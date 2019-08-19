@@ -1,0 +1,253 @@
+/*Default styling for the website, simple and clean*/
+
+.main {
+    background: url(../images/background.jpg) no-repeat center;
+    background-size: cover;
+    background-attachment:fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+    min-height: 120vh;
+}
+
+.title {
+    text-align: center;
+    position: relative;
+    top: 190px;
+    color: white;
+}
+
+
+.chart{
+    text-align: left;
+    position: relative;
+    top: 230px;
+}
+
+.button-four {
+    position: relative;
+    top: 250px;
+    text-align: center;
+}
+
+.btn {
+    background: #06b393;
+    border: none;
+    color: #fff;
+    margin: 5px;
+}
+
+/*Prevent clashing of white text with white textboxes*/
+
+input[type = text] {
+    color: black;
+}
+
+textarea {
+    color: black;
+}
+.bottom {
+    text-align: center;
+    color: white;
+    top: 400px;
+}
+
+input[type = submit]{
+    color: black;
+}
+
+/*bar graph formatting and design for displaying the grade summary*/
+
+.bargraph {
+    height: 229px;
+    position: relative;
+    background:  url(http://pics.cssbakery.com/pics/papergrid.jpg) repeat-x;
+    border-left: 1px solid #d4d4d4;
+    margin: 15px auto 50px;
+}
+
+.bargraph ul.bars {
+    margin: 0;
+    padding: 0;
+    /* getting rid of bullets */
+    list-style-type: none;
+}
+
+.bargraph ul.olympic-watermark {
+    background: url(http://pics.cssbakery.com/pics/orings.png) no-repeat;
+    background-position: 50% 50%;
+    height: 122px; /* IE fix */
+    z-index: 98;
+}
+
+.bargraph ul.euro-watermark {
+    background: url(http://pics.cssbakery.com/pics/sapphire5.png) no-repeat;
+    height: 201px; /* IE fix was 164*/
+    background-position: 0 0;
+}
+
+.bargraph ul.stars-watermark {
+    background: url(http://pics.cssbakery.com/pics/starcoin4.png) no-repeat;
+    background-position: 50% 50%;
+    height: 174px; /* IE fix */
+}
+
+div.bargraph div.colorfilter {
+    position: absolute;
+    top: 0; left: 0;
+    height: 201px;
+    background-color: black;
+    opacity:0.2;  filter:alpha(opacity=20);
+    z-index: 97;
+
+}
+
+div.bargraph div.colorfilter2 {
+    position: absolute;
+    top: 0; left: 0;
+    height: 201px;
+    background-color: black;
+    opacity:0.4;  filter:alpha(opacity=40);
+    z-index: 97;
+
+}
+
+.bargraph ul.bars li {
+    position: absolute;
+    width: 30px;
+    height: 200px;
+    bottom: 29px;
+    padding: 0;
+    margin: 0;
+    background: url(http://pics.cssbakery.com/pics/bars200.jpg) no-repeat;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    line-height: 2.5em;
+    font-family: "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    z-index: 99;
+}
+
+
+.bargraph ul.bars li span {
+    position: relative;
+    top: -25px;
+    color: #7c7c7c;
+}
+.bargraph ul.bars li img {
+    margin: 0; padding: 0;
+    position: relative;
+    top: -71px;
+    left: 0;
+}
+
+.bargraph ul.bars li span.darkpen {
+    color: #515151;
+    position: static;
+}
+.bargraph ul.bars li span.whitepen {
+    color: red;
+}
+
+.bargraph ul.bars li.bar1 { left: 21px;  }
+.bargraph ul.bars li.bar2 { left: 94px;  }
+.bargraph ul.bars li.bar3 { left: 167px; }
+.bargraph ul.bars li.bar4 { left: 240px; }
+.bargraph ul.bars li.bar5 { left: 313px; }
+.bargraph ul.bars li.bar6 { left: 386px; }
+.bargraph ul.bars li.bar7 { left: 459px; }
+.bargraph ul.bars li.bar8 { left: 532px; }
+.bargraph ul.bars li.bar9 { left: 605px; }
+
+
+.bargraph ul.bars li.bluebar  { background-position: 0px bottom; }
+.bargraph ul.bars li.redbar   { background-position: -30px bottom; }
+.bargraph ul.bars li.greenbar { background-position: -60px bottom; }
+.bargraph ul.bars li.orangebar  {  background-position: -90px bottom; }
+.bargraph ul.bars li.grapebar   {  background-position: -120px bottom; }
+.bargraph ul.bars li.purplebar  {  background-position: -150px bottom; }
+.bargraph ul.bars li.crimsonbar {  background-position: -180px bottom; }
+.bargraph ul.bars li.navybar    {  background-position: -210px bottom; }
+.bargraph ul.bars li.goldbar    {  background-position: -240px bottom; }
+.bargraph ul.bars li.tealbar    {  background-position: -270px bottom; }
+
+.label { list-style-type: none;
+    position: absolute; bottom: 3px;
+    margin: 0; padding: 0; }
+.label li {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 11px;
+    width: 73px;
+    font-family: "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+    line-height: 1.6em;
+}
+
+
+ul.y-axis { list-style-type: none; position: absolute;
+    left: -45px;
+    width: 40px;
+    text-align: right;
+    bottom: 0;
+    margin: 0; padding: 0;
+}
+
+ul.y-axis li:first-child {
+    height: 40px;
+    line-height: 40px;
+}
+
+ul.y-axis li {
+    color: white;
+    font-size: 12px;
+    height: 51px;
+    line-height: 51px;
+    text-align: right;
+}
+
+ul.y-axis li.units {
+    position: absolute;
+    bottom: 110px;
+    right: 20px;
+    line-height: 1.2em;
+    height: auto;
+}
+/*labeling of the graph*/
+.bargraph h3 {
+    position: absolute;
+    left: 0;
+    top: 236px;
+
+    padding: 0;
+    margin:0;
+    text-align: left;
+
+    width: 100%;
+    font-family: Verdana, sans-serif;
+    font-size: 15px; color: white;
+    line-height: 1.3em;
+    text-align: center;
+
+}
+.bargraph p.centered { text-align: center; color:white}
+
+.main h2 {color:white; text-align: center}
+
+.reset {
+    position: relative;
+    padding: 10px 0 10px 15px;
+    font-size: 17px;
+    font-weight: 300;
+    color: #ddd;
+    letter-spacing: 1px;
+    background-color: rgba(255,255,255,0.7);
+    margin-left: 2px;
+    box-sizing: border-box;
+    font-family: 'Mukta', sans-serif;
+    width: 25%;
+    outline: none;
+}
