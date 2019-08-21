@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 require('mongoose-type-url');
 
-/*A recycling item*/
+/*A recycling item */
 
 const itemSchema = mongoose.Schema(
     {
