@@ -36,7 +36,7 @@ router.post('/login', controller.handleLogin);
 router.post('/', controller.createUser);
 
 router.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '../views/landing.html'));
+    res.sendFile(path.join(__dirname, '../views/login.html'));
 });
 
 /*----------------------file paths for local views----------------------------*/

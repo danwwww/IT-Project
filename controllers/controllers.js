@@ -17,7 +17,7 @@ const createUser = function (req, res) {
         });
         user.save(function (err) {
             if (!err) {
-                res.sendFile(path.join(__dirname, '../views/landing.html'));
+                res.sendFile(path.join(__dirname, '../views/login.html'));
             }
             else {
                 res.end('You were not added');
