@@ -159,6 +159,10 @@ body a:hover {
     left: 15em;
 }
 
+.content-w3ls h1 {
+    font-size: 38px;
+}
+
 .content-bottom {
     padding: 0em 4em;
     margin: 0 1em;
@@ -246,7 +250,7 @@ ul.list-login-bottom li:nth-child(2) {
 /*/////////////// FORM STYLES ////////////////////*/
 
 form .field-group {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.3);
     display: flex;
     display: flex;
     display: -webkit-box;
@@ -293,13 +297,13 @@ form .field-group .wthree-field {
 }
 
 .wthree-field button.btn {
-    background-color: rgba(204, 153, 102, 0.6);
+    background-color: rgba(153, 102, 51, 0.6);
     border: none;
     color: #fff;
     padding: 11px 15px;
     text-transform: uppercase;
     font-family: 'Mukta', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     width:100%;
     margin-top:10px;
     letter-spacing: 2px;
@@ -339,9 +343,9 @@ ul.links-unordered-list li a {
 }
 .wthree-field input {
     padding: 10px 0 10px 15px;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 300;
-    color: #663300;
+    color: #502700;
     letter-spacing: 1px;
     border: none;
     background: transparent;
@@ -352,16 +356,16 @@ ul.links-unordered-list li a {
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: #663300;
+    color: #502700;
 }
 ::-moz-placeholder { /* Firefox 19+ */
-    color: #663300;
+    color: #502700;
 }
 ::-ms-input-placeholder { /* IE 10+ */
-    color: #663300;
+    color: #502700;
 }
 ::-moz-placeholder { /* Firefox 18- */
-    color: #663300;
+    color: #502700;
 }
 /* switch */
 
@@ -377,22 +381,22 @@ label.switch {
 
 li:nth-child(2) a,
 label.switch {
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 1px;
     font-weight: 300;
     color: #fff;
     text-transform: capitalize;
 }
 ul.list-login-bottom li:nth-child(1) a,ul.list-login-bottom li:nth-child(2) a {
-    font-size: 15px;
+    font-size: 18px;
     letter-spacing: 2px;
     font-weight: normal;
     text-transform: uppercase;
-    color: #fff !important;
+    color: #502700 !important;
 }
 
 li:nth-child(2) a,li:nth-child(1) a {
-    color: #fff;
+    color: #ffffff;
 }
 
 .switch input {
