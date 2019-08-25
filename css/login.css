@@ -246,7 +246,7 @@ ul.list-login-bottom li:nth-child(2) {
 /*/////////////// FORM STYLES ////////////////////*/
 
 form .field-group {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.3);
     display: flex;
     display: flex;
     display: -webkit-box;
