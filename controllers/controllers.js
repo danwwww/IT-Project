@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Items = mongoose.model('items');
-const Users = mongoose.model('users');
+const Items = mongoose.model('item_table');
+const Users = mongoose.model('user_table');
 const path = require('path');
 
 /*Create a new user with entered username, password, email and default avatar and bio. Set scores to 0*/
@@ -29,39 +29,33 @@ const createUser = function (req, res) {
 * be able to test functions*/
 
 const validateUser = function (req, res) {
-    if (req.session && req.session.user) { // Check if session exists
-        // lookup the user in the DB by pulling their email from the session
-        Users.findOne({ email: req.session.user.email }, function (err, user) {
-            if (!user) {
-                // if the user isn't found in the DB, reset the session info and
-                // redirect the user to the login page
-                req.session.reset();
-                res.redirect('/');
-            } else {
-                // expose the user to the template
-                res.locals.user = user;
-                let gradeAdjusted = [];
-                for (let i = 0; i < 7; i++){
-                    gradeAdjusted[i] = req.session.user.grade[i] * 10;
-                }
-                res.render(path.join(__dirname, '../views/home.jade'), { user: user, gradeFormat : gradeAdjusted });
-            }
-        });
-    } else {
+    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
+        if (!user) {
+            // if the user isn't found in the DB, reset the session info and
+            // redirect the user to the login page
+            req.session.reset();
+            res.redirect('/');
+        } else {
+            //
+            res.locals.user = user;
+            /**
+             handleLogin
+             */
+
+        }
+    }); else {
         res.redirect('/');
     }
 };
 
 /* User logged out, direct them to log in screen and remove session data*/
-
 const logOut = function(req, res) {
     req.session.reset();
     res.redirect('/');
 };
 
-/*Plain API displaying functions from earlier prototypes removed for brevity and professionalism. findAllItems kept
-* for functionality in recycling directory*/
-
+/*list all items to be shown on the 'my family treasure'
+* */
 const findAllItems = function (req, res) {
     Items.find({}, function (err, items) {
         if (!err) {
@@ -75,28 +69,30 @@ const findAllItems = function (req, res) {
 
 /* User attempted a log in, check email and password against database. If successful store their user information in
  * session data to help templating and updating user info whilst on the site */
-
 const handleLogin = function(req, res) {
     Users.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
             res.send('Invalid email or password.');
+            /**
+             * also direct to the error message page
+             */
+            /** ask how to render...
+             * */
+
         } else {
             if (req.body.psw === user.passwordHash) {
                 req.session.user = user;
                 let currentDate = new Date()
                 let currentDay = currentDate.getDay();
-                if (user.lastvisited !== currentDay){
+                //reset the lastvisited
+                if (user.lastvisited !== currentDay) {
                     req.session.user.grade[currentDay] = 0;
                     req.session.user.lastvisited = currentDay;
                 }
                 updateUser(req, res);
-                let gradeAdjusted = [];
-                for (let i = 0; i < 7; i++){
-                    gradeAdjusted[i] = req.session.user.grade[i] * 10;
-                }
-
-                res.render(path.join(__dirname, '../views/home.jade'), { user: user, gradeFormat : gradeAdjusted });
-                }
+                /** ask how to render...
+                 * */
+            }
             else {
                 res.send('Invalid email or password.');
             }
@@ -111,13 +107,10 @@ const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
 
-/* User navigated to MyAccount, display the myAccount page*/
-
+/* User navigated to homePage*/
 const getAccount = function (req, res) {
-    let gradeAdjusted = [];
-    for (let i = 0; i < 7; i++){
-        gradeAdjusted[i] = req.session.user[i] * 5;
-    }
+    /** ask how to render...
+     * */
     res.render(path.join(__dirname, '../views/Account.jade'), { user: req.session.user, gradeFormat : gradeAdjusted });
 };
 
@@ -141,7 +134,6 @@ const updateAccount = function(req, res){
 
 module.exports.createUser = createUser;
 module.exports.findAllItems = findAllItems;
-module.exports.createUser = createUser;
 module.exports.handleLogin = handleLogin;
 module.exports.validateUser = validateUser;
 module.exports.logOut = logOut;
