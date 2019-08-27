@@ -17,7 +17,7 @@ const createUser = function (req, res) {
         });
         user.save(function (err) {
             if (!err) {
-                res.sendFile(path.join(__dirname, '../views/login.html'));
+                res.sendFile(path.join(__dirname, '../views/landing.html'));
             }
             else {
                 res.end('You were not added');
@@ -105,28 +105,7 @@ const handleLogin = function(req, res) {
 };
 
 
-const getGrades = function (req, res) {
-
-    let bestScore = [];
-    let highest = 0;
-    for (let j = 0; j < 7; j++){
-        if (req.session.user.grade[j] > highest){
-            bestScore[0] = req.session.user.grade[j];
-            bestScore[1] = j;
-            highest = bestScore[0];
-        }
-    }
-    let gradeAdjusted = [];
-    for (let i = 0; i < 7; i++){
-        gradeAdjusted[i] = req.session.user.grade[i] * 10;
-    }
-    updateUser(req, res);
-
-    res.render(path.join(__dirname, '../views/grade.jade'), { user: req.session.user, gradeFormat: gradeAdjusted,
-                                                                bestGrade: bestScore});
-};
-
-/*Update user information, whether it be grade, user details or other*/
+/*Update user information*/
 
 const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
@@ -140,12 +119,6 @@ const getAccount = function (req, res) {
         gradeAdjusted[i] = req.session.user[i] * 5;
     }
     res.render(path.join(__dirname, '../views/Account.jade'), { user: req.session.user, gradeFormat : gradeAdjusted });
-};
-
-/* User navigated to recycling directory, display the directory page*/
-
-const getDirectory = function (req, res) {
-    res.sendFile(path.join(__dirname, '../views/directory.html'));
 };
 
 /* User entered new information to their account, update it*/
@@ -164,14 +137,6 @@ const updateAccount = function(req, res){
     getAccount(req, res);
 };
 
-/* User recycled an item, increment their score for the day*/
-
-const handleRecycling = function(req, res) {
-    req.session.user.grade[new Date().getDay()] = req.session.user.grade[new Date().getDay()] + 1;
-    updateUser(req, res);
-    validateUser(req, res);
-};
-
 /*--------------------Function Exports---------------------------*/
 
 module.exports.createUser = createUser;
@@ -180,8 +145,5 @@ module.exports.createUser = createUser;
 module.exports.handleLogin = handleLogin;
 module.exports.validateUser = validateUser;
 module.exports.logOut = logOut;
-module.exports.getGrades = getGrades;
 module.exports.getAccount = getAccount;
-module.exports.getDirectory = getDirectory;
 module.exports.updateAccount = updateAccount;
-module.exports.handleRecycling = handleRecycling;
