@@ -1,17 +1,20 @@
 const mongoose = require('mongoose');
 const Items = mongoose.model('item_table');
 const Users = mongoose.model('account_table');
+const Profiles = mongoose.model('profile_table');
+const Families = mongoose.model('family_table');
+
+
+
 const path = require('path');
 
 /*Create a new user with entered username, password, email and default avatar and bio. Set scores to 0*/
-
 const createUser = function (req, res) {
         const user = new Users({
             "username":req.body.username,
             "email":req.body.email,
             "passwordHash":req.body.passwordHash,
-            "Avatar": "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png",
-            "bio": "welcome to your family treasure"
+            "Avatar": "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
         });
         user.save(function (err) {
             if (!err) {
@@ -25,9 +28,9 @@ const createUser = function (req, res) {
         });
 };
 
+
 /*Ensure a user is logged in otherwise do not allow them to access website functionalities. NOTE: must log in to
 * be able to test functions*/
-
 const validateUser = function (req, res) {
     if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
         if (!user) {
@@ -42,6 +45,7 @@ const validateUser = function (req, res) {
             res.locals.user = user;
             /**
              handleLogin
+
              */
 
         }
@@ -56,17 +60,6 @@ const logOut = function(req, res) {
     res.redirect('/');
 };
 
-/*list all items to be shown on the 'my family treasure'
-* */
-const findAllItems = function (req, res) {
-    Items.find({}, function (err, items) {
-        if (!err) {
-            res.send(items);
-        } else {
-            res.sendStatus(400);
-        }
-    });
-};
 
 /*list all items to be shown on the 'my family treasure'
 * */
