@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
 const Items = mongoose.model('item_table');
-const Users = mongoose.model('user_table');
+const Users = mongoose.model('account_table');
+const Profiles = mongoose.model('profile_table');
+const Families = mongoose.model('family_table');
+
+
+
 const path = require('path');
 
 /*Create a new user with entered username, password, email and default avatar and bio. Set scores to 0*/
-
 const createUser = function (req, res) {
         const user = new Users({
             "username":req.body.username,
             "email":req.body.email,
             "passwordHash":req.body.passwordHash,
-            "Avatar": "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png",
-            "grade": [0,0,0,0,0,0,0],
-            "lastvisited": 0,
-            "bio": "Proud member of our recycling community!"
+            "Avatar": "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
         });
         user.save(function (err) {
             if (!err) {
@@ -21,25 +22,30 @@ const createUser = function (req, res) {
             }
             else {
                 res.end('You were not added');
+                /**should also jump to error message page
+                 * */
             }
         });
 };
 
+
 /*Ensure a user is logged in otherwise do not allow them to access website functionalities. NOTE: must log in to
 * be able to test functions*/
-
 const validateUser = function (req, res) {
     if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
         if (!user) {
             // if the user isn't found in the DB, reset the session info and
             // redirect the user to the login page
             req.session.reset();
+            /**should jump to error message page then automatically jump to the login page after a few seconds
+             * */
             res.redirect('/');
         } else {
             //
             res.locals.user = user;
             /**
              handleLogin
+
              */
 
         }
@@ -54,6 +60,7 @@ const logOut = function(req, res) {
     res.redirect('/');
 };
 
+
 /*list all items to be shown on the 'my family treasure'
 * */
 const findAllItems = function (req, res) {
@@ -65,7 +72,6 @@ const findAllItems = function (req, res) {
         }
     });
 };
-
 
 /* User attempted a log in, check email and password against database. If successful store their user information in
  * session data to help templating and updating user info whilst on the site */
@@ -82,18 +88,14 @@ const handleLogin = function(req, res) {
         } else {
             if (req.body.psw === user.passwordHash) {
                 req.session.user = user;
-                let currentDate = new Date()
-                let currentDay = currentDate.getDay();
-                //reset the lastvisited
-                if (user.lastvisited !== currentDay) {
-                    req.session.user.grade[currentDay] = 0;
-                    req.session.user.lastvisited = currentDay;
-                }
+
                 updateUser(req, res);
                 /** ask how to render...
                  * */
             }
             else {
+                /**should jump to error message page then automatically jump to the login page after a few seconds
+                 * */
                 res.send('Invalid email or password.');
             }
         }
