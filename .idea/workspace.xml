@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3cafbe8-b762-4d83-8604-8104fcd64c64" name="Default" comment="router&amp;controller">
+      <change afterPath="$PROJECT_DIR$/views/landing.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/items.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/items.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,13 +29,6 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectId" id="1PiRwvO4zKw0h3mdsMbLbMU2FYe" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -42,7 +37,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -63,6 +58,16 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="login.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/IT-Project/views/login.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.login.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -75,7 +80,7 @@
       <updated>1566187954181</updated>
       <workItem from="1566187955932" duration="7028000" />
       <workItem from="1566355179239" duration="2585000" />
-      <workItem from="1566905805011" duration="4467000" />
+      <workItem from="1566905805011" duration="8614000" />
     </task>
     <task id="LOCAL-00001" summary="router&amp;controller">
       <created>1566908453814</created>
@@ -98,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566955092186</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="router&amp;controller">
+      <created>1566955473951</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1566955473951</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

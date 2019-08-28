@@ -3,21 +3,39 @@
 const mongoose = require("mongoose");
 require('mongoose-type-url');
 
-/*A recycling item */
-
+/* treasure item */
 const itemSchema = mongoose.Schema(
     {
-        "name":String,
-        "category":String,
-        "method":String,
-        "photo":mongoose.SchemaTypes.Url
+        "_id": {
+            type: String,
+            required: true,
+        },
+        "name":{
+            type: String,
+            required: true
+        },
+        "category": String,
+        "photo": mongoose.SchemaTypes.Url,
+        "date_created": Date,
+        "date_refurbished": Date,
+        "creator": String,
+        "current_owner": String,
+        "location": String,
+        "description": String,
+        "familyId": {
+            type: String,
+            required: true,
+        }
     }
 );
 
-/*A user of the system, including their grade*/
-
+/*user*/
 const userSchema = mongoose.Schema(
     {
+        "_id": {
+            type: String,
+            required: true,
+        },
         "username":{
             type: String,
             required: true
@@ -29,33 +47,10 @@ const userSchema = mongoose.Schema(
         "passwordHash": {
             type: String,
             required: true
-        },
-        "grade": {
-            type: Array,
-            required: true
-        },
-        "Avatar": {
-            type: String,
-            required: true
-        },
-        "bio": {
-            type: String,
-            required: true
-        },
-        "lastvisited": {
-            type: Number,
-            required: true
         }
     }
 );
 
-var gradeSchema = mongoose.Schema(
-    {
-        "username": String,
-        "score": String
-    }
-);
 
 module.exports = mongoose.model('items', itemSchema);
 module.exports = mongoose.model('users', userSchema);
-module.exports = mongoose.model('grades', gradeSchema);

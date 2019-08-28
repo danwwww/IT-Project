@@ -1,23 +1,34 @@
 const mongoose = require('mongoose');
 const Items = mongoose.model('item_table');
 const Users = mongoose.model('account_table');
-const Profiles = mongoose.model('profile_table');
-const Families = mongoose.model('family_table');
+//const Profiles = mongoose.model('profile_table');
+//const Families = mongoose.model('family_table');
 
 
 
 const path = require('path');
 
-/*Create a new user with entered username, password, email and default avatar and bio. Set scores to 0*/
+/**-------------------------------------------------------------------------------------------------------------------
+ * below: login related operations
+ * -------------------------------------------------------------------------------------------------------------------
+ * */
+
+/*Create a new user with entered username, password, email */
 const createUser = function (req, res) {
         const user = new Users({
             "username":req.body.username,
             "email":req.body.email,
             "passwordHash":req.body.passwordHash,
-            "Avatar": "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
         });
+
+        /** check if account has already existed
+         * */
+
+
         user.save(function (err) {
             if (!err) {
+                /** the file is to be made and changed
+                 * */
                 res.sendFile(path.join(__dirname, '../views/landing.html'));
             }
             else {
@@ -29,7 +40,7 @@ const createUser = function (req, res) {
 };
 
 
-/*Ensure a user is logged in otherwise do not allow them to access website functionalities. NOTE: must log in to
+/*Ensure a user is logged in otherwise do not allow them to access website's functionalities. NOTE: must log in to
 * be able to test functions*/
 const validateUser = function (req, res) {
     if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
@@ -45,7 +56,7 @@ const validateUser = function (req, res) {
             res.locals.user = user;
             /**
              handleLogin
-
+            cookie set
              */
 
         }
@@ -60,7 +71,17 @@ const logOut = function(req, res) {
     res.redirect('/');
 };
 
+/**-------------------------------------------------------------------------------------------------------------------
+ * above:  login related operations
+ * -------------------------------------------------------------------------------------------------------------------
+ * */
 
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+ * below:  navigation bar operations
+ * -------------------------------------------------------------------------------------------------------------------
+ * */
 /*list all items to be shown on the 'my family treasure'
 * */
 const findAllItems = function (req, res) {
@@ -104,7 +125,6 @@ const handleLogin = function(req, res) {
 
 
 /*Update user information*/
-
 const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
@@ -117,27 +137,32 @@ const getAccount = function (req, res) {
 };
 
 /* User entered new information to their account, update it*/
-
 const updateAccount = function(req, res){
     if (req.body.uname){
         req.session.user.username = req.body.uname;
     }
-    if (req.body.bio){
-        req.session.user.bio = req.body.bio;
-    }
-    if (req.body.avatar) {
-        req.session.user.Avatar = req.body.avatar;
+
+    if (req.body.familyId){
+        req.session.user.familyId = req.body.familyId;
     }
     updateUser(req, res);
     getAccount(req, res);
 };
+/**-------------------------------------------------------------------------------------------------------------------
+ * above:  navigation bar operations
+ * -------------------------------------------------------------------------------------------------------------------
+ * */
+
+
+
 
 /*--------------------Function Exports---------------------------*/
 
 module.exports.createUser = createUser;
-module.exports.findAllItems = findAllItems;
-module.exports.handleLogin = handleLogin;
 module.exports.validateUser = validateUser;
+module.exports.handleLogin = handleLogin;
 module.exports.logOut = logOut;
+
+module.exports.findAllItems = findAllItems;
 module.exports.getAccount = getAccount;
 module.exports.updateAccount = updateAccount;
