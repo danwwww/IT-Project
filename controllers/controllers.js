@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Items = mongoose.model('item_table');
-const Users = mongoose.model('account_table');
+const Items = mongoose.model('items');
+const Users = mongoose.model('users');
 //const Profiles = mongoose.model('profile_table');
 //const Families = mongoose.model('family_table');
 
@@ -12,6 +12,14 @@ const path = require('path');
  * below: login related operations
  * -------------------------------------------------------------------------------------------------------------------
  * */
+
+
+/*welcome page*/
+const welcome = function(req, res){
+    res.sendFile(path.join(__dirname, '../views/login.html'));
+}
+
+
 
 /*Create a new user with entered username, password, email */
 const createUser = function (req, res) {
@@ -29,7 +37,7 @@ const createUser = function (req, res) {
             if (!err) {
                 /** the file is to be made and changed
                  * */
-                res.sendFile(path.join(__dirname, '../views/landing.html'));
+                res.sendFile(path.join(__dirname, '../views/account.html'));
             }
             else {
                 res.end('You were not added');
@@ -157,6 +165,8 @@ const updateAccount = function(req, res){
 
 
 /*--------------------Function Exports---------------------------*/
+
+module.exports.welcome = welcome;
 
 module.exports.createUser = createUser;
 module.exports.validateUser = validateUser;

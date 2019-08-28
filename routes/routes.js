@@ -11,6 +11,8 @@ const controller = require('../controllers/controllers.js');
 
 /*Main navigation routes, function details/comments in controller entry*/
 
+router.get('/', controller.welcome);
+
 router.get('/logout', controller.logOut);
 
 router.post('/register', controller.createUser);
