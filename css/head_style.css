@@ -74,7 +74,7 @@ label{
 	text-decoration:none;
 }
 .w3l_header_left ul li a:hover{
-	color:#7bf3dd;
+	color: #996633;
 }
 .w3l_header_left {
 	padding-top: 1.1em;
@@ -248,7 +248,7 @@ h1 a.navbar-brand span {
 	width: 100%;
 	height: 3px;
     opacity: 0;
-    background: #06b393;
+    background: #996633;
 	-webkit-transform: translate3d(0, -3em, 0);
 	transform: translate3d(0, -3em, 0);
 	-webkit-transition: -webkit-transform 0s 0.3s, opacity 0.2s;
@@ -328,7 +328,7 @@ h1 a.navbar-brand span {
 	transition: all 0.5s;
 }
 .slider-info h5 a:hover{
-	color:#06b393;
+	color: #996633;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
 	-ms-transition: all 0.5s;
@@ -549,7 +549,7 @@ h1 a.navbar-brand span {
     font-weight: bold;
 }
 .modal-header h5 {
-    color: #06b393;
+    color: #996633;
     font-size: 1.3em;
     letter-spacing: 1px;
     text-align: center;
