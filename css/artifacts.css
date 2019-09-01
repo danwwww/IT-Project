@@ -1,0 +1,84 @@
+body {
+    background: url(../images/bg.jpeg) no-repeat center;
+    background-size: cover;
+    background-attachment:fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.search {
+    width: 80%;
+    position: relative;
+    margin-left: 10%;
+    top: 190px;
+    background-color: rgba(255,255,255,0.7);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.search_bar {
+    margin-right: 30%;
+}
+
+
+.search div input {
+    text-align: center;
+    position: absolute;
+    padding: 10px 0 10px 15px;
+    font-size: 17px;
+    font-weight: 300;
+    color: black;
+    letter-spacing: 1px;
+    background-color: rgba(255,255,255,0.7);
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Mukta', sans-serif;
+    width: 30%;
+    outline: none;
+    top: 50px;
+}
+
+.search div button {
+    background: #996633;
+    border: none;
+    color: #fff;
+    margin: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: absolute;
+    top: 100px;
+    width: 7%;
+}
+
+.search div .btn {
+    position: absolute;
+    top: 220px;
+    text-align: center;
+}
+
+.btn {
+    margin-right: 7%;
+}
+
