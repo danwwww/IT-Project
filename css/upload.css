@@ -1,0 +1,22 @@
+body {
+    background: url(../images/bg.jpeg) no-repeat center;
+    background-size: cover;
+    background-attachment:fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.main {
+    width: 80%;
+    position: relative;
+    margin-left: 10%;
+    top: 190px;
+    background-color: rgba(255,255,255,0.7);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    text-align: center;
+}
