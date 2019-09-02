@@ -1,4 +1,4 @@
-branch's name regulation:
+branch's name regulation: 
   ·start with lowercase
   ·use cammel case
   ·if is 'additional function', name it by its feature and dont merge until completed
