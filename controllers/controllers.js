@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-const Items = mongoose.model('items');
-const Users = mongoose.model('users');
+//these are from items.js
+const Items = mongoose.model('item_table');
+const Users = mongoose.model('account_table');
+
 //const Profiles = mongoose.model('profile_table');
 //const Families = mongoose.model('family_table');
-
+console.log(Users.findOne());
 
 
 const path = require('path');
@@ -14,7 +16,7 @@ const path = require('path');
  * */
 
 
-/*welcome page*/
+/*done: open welcome page*/
 const welcome = function(req, res){
     res.sendFile(path.join(__dirname, '../views/login.html'));
 }
@@ -31,16 +33,17 @@ const createUser = function (req, res) {
 
         /** check if account has already existed
          * */
-
-
+    //testing: printout the input username
+        console.log(req.body.username);
         user.save(function (err) {
+            console.log(err);
             if (!err) {
                 /** the file is to be made and changed
                  * */
                 res.sendFile(path.join(__dirname, '../views/account.html'));
             }
             else {
-                res.end('You were not added');
+                res.end("register failed");
                 /**should also jump to error message page
                  * */
             }
@@ -54,11 +57,12 @@ const validateUser = function (req, res) {
     if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
         if (!user) {
             // if the user isn't found in the DB, reset the session info and
+
             // redirect the user to the login page
-            req.session.reset();
+            //req.session.reset();
             /**should jump to error message page then automatically jump to the login page after a few seconds
              * */
-            res.redirect('/');
+            //res.redirect('/');
         } else {
             //
             res.locals.user = user;
@@ -106,13 +110,11 @@ const findAllItems = function (req, res) {
  * session data to help templating and updating user info whilst on the site */
 const handleLogin = function(req, res) {
     Users.findOne({ email: req.body.email }, function(err, user) {
+        console.log(user);
         if (!user) {
-            res.send('Invalid email or password.');
-            /**
-             * also direct to the error message page
-             */
-            /** ask how to render...
-             * */
+            console.log(req.body.email);
+            res.send('user not found');
+            //should direct to error page later
 
         } else {
             if (req.body.psw === user.passwordHash) {
@@ -125,11 +127,13 @@ const handleLogin = function(req, res) {
             else {
                 /**should jump to error message page then automatically jump to the login page after a few seconds
                  * */
-                res.send('Invalid email or password.');
+                res.send(' email and password not match');
             }
         }
     });
 };
+
+
 
 
 /*Update user information*/
