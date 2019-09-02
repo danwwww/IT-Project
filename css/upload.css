@@ -19,4 +19,85 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     text-align: center;
+    min-height: 100vh;
 }
+
+.div1 {
+    font-family: 'Mukta', sans-serif;
+    float: left;
+    height: 41px;
+    background-color: rgba(153, 102, 51, 0.6);
+    width: 144px;
+    position: relative;
+    top: 100px;
+    left: 30%;
+    margin-right: 10%;
+    cursor: pointer;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    border-radius: 35px;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    -ms-border-radius: 35px;
+    -o-border-radius: 35px;
+}
+.div2 {
+    color: white;
+    text-align: center;
+    padding-top: 12px;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.inputstyle {
+    width: 144px;
+    height: 41px;
+    cursor: pointer;
+    font-size: 30px;
+    outline: medium none;
+    position: absolute;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    opacity: 0;
+    left: 0px;
+    top: 0px;
+}
+
+.addDiscription {
+    position: relative;
+    top: 210px;
+    height: 400px;
+    font-family: 'Mukta', sans-serif;
+}
+
+.addDiscription form {
+    position: absolute;
+    margin-left: 25%;
+}
+
+.addDiscription form input {
+    width: 300px;
+}
+
+.addDiscription form textarea {
+    width: 300px;
+}
+
+.addDiscription form label {
+    text-align: right;
+    vertical-align: top;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 6px;
+    width: 200px;
+}
+.btn {
+    background-color: rgba(153, 102, 51, 0.6);
+    color: white;
+    font-family: 'Mukta', sans-serif;
+    font-size: 18px;
+}
+
