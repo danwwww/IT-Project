@@ -14,6 +14,10 @@ const controller = require('../controllers/controllers.js');
 
 router.get('/', controller.welcome);
 
+//table testers
+router.get('/users', controller.findAllUsers);
+router.get('/items', controller.findAllItems);
+
 router.get('/logout', controller.logOut);
 
 router.post('/register', controller.createUser);
@@ -27,6 +31,7 @@ router.post('/account', controller.updateAccount);
 
 //Find all list items
 router.get('/directory/items/api',controller.findAllItems);
+
 
 //handle login logic
 router.post('/login', controller.handleLogin);

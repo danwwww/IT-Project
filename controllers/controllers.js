@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
 //these are from items.js
 const Items = mongoose.model('item_table');
 const Users = mongoose.model('account_table');
 
 //const Profiles = mongoose.model('profile_table');
 //const Families = mongoose.model('family_table');
-console.log(Users.findOne());
+
 
 
 const path = require('path');
@@ -26,9 +27,10 @@ const welcome = function(req, res){
 /*Create a new user with entered username, password, email */
 const createUser = function (req, res) {
         const user = new Users({
+            "userId":req.body.userId,
             "username":req.body.username,
             "email":req.body.email,
-            "passwordHash":req.body.passwordHash,
+            "passwordHash":req.body.psw,
         });
 
         /** check if account has already existed
@@ -40,7 +42,7 @@ const createUser = function (req, res) {
             if (!err) {
                 /** the file is to be made and changed
                  * */
-                res.sendFile(path.join(__dirname, '../views/account.html'));
+                res.sendFile('account.html');
             }
             else {
                 res.end("register failed");
@@ -106,23 +108,37 @@ const findAllItems = function (req, res) {
     });
 };
 
+/*list all users
+* */
+const findAllUsers = function (req, res) {
+    Users.find({}, function (err, users) {
+        if (!err) {
+            res.send(users);
+        } else {
+            res.sendStatus(400);
+        }
+    });
+};
+
+
 /* User attempted a log in, check email and password against database. If successful store their user information in
  * session data to help templating and updating user info whilst on the site */
 const handleLogin = function(req, res) {
-    Users.findOne({ email: req.body.email }, function(err, user) {
-        console.log(user);
+    Users.findOne({ id: req.body.userId }, function(err, user) {
+        console.log(req.body.userId);
+        console.log(req.body.psw);
         if (!user) {
-            console.log(req.body.email);
             res.send('user not found');
             //should direct to error page later
 
         } else {
             if (req.body.psw === user.passwordHash) {
                 req.session.user = user;
-
                 updateUser(req, res);
-                /** ask how to render...
-                 * */
+                //do something!
+                res.sendFile(path.join(__dirname, '../views/account.html'));
+                console.log("sent");
+
             }
             else {
                 /**should jump to error message page then automatically jump to the login page after a few seconds
@@ -145,7 +161,7 @@ const updateUser = function (req) {
 const getAccount = function (req, res) {
     /** ask how to render...
      * */
-    res.render(path.join(__dirname, '../views/Account.jade'), { user: req.session.user, gradeFormat : gradeAdjusted });
+    //res.render(path.join(__dirname, '../views/Account.jade'), { user: req.session.user, gradeFormat : gradeAdjusted });
 };
 
 /* User entered new information to their account, update it*/
@@ -178,5 +194,6 @@ module.exports.handleLogin = handleLogin;
 module.exports.logOut = logOut;
 
 module.exports.findAllItems = findAllItems;
+module.exports.findAllUsers = findAllUsers;
 module.exports.getAccount = getAccount;
 module.exports.updateAccount = updateAccount;
