@@ -71,7 +71,7 @@ const createUser = function (req, res) {
             if (!err) {
                 /** the file is to be made and changed
                  * */
-                res.sendFile(path.join(__dirname, '../views/account.html'));
+                res.sendFile(path.join(__dirname, '../views/home.html'));
             }
             else {
                 res.end("register failed");
@@ -165,7 +165,7 @@ const handleLogin = function(req, res) {
                 req.session.user = user;
                 updateUser(req, res);
                 //do something!
-                res.sendFile(path.join(__dirname, '../views/account.html'));
+                res.sendFile(path.join(__dirname, '../views/home.html'));
 
             }
             else {
