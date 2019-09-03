@@ -40,6 +40,7 @@ h6.main-title-w3pvt {
     visibility: hidden;
     opacity: 0;
     z-index: 99;
+    overflow-y: auto;
 }
 
 .popup-effect:target {
@@ -56,7 +57,7 @@ h6.main-title-w3pvt {
     -moz-border-radius: 4px;
     max-width: 430px;
     position: relative;
-    margin: 8em auto;
+    margin: 4em auto;
     padding: 3em 2em;
     z-index: 999;
     text-align: center;
@@ -75,6 +76,10 @@ h6.main-title-w3pvt {
 
 .popup .close:hover {
     color: #45d5c0;
+}
+
+.popup p {
+    text-align: left;
 }
 
 /* //popup */
