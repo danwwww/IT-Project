@@ -150,6 +150,19 @@ const findAllUsers = function (req, res) {
 };
 
 
+/*show artifacts page*/
+const showArtifacts = function (req, res) {
+    res.sendFile(path.join(__dirname, '../views/artifacts.html'));
+};
+
+/*show upload artifacts page*/
+const uploadArtifacts = function (req, res) {
+    res.sendFile(path.join(__dirname, '../views/upload.html'));
+};
+
+
+
+
 /* User attempted a log in, check email and password against database. If successful store their user information in
  * session data to help templating and updating user info whilst on the site */
 const handleLogin = function(req, res) {
@@ -223,3 +236,6 @@ module.exports.findAllItems = findAllItems;
 module.exports.findAllUsers = findAllUsers;
 module.exports.getAccount = getAccount;
 module.exports.updateAccount = updateAccount;
+module.exports.showArtifacts = showArtifacts;
+module.exports.uploadArtifacts = uploadArtifacts;
+

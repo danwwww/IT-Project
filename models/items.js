@@ -6,26 +6,19 @@ require('mongoose-type-url');
 /* treasure item */
 const itemSchema = mongoose.Schema(
     {
-        "id": {
-            type: String,
-            required: true,
-        },
         "name":{
             type: String,
             required: true
         },
-        "category": String,
-        "photo": mongoose.SchemaTypes.Url,
-        "date_created": Date,
-        "date_refurbished": Date,
-        "creator": String,
+        "date": String,
+        "owner": mongoose.SchemaTypes.Url,
+        "keeper": Date,
+        "location": Date,
+        "description": String,
         "current_owner": String,
         "location": String,
         "description": String,
-        "familyId": {
-            type: String,
-            required: true,
-        }
+        "photo": Object,
     }
 );
 

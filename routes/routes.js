@@ -29,6 +29,10 @@ router.get('/account', controller.getAccount);
 
 router.post('/account', controller.updateAccount);
 
+router.get('/artifacts', controller.showArtifacts);
+
+router.get('/upload', controller.uploadArtifacts);
+
 //Find all list items
 router.get('/directory/items/api',controller.findAllItems);
 
