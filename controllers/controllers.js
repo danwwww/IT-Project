@@ -26,23 +26,52 @@ const welcome = function(req, res){
 
 /*Create a new user with entered username, password, email */
 const createUser = function (req, res) {
+    /** check if account has already existed
+     * */
+    Users.findOne({ id: req.body.userId }, function(err, user) {
+        if (user) {
+            console.log("existed");
+            res.send('userId already exist');
+            //should direct to error page later
+
+        }
+        else {
+            console.log("new");
+        }
+    });
+    Users.findOne({ id: req.body.email }, function(err, user) {
+        if (user) {
+            console.log("existed");
+            res.send('user email already exist');
+            //should direct to error page later
+
+        }
+        else {
+            console.log("new");
+        }
+    });
+
+
+
         const user = new Users({
-            "userId":req.body.userId,
+            "id":req.body.userId,
             "username":req.body.username,
             "email":req.body.email,
             "passwordHash":req.body.psw,
         });
 
-        /** check if account has already existed
-         * */
-    //testing: printout the input username
-        console.log(req.body.username);
+        //testing: printout the input username
+        // console.log(req.body.userId);
+        // console.log(req.body.username);
+        // console.log(req.body.email);
+        // console.log(req.body.psw);
+
         user.save(function (err) {
             console.log(err);
             if (!err) {
                 /** the file is to be made and changed
                  * */
-                res.sendFile('account.html');
+                res.sendFile(path.join(__dirname, '../views/account.html'));
             }
             else {
                 res.end("register failed");
@@ -128,7 +157,7 @@ const handleLogin = function(req, res) {
         console.log(req.body.userId);
         console.log(req.body.psw);
         if (!user) {
-            res.send('user not found');
+            res.send('userId not found');
             //should direct to error page later
 
         } else {
@@ -137,7 +166,6 @@ const handleLogin = function(req, res) {
                 updateUser(req, res);
                 //do something!
                 res.sendFile(path.join(__dirname, '../views/account.html'));
-                console.log("sent");
 
             }
             else {
@@ -159,9 +187,7 @@ const updateUser = function (req) {
 
 /* User navigated to homePage*/
 const getAccount = function (req, res) {
-    /** ask how to render...
-     * */
-    //res.render(path.join(__dirname, '../views/Account.jade'), { user: req.session.user, gradeFormat : gradeAdjusted });
+    res.sendFile(path.join(__dirname, '../views/account.html'));
 };
 
 /* User entered new information to their account, update it*/
