@@ -19,31 +19,15 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     text-align: center;
-    min-height: 230vh;
+    min-height: 190vh;
     background-attachment:fixed;
 }
 
-.search_bar {
-    margin-right: 30%;
-}
-
-
-.search div input {
-    text-align: center;
-    position: absolute;
-    padding: 10px 0 10px 15px;
-    font-size: 17px;
-    font-weight: 300;
-    color: black;
-    letter-spacing: 1px;
-    background-color: rgba(255,255,255,0.7);
-    border: 1px solid #000000;
-    border-radius:15px;
-    box-sizing: border-box;
-    font-family: 'Mukta', sans-serif;
-    width: 30%;
-    outline: none;
-    top: 50px;
+.search .main {
+    width: 90%;
+    margin-left: 5%;
+    position: relative;
+    top: 100px;
 }
 
 .search div button {
@@ -71,7 +55,7 @@ body {
     border: 1px solid transparent;
     border-radius: 30px;
     position: absolute;
-    top: 110px;
+    top: 30px;
     width: 7%;
 }
 
@@ -83,13 +67,6 @@ body {
 
 .btn {
     margin-right: 9%;
-}
-
-.search .main {
-    width: 90%;
-    margin-left: 5%;
-    position: relative;
-    top: 130px;
 }
 
 .img-fluid {
