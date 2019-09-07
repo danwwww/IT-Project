@@ -19,112 +19,19 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     text-align: center;
-    min-height: 120vh;
-}
-
-.img-grid button{
-    float: left;
-    height: 80px;
-    background-color: rgba(153, 102, 51, 0.6);
-    font-family: 'Mukta', sans-serif;
-    width: 18%;
-    position: relative;
-    top: 85px;
-    left: 13%;
-    margin-right: 10%;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    border-radius: 35px;
-    -webkit-border-radius: 35px;
-    -moz-border-radius: 35px;
-    -ms-border-radius: 35px;
-    -o-border-radius: 35px;
-}
-
-
-
-
-/* popup */
-.popup-effect {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    transition: opacity 0ms;
-    visibility: hidden;
-    opacity: 0;
-    z-index: 99;
-    /*overflow-y: auto;*/
-}
-
-.popup-effect:target {
-    visibility: visible;
-    opacity: 1;
-}
-
-.popup {
-    background: #fff;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -o-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -moz-border-radius: 4px;
-    max-width: 500px;
-    max-height: 500px;
-    position: relative;
-    margin: 15em auto;
-    padding: 3em 2em;
-    z-index: 999;
-    text-align: center;
-}
-
-.popup .close {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    transition: all 200ms;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #000;
-}
-
-.popup .close:hover {
-    color: #875532;
-}
-
-.popup p {
-    text-align: left;
-    font-size: 18px;
-}
-
-.popup input {
-    width: 200px;
-}
-
-.popup button {
-    background-color: rgba(153, 102, 51, 0.6);
-    color: white;
-    font-family: 'Mukta', sans-serif;
-    text-align: center;
-    font-size: 18px;
-
+    min-height: 110vh;
 }
 
 .div1 {
+    font-family: 'Mukta', sans-serif;
     float: left;
-    height: 32px;
+    height: 41px;
     background-color: rgba(153, 102, 51, 0.6);
-    width: 40%;
+    width: 144px;
     position: relative;
+    top: 100px;
+    left: 30%;
+    margin-right: 10%;
     cursor: pointer;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
@@ -136,18 +43,13 @@ body {
     -moz-border-radius: 35px;
     -ms-border-radius: 35px;
     -o-border-radius: 35px;
-    left: 8%;
-    top: -10px;
-    margin-right: 5%;
 }
-
-
 .div2 {
     color: white;
-    font-family: 'Mukta', sans-serif;
     text-align: center;
-    padding-top: 5px;
-    font-size: 18px;
+    padding-top: 12px;
+    font-size: 15px;
+    font-weight: 800;
 }
 
 .inputstyle {
@@ -164,28 +66,24 @@ body {
     top: 0px;
 }
 
-
-
 .addDiscription {
     position: relative;
     top: 210px;
     height: 400px;
     font-family: 'Mukta', sans-serif;
-    font-size: 18px;
-    color: #875532;
 }
 
 .addDiscription form {
     position: absolute;
-    margin-left: 20%;
+    margin-left: 25%;
 }
 
 .addDiscription form input {
-    width: 350px;
+    width: 300px;
 }
 
 .addDiscription form textarea {
-    width: 350px;
+    width: 300px;
 }
 
 .addDiscription form label {
@@ -194,24 +92,12 @@ body {
     cursor: pointer;
     display: inline-block;
     padding: 3px 6px;
-    width: 250px;
+    width: 200px;
 }
-.addDiscription form .btn {
+.btn {
     background-color: rgba(153, 102, 51, 0.6);
     color: white;
     font-family: 'Mukta', sans-serif;
-    font-size: 20px;
-    margin-left: 23%;
-    cursor: pointer;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    border-radius: 35px;
-    -webkit-border-radius: 35px;
-    -moz-border-radius: 35px;
-    -ms-border-radius: 35px;
-    -o-border-radius: 35px;
+    font-size: 18px;
 }
 
