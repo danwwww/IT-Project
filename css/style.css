@@ -8,24 +8,17 @@ hr {
 }
 
 /* //Portfolio */
-img {
-    vertical-align: middle;
-    border-style: none;
-}
+
 
 .img-grid {
     margin-bottom: 1.2em;
-    width: 100%;
-    height: 500px;
 }
 
 h6.main-title-w3pvt {
     text-transform: uppercase;
     font-weight: 600;
-    font-family: "Times New Roman";
-    font-size: larger;
     margin-bottom: 1em;
-    color: gray;
+    color: #0083ff;
     letter-spacing: 0.5px;
 }
 
@@ -64,7 +57,7 @@ h6.main-title-w3pvt {
     -moz-border-radius: 4px;
     max-width: 430px;
     position: relative;
-    margin: 11em auto;
+    margin: 4em auto;
     padding: 3em 2em;
     z-index: 999;
     text-align: center;

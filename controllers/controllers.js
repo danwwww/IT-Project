@@ -97,7 +97,6 @@ const validateUser = function (req, res) {
         } else {
             //
             res.locals.user = user;
-            res.sendFile(path.join(__dirname, '../views/home.html'));
             /**
              handleLogin
             cookie set

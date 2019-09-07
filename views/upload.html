@@ -9,18 +9,68 @@
 </head>
 <body>
 <div class="main">
-    <div class="div1">
-        <div class="div2" id="left">Add Image</div>
-        <input type="file" class="inputstyle">
+    <div class="img-grid">
+        <a href="#gal4">
+            <button onclick="">Add Image & Video</button>
+        </a>
+        <a href="#gal5">
+            <button onclick="">Add Documents</button>
+        </a>
+        <a href="#gal6">
+            <button onclick="">Add URL</button>
+        </a>
     </div>
-    <div class="div1">
-        <div class="div2" id="right">Add Documents</div>
-        <input type="file" class="inputstyle">
-</div>
+
+    <!-- popup-->
+    <div id="gal4" class="popup-effect animate">
+        <div class="popup">
+
+                 <form action="" >
+                     <div class="div1">
+                         <div class="div2">Choose Image</div>
+                         <input type="file" class="inputstyle" name="image[]" multiple/>
+                     </div>
+
+                     <div class="div1">
+                         <div class="div2">Confirm</div>
+                     </div>
+                 </form>
+            <a class="close" href="#gallery">&times;</a>
+        </div>
+    </div>
+
+    <!-- popup-->
+    <div id="gal5" class="popup-effect animate">
+        <div class="popup">
+            <form action="" >
+                <div class="div1">
+                    <div class="div2">Choose Document</div>
+                    <input type="file" class="inputstyle" name="image[]" multiple/>
+                </div>
+                <div class="div1">
+                    <div class="div2">Confirm</div>
+                </div>
+            </form>
+            <a class="close" href="#gallery">&times;</a>
+        </div>
+    </div>
+
+
+    <!-- popup-->
+    <div id="gal6" class="popup-effect animate">
+        <div class="popup">
+            <p><label>Add URL: </label>
+                <input type = "text" name = "name"></p><br>
+            <button onclick="">Confirm</button>
+            <a class="close" href="#gallery">&times;</a>
+        </div>
+    </div>
 
 <div class="addDiscription">
     <form action="/upload" id="upload" method = POST>
         <p><label>Name of the Artifact: </label>
+            <input type = "text" name = "name"></p><br>
+        <p><label>Category: </label>
             <input type = "text" name = "name"></p><br>
         <p><label>Year of the Artifact: </label>
             <input type = "text" name = "name"></p><br>
@@ -31,7 +81,7 @@
         <p><label>Current Location: </label>
             <input type = "text" name = "name"></p><br>
         <p><label>Description: </label>
-            <textarea cols="50" rows="10"></textarea></p><br>
+            <textarea cols="50" rows="8"></textarea></p><br>
         <input type="submit" class="btn" onclick=uploadArtifact()>
     </form>
 </div>
