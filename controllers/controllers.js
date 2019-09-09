@@ -158,7 +158,7 @@ const showArtifacts = function (req, res) {
 
 /*show upload artifacts page*/
 const uploadArtifacts = function (req, res) {
-    res.sendFile(path.join(__dirname, '../views/upload.html'));
+    res.sendFile(path.join(__dirname, '../views/upload_artifacts.html'));
 };
 
 

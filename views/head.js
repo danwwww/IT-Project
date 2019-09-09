@@ -54,7 +54,7 @@ document.writeln("                                        <li class=\"menu__item
 document.writeln("                                        <li class=\"dropdown\">");
 document.writeln("                                            <a href=\"#\" class=\"menu__item dropdown-toggle\" data-toggle=\"dropdown\">Upload</a>");
 document.writeln("                                            <ul class=\"dropdown-menu\">");
-document.writeln("                                                <li class=\"menu__item\"><a href=\"upload.html\" class=\"menu__link scroll\"><span class=\"menu__helper\">Upload Artifacts</span></a></li>");
+document.writeln("                                                <li class=\"menu__item\"><a href=\"upload_artifacts.html\" class=\"menu__link scroll\"><span class=\"menu__helper\">Upload Artifacts</span></a></li>");
 document.writeln("                                                <li class=\"menu__item\"><a href=\"upload_profile.html\" class=\"menu__link scroll\"><span class=\"menu__helper\">Upload Profile</span></a></li>");
 document.writeln("                                            </ul>");
 document.writeln("                                        </li>");

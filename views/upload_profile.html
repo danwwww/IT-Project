@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload a profile</title>
+
+    <link rel="stylesheet" href="../css/upload.css">
+    <script type="text/javascript" src="head.js"></script>
 </head>
 <body>
-
+<div class="main">
+    <div class="upload-document">
+        <button onclick="">Add Image & Video</button>
+    </div>
+    <div class="addProfile">
+        <form action="/upload" id="upload" method = POST>
+            <p><label>Name: </label>
+                <input type = "text" name = "name"></p><br>
+            <p><label>Age: </label>
+                <input type = "text" name = "age"></p><br>
+            <p><label>Birthday: </label>
+                <input type = "text" name = "birthday"></p><br>
+            <p><label>Description: </label>
+                <textarea cols="50" rows="8"></textarea></p><br>
+            <p><label>Life Story: </label>
+                <textarea cols="50" rows="8"></textarea></p><br>
+            <input type="submit" class="btn" onclick=uploadProfile()>
+        </form>
+    </div>
+</div>
 </body>
 </html>
