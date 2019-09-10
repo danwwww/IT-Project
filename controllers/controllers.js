@@ -149,9 +149,9 @@ const findAllItems = function (req, res) {
 /*list all users
 * */
 const findAllUsers = function (req, res) {
-    Users.find({}, function (err, users) {
+    Users.find({}, function (err, user) {
         if (!err) {
-            res.send(users);
+            res.send(user);
         } else {
             res.sendStatus(400);
         }
@@ -161,7 +161,29 @@ const findAllUsers = function (req, res) {
 
 /*show artifacts page*/
 const showArtifacts = function (req, res) {
-    res.sendFile(path.join(__dirname, '../views/artifacts.html'));
+    Items.find({}, function (err, items) {
+        if (!err) {
+
+            //res.send(item);]
+            //JSON.stringify(item);
+            //var arr=str.split(",");
+            //let arr = Array.from( item );
+            console.log(items);
+            // for(a in items){
+            //     if (a == 0){
+            //         console.log(items[a]);
+            //         console.log("?");
+            //         res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items[a]});
+            //     }
+            //
+            // }
+            res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
+
+        } else {
+            res.sendStatus(400);
+        }
+    });
+
 };
 
 /*show upload artifacts page*/
@@ -179,7 +201,7 @@ const handleLogin = function(req, res) {
         console.log(req.body.userId);
         console.log(req.body.psw);
         if (!user) {
-            res.send('userId not found');
+            confirm('userId not found');
             //should direct to error page later
 
         } else {
@@ -187,7 +209,7 @@ const handleLogin = function(req, res) {
                 req.session.user = user;
                 updateUser(req, res);
                 //do something!
-                res.sendFile(path.join(__dirname, '../views/home.html'));
+                res.sendFile(path.join(__dirname, '../views/account.html'));
 
             }
             else {

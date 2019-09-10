@@ -1,0 +1,29 @@
+< !DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" > 
+<HTML> 
+<HEAD> 
+    <TITLE> New Document </TITLE>  
+  <script language="javascript" type="text/javascript " src="jquery.min.js "></script>
+    <script type = "text / javascript ">
+    $(function(){
+
+    var tbody = "";
+    var anArray = ['one','two','three'];
+    $("#result ").html("------------遍历数组.each的使用-------------");
+    $.each(anArray,function(n,value) {
+
+    alert(n+' '+value);
+    var trs = "";
+    trs += " < tr > <td > " +value+" < /td></tr > ";
+    tbody += trs;
+});
+
+    $("#project ").append(tbody);
+
+});
+</script>  
+ </HEAD>  
+   
+ <BODY>  
+  
+ </BODY>  
+</HTML>  

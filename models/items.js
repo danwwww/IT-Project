@@ -12,13 +12,14 @@ const itemSchema = mongoose.Schema(
         },
         "date": String,
         "owner": mongoose.SchemaTypes.Url,
-        "keeper": Date,
-        "location": Date,
-        "description": String,
-        "current_owner": String,
+        "keeper": String,
         "location": String,
         "description": String,
-        "photo": Object,
+        "owner": String,
+        "location": String,
+        "description": String,
+        "photo": String,
+        "category":String,
     }
 );
 
