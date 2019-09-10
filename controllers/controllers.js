@@ -20,6 +20,15 @@ const path = require('path');
 /*done: open welcome page*/
 const welcome = function(req, res){
     res.sendFile(path.join(__dirname, '../views/login.html'));
+
+    /*TEST!!!delete this after
+    Users.deleteOne({ "username": "b" }, function (error, data) {
+        if (error) {
+            console.log('delete fail');
+            return;
+        }
+        console.log("delete successful");
+    });*/
 }
 
 
@@ -90,12 +99,11 @@ const validateUser = function (req, res) {
             // if the user isn't found in the DB, reset the session info and
 
             // redirect the user to the login page
-            //req.session.reset();
+            req.session.reset();
             /**should jump to error message page then automatically jump to the login page after a few seconds
              * */
-            //res.redirect('/');
+            res.redirect('/');
         } else {
-            //
             res.locals.user = user;
             res.sendFile(path.join(__dirname, '../views/home.html'));
             /**
