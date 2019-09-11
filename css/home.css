@@ -48,8 +48,42 @@ body {
     margin-left: 10%;
     background: none;
     border: 0;
-    font-size: large;
+    font-size: x-large;
     font-family: "Snell Roundhand";
     word-wrap:break-word;
     word-break:break-all;
+}
+
+.btn {
+    position: relative;
+    margin-left: 54%;
+    top: 260px;
+}
+
+.btn button {
+    background: rgba(153, 102, 51, 0.6);
+    border: none;
+    color: #fff;
+    margin: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    position: absolute;
+    width: 350px;
 }
