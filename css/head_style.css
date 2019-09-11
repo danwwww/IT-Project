@@ -157,12 +157,12 @@ h1 a.navbar-brand span {
     border: none!important;
 }
 .navbar-default .navbar-nav > li > a {
-    color: #fff;
+    color: white;
     font-size: 1.2em;
 	letter-spacing: 1px;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color: #111;
+    color: #996633;
     background-color: #fff;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
@@ -205,6 +205,7 @@ h1 a.navbar-brand span {
 /* Francisco */
 .menu--francisco .menu__item {
 	margin: 0 1.2em;
+	font-weight: bold;
 }
 .menu--francisco .menu__link {
 	position: relative;
@@ -212,16 +213,16 @@ h1 a.navbar-brand span {
     height: 3em;
     padding: 1em 1em 1.5em;
 	text-align: center;
-	color: black;
+	color: #996633;
 	-webkit-transition: color 0.3s;
 	transition: color 0.3s;
 }
 .menu--francisco .menu__link:hover,
 .menu--francisco .menu__link:focus {
-	color: black;
+	color: #996633;
 }
 .menu--francisco .menu__item--current .menu__link{
-	color: black;
+	color: #996633;
 }
 .menu--francisco .menu__link::before{
 	content: '';
@@ -641,6 +642,7 @@ marquee span {
 	}
 	.navbar-default .navbar-nav > li > a {
 		font-size: 1.1em;
+		font-weight: bold;
 	}
 	.menu--francisco .menu__link {
 		padding: 1em 1em 1em;

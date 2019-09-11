@@ -47,7 +47,7 @@ document.writeln("                            </div>");
 document.writeln("                            <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">");
 document.writeln("                                <nav class=\"menu menu--francisco\">");
 document.writeln("                                    <ul class=\"nav navbar-nav menu__list\">");
-document.writeln("                                        <li class=\"menu__item menu__item--current\"><a href=\"home\" class=\"menu__link\"><span class=\"menu__helper\">Home</span></a></li>");
+document.writeln("                                        <li class=\"menu__item\"><a href=\"home\" class=\"menu__link\"><span class=\"menu__helper\">Home</span></a></li>");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"artifacts\" class=\"menu__link scroll\"><span class=\"menu__helper\">Artifacts</span></a></li>");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"family\" class=\"menu__link scroll\"><span class=\"menu__helper\">Family</span></a></li>");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"account\" class=\"menu__link scroll\"><span class=\"menu__helper\">My Account</span></a></li>");
