@@ -218,15 +218,15 @@ body {
 
 
 /* Css used in upload_profile.html */
-.upload-document button {
+.upload-document {
     height: 80px;
     background-color: rgba(153, 102, 51, 0.6);
     font-family: 'Mukta', sans-serif;
     width: 18%;
+    float: left;
+    left: 40%;
     position: relative;
-    text-align: center;
     top: 65px;
-    color: white;
     font-size: 20px;
     cursor: pointer;
     transition: 0.5s all;
@@ -241,9 +241,31 @@ body {
     -o-border-radius: 35px;
 }
 
+.upload-document .div3 {
+    color: white;
+    font-family: 'Mukta', sans-serif;
+    text-align: center;
+    padding-top: 24px;
+    font-size: 20px;
+}
+
+.upload-document .input {
+    width: 144px;
+    height: 41px;
+    cursor: pointer;
+    font-size: 30px;
+    outline: medium none;
+    position: absolute;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    opacity: 0;
+    left: 0px;
+    top: 0px;
+}
+
 .addProfile {
     position: relative;
-    top: 110px;
+    top: 180px;
     height: 400px;
     font-family: 'Mukta', sans-serif;
     font-size: 18px;
@@ -289,3 +311,4 @@ body {
     -ms-border-radius: 35px;
     -o-border-radius: 35px;
 }
+
