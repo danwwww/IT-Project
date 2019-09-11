@@ -169,6 +169,32 @@ const uploadArtifacts = function (req, res) {
 };
 
 
+/*submit upload artifacts*/
+const submitUploadArtifacts = function (req, res) {
+    const item = new Items({
+        "name": req.body.name,
+        "date": req.body.year,
+        "owner": req.body.owner,
+        "keeper": req.body.keeper,
+        "location": req.body.keeper,
+        "description": req.body.keeper,
+        "category": req.body.category,
+    });
+
+    item.save(function (err) {
+        console.log(err);
+        if (!err) {
+            /** the file is to be made and changed
+             * */
+            res.send('submit successful');
+        }
+        else {
+            res.end("sumbit fail");
+            /**should also jump to error message page
+             * */
+        }
+    });
+};
 
 
 /* User attempted a log in, check email and password against database. If successful store their user information in
@@ -297,4 +323,5 @@ module.exports.getAccount = getAccount;
 module.exports.updateAccount = updateAccount;
 module.exports.showArtifacts = showArtifacts;
 module.exports.uploadArtifacts = uploadArtifacts;
+module.exports.submitUploadArtifacts = submitUploadArtifacts;
 

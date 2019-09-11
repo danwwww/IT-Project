@@ -33,6 +33,8 @@ router.get('/artifacts', controller.showArtifacts);
 
 router.get('/upload', controller.uploadArtifacts);
 
+router.post('/upload', controller.submitUploadArtifacts);
+
 //Find all list items
 router.get('/directory/items/api',controller.findAllItems);
 
