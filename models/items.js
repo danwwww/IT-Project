@@ -11,7 +11,7 @@ const itemSchema = mongoose.Schema(
             required: true
         },
         "date": String,
-        "owner": mongoose.SchemaTypes.Url,
+        "owner": String,
         "keeper": String,
         "location": String,
         "description": String,
@@ -20,6 +20,7 @@ const itemSchema = mongoose.Schema(
         "description": String,
         "photo": String,
         "category":String,
+
     }
 );
 

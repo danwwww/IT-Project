@@ -21,14 +21,6 @@ const path = require('path');
 const welcome = function(req, res){
     res.sendFile(path.join(__dirname, '../views/login.html'));
 
-    /*TEST!!!delete this after
-    Users.deleteOne({ "username": "b" }, function (error, data) {
-        if (error) {
-            console.log('delete fail');
-            return;
-        }
-        console.log("delete successful");
-    });*/
 }
 
 
@@ -91,31 +83,6 @@ const createUser = function (req, res) {
 };
 
 
-/*Ensure a user is logged in otherwise do not allow them to access website's functionalities. NOTE: must log in to
-* be able to test functions*/
-const validateUser = function (req, res) {
-    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
-        if (!user) {
-            // if the user isn't found in the DB, reset the session info and
-
-            // redirect the user to the login page
-            req.session.reset();
-            /**should jump to error message page then automatically jump to the login page after a few seconds
-             * */
-            res.redirect('/');
-        } else {
-            res.locals.user = user;
-            res.sendFile(path.join(__dirname, '../views/home.html'));
-            /**
-             handleLogin
-            cookie set
-             */
-
-        }
-    }); else {
-        res.redirect('/');
-    }
-};
 
 /* User logged out, direct them to log in screen and remove session data*/
 const logOut = function(req, res) {
@@ -137,6 +104,8 @@ const logOut = function(req, res) {
 /*list all items to be shown on the 'my family treasure'
 * */
 const findAllItems = function (req, res) {
+    validateUser(req, res);
+    console.log("should have called validated");
     Items.find({}, function (err, items) {
         if (!err) {
             res.send(items);
@@ -161,28 +130,36 @@ const findAllUsers = function (req, res) {
 
 /*show artifacts page*/
 const showArtifacts = function (req, res) {
-    Items.find({}, function (err, items) {
-        if (!err) {
+    console.log("trying to go artifacts page");
+    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
+        console.log("in validateUser: user ="+user);
+        if (!user) {
 
-            //res.send(item);]
-            //JSON.stringify(item);
-            //var arr=str.split(",");
-            //let arr = Array.from( item );
-            console.log(items);
-            // for(a in items){
-            //     if (a == 0){
-            //         console.log(items[a]);
-            //         console.log("?");
-            //         res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items[a]});
-            //     }
-            //
-            // }
-            res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
-
+            // if the user isn't found in the DB, reset the session info and
+            // redirect the user to the login page
+            req.session.reset();
+            res.redirect('/');
         } else {
-            res.sendStatus(400);
+            console.log(user);
+            res.locals.user = user;
+            console.log("in validating function, validation successed");
+            Items.find({}, function (err, items) {
+                if (!err) {
+
+                    console.log("currently  on artifacts page");
+                    res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
+
+                } else {
+                    res.sendStatus(400);
+                }
+            });
+
         }
-    });
+    }); else {
+        console.log("in validating function, validation failed");
+        req.session.reset();
+        res.redirect('/');
+    }
 
 };
 
@@ -209,7 +186,7 @@ const handleLogin = function(req, res) {
                 req.session.user = user;
                 updateUser(req, res);
                 //do something!
-                res.sendFile(path.join(__dirname, '../views/account.html'));
+                res.sendFile(path.join(__dirname, '../views/home.html'));
 
             }
             else {
@@ -229,9 +206,60 @@ const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
 
-/* User navigated to homePage*/
+/* User navigated to accountPage*/
+const getHome = function (req, res) {
+    console.log("in validateUser: validating");
+
+    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
+        console.log("in validateUser: user ="+user);
+        if (!user) {
+
+            // if the user isn't found in the DB, reset the session info and
+
+            // redirect the user to the login page
+            req.session.reset();
+            res.redirect('/');
+        } else {
+            console.log(user);
+            res.locals.user = user;
+            console.log("in validating function, validation successed");
+            res.sendFile(path.join(__dirname, '../views/home.html'));
+
+        }
+    }); else {
+        console.log("in validating function, validation failed");
+        req.session.reset();
+        res.redirect('/');
+    }
+
+
+};
+
 const getAccount = function (req, res) {
-    res.sendFile(path.join(__dirname, '../views/account.html'));
+    console.log("in validateUser: validating");
+
+    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
+        console.log("in validateUser: user ="+user);
+        if (!user) {
+
+            // if the user isn't found in the DB, reset the session info and
+
+            // redirect the user to the login page
+            req.session.reset();
+            res.redirect('/');
+        } else {
+            console.log(user);
+            res.locals.user = user;
+            console.log("in validating function, validation successed");
+            res.sendFile(path.join(__dirname, '../views/account.html'));
+
+        }
+    }); else {
+        console.log("in validating function, validation failed");
+        req.session.reset();
+        res.redirect('/');
+    }
+
 };
 
 /* User entered new information to their account, update it*/
@@ -257,9 +285,9 @@ const updateAccount = function(req, res){
 /*--------------------Function Exports---------------------------*/
 
 module.exports.welcome = welcome;
+module.exports.getHome = getHome;
 
 module.exports.createUser = createUser;
-module.exports.validateUser = validateUser;
 module.exports.handleLogin = handleLogin;
 module.exports.logOut = logOut;
 
