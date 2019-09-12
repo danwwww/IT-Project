@@ -50,8 +50,6 @@ body {
     border: 0;
     font-size: x-large;
     font-family: "Snell Roundhand";
-    word-wrap:break-word;
-    word-break:break-all;
 }
 
 .btn {
