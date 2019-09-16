@@ -30,8 +30,8 @@ body {
     top: 100px;
 }
 
-.search div button {
-    background: #996633;
+.search .btn button {
+    background: rgba(153, 102, 51, 0.6);
     border: none;
     color: #fff;
     margin: 10px;
@@ -55,7 +55,7 @@ body {
     border: 1px solid transparent;
     border-radius: 30px;
     position: absolute;
-    top: 30px;
+    top: 40px;
     width: 7%;
 }
 
@@ -78,3 +78,4 @@ img {
     vertical-align: middle;
     border-style: none;
 }
+

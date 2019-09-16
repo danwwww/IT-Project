@@ -249,7 +249,7 @@ body {
     font-size: 20px;
 }
 
-.upload-document .input {
+.upload-document input {
     width: 144px;
     height: 41px;
     cursor: pointer;
