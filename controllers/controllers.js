@@ -60,13 +60,6 @@ const createUser = function (req, res) {
             "email":req.body.email,
             "passwordHash":req.body.psw,
         });
-
-        //testing: printout the input username
-        // console.log(req.body.userId);
-        // console.log(req.body.username);
-        // console.log(req.body.email);
-        // console.log(req.body.psw);
-
         user.save(function (err) {
             console.log(err);
             if (!err) {
@@ -305,7 +298,7 @@ const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
 
-/* User navigated to accountPage*/
+/* User navigated to home Page*/
 const getHome = function (req, res) {
     console.log("in validateUser: validating");
 

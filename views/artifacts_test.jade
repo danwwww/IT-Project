@@ -11,7 +11,7 @@ html(lang='en')
         .search
             .search_bar
                 input.itemSearch(placeholder='Search for an artifact...')
-                button(onclick="") SEARCH
+                button(onclick='') SEARCH
                 br
                 br
             .btn
@@ -23,7 +23,7 @@ html(lang='en')
                         .img-grid
                             .Portfolio-grid1
                                 a(href= '#'+'gal'+i.toString())
-                                    img.img-fluid(src='../images/clock.jpg', alt=' ')
+                                    img.img-fluid(#{item[i].photo}, alt=' ')
                             .port-desc.text-center
                                 h6.main-title-w3pvt.text-center #{item[i].name}
                                 p #{item[i].description}
@@ -32,7 +32,7 @@ html(lang='en')
                     // popup
                     div(id='gal'+i.toString()).popup-effect.animate
                         .popup
-                            img.img-fluid(src='../images/clock.jpg', alt='Popup Image')
+                            img.img-fluid(#{item[i].photo}, alt='Popup Image')
                             p Name: #{item[i].name}
                             p Category: #{item[i].category}
                             p Year: #{item[i].date}
@@ -42,4 +42,3 @@ html(lang='en')
                             p.editContent.mt-4
                                 | Description: #{item[i].description}
                             a.close(href='#gallery')&times;
-                            button DELETE
