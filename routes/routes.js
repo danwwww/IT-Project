@@ -17,6 +17,7 @@ router.get('/', controller.welcome);
 //table testers
 router.get('/users', controller.findAllUsers);
 router.get('/items', controller.findAllItems);
+router.get('/profiles', controller.findAllProfiles);
 
 router.get('/logout', controller.logOut);
 
@@ -31,9 +32,15 @@ router.post('/account', controller.updateAccount);
 
 router.get('/artifacts', controller.showArtifacts);
 
-router.get('/upload', controller.uploadArtifacts);
+router.get('/upload/artifacts', controller.uploadArtifacts);
 
-router.post('/upload', controller.submitUploadArtifacts);
+router.post('/upload/artifacts/submit', controller.submitUploadArtifacts);
+
+router.get('/family', controller.showProfiles);
+
+router.post('/upload/profiles/submit', controller.submitUploadProfiles);
+
+router.get('/upload/profiles', controller.uploadProfiles);
 
 //Find all list items
 router.get('/directory/items/api',controller.findAllItems);

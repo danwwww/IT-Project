@@ -557,6 +557,7 @@ h1 a.navbar-brand span {
 /*-- move-text --*/ 
 .Main-agile {
     position: relative;
+	z-index: 10;
 }
 .header {
     position: absolute;

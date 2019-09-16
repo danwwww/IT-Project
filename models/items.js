@@ -47,5 +47,16 @@ const userSchema = mongoose.Schema(
 );
 
 
+/*profiles*/
+const profileSchema = mongoose.Schema(
+    {
+        "name": String,
+        "birthday": String,
+        "description": String,
+        "life_story": String,
+    }
+);
+
 module.exports = mongoose.model('item_table', itemSchema);
 module.exports = mongoose.model('account_table', userSchema);
+module.exports = mongoose.model('profile_table', profileSchema);

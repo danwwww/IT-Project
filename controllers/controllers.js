@@ -3,8 +3,8 @@ mongoose.set('useFindAndModify', false);
 //these are from items.js
 const Items = mongoose.model('item_table');
 const Users = mongoose.model('account_table');
+const Profiles = mongoose.model('profile_table');
 
-//const Profiles = mongoose.model('profile_table');
 //const Families = mongoose.model('family_table');
 
 
@@ -127,6 +127,16 @@ const findAllUsers = function (req, res) {
     });
 };
 
+const findAllProfiles = function (req, res) {
+    Profiles.find({}, function (err, user) {
+        if (!err) {
+            res.send(user);
+        } else {
+            res.sendStatus(400);
+        }
+    });
+};
+
 
 /*show artifacts page*/
 const showArtifacts = function (req, res) {
@@ -163,9 +173,48 @@ const showArtifacts = function (req, res) {
 
 };
 
+/*show profiles page*/
+const showProfiles = function (req, res) {
+    console.log("trying to go family page");
+    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
+        console.log("in validateUser: user ="+user);
+        if (!user) {
+
+            // if the user isn't found in the DB, reset the session info and
+            // redirect the user to the login page
+            req.session.reset();
+            res.redirect('/');
+        } else {
+            console.log(user);
+            res.locals.user = user;
+            console.log("in validating function, validation successed");
+            Profiles.find({}, function (err, profiles) {
+                if (!err) {
+                    console.log("currently on family page");
+                    res.render(path.join(__dirname, '../views/family_test.jade'), {profile : profiles});
+
+                } else {
+                    res.sendStatus(400);
+                }
+            });
+
+        }
+    }); else {
+        console.log("in validating function, validation failed");
+        req.session.reset();
+        res.redirect('/');
+    }
+
+};
+
 /*show upload artifacts page*/
 const uploadArtifacts = function (req, res) {
     res.sendFile(path.join(__dirname, '../views/upload_artifacts.html'));
+};
+
+/*show upload profiles page*/
+const uploadProfiles = function (req, res) {
+    res.sendFile(path.join(__dirname, '../views/upload_profile.html'));
 };
 
 
@@ -182,6 +231,30 @@ const submitUploadArtifacts = function (req, res) {
     });
 
     item.save(function (err) {
+        console.log(err);
+        if (!err) {
+            /** the file is to be made and changed
+             * */
+            res.send('submit successful');
+        }
+        else {
+            res.end("sumbit fail");
+            /**should also jump to error message page
+             * */
+        }
+    });
+};
+
+/*submit upload profiles*/
+const submitUploadProfiles = function (req, res) {
+    const profile = new Profiles({
+        "name": req.body.name,
+        "birthday": req.body.birthday,
+        "description": req.body.description,
+        "life_story": req.body.life_story,
+    });
+
+    profile.save(function (err) {
         console.log(err);
         if (!err) {
             /** the file is to be made and changed
@@ -324,4 +397,9 @@ module.exports.updateAccount = updateAccount;
 module.exports.showArtifacts = showArtifacts;
 module.exports.uploadArtifacts = uploadArtifacts;
 module.exports.submitUploadArtifacts = submitUploadArtifacts;
+
+module.exports.findAllProfiles = findAllProfiles;
+module.exports.showProfiles = showProfiles;
+module.exports.uploadProfiles = uploadProfiles;
+module.exports.submitUploadProfiles = submitUploadProfiles;
 

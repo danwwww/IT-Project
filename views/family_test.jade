@@ -12,92 +12,22 @@ html(lang='en')
             .btn
                 button(onclick="window.open('upload.html')") UPLOAD
             .main
-                ul.demo.row
-                    li.col-lg-4
+                -for(var i=0;i<profile.length;i++)
+                    .col-lg-4
                         .img-grid
                             .Portfolio-grid1
-                                a(href='#gal1')
+                                a(href='#'+'gal'+i.toString())
                                     img.img-fluid(src='../images/oldman.jpeg', alt=' ')
                             .port-desc.text-center
-                                h6.main-title-w3pvt.text-center Name: xxx
-                    li.col-lg-4
-                        .img-grid
-                            .Portfolio-grid1
-                                a(href='#gal2')
-                                    img.img-fluid(src='../images/oldwoman.jpeg', alt=' ')
-                            .port-desc.text-center
-                                h6.main-title-w3pvt.text-center Name: xxx
-                    li.col-lg-4
-                        .img-grid
-                            .Portfolio-grid1
-                                a(href='#gal3')
-                                    img.img-fluid(src='../images/man.jpeg', alt=' ')
-                            .port-desc.text-center
-                                h6.main-title-w3pvt.text-center Name: xxx
-                    li.col-lg-4
-                        .img-grid
-                            .Portfolio-grid1
-                                a(href='#gal4')
-                                    img.img-fluid(src='../images/woman.jpeg', alt=' ')
-                            .port-desc.text-center
-                                h6.main-title-w3pvt.text-center Name: xxx
-                // popup
-                #gal1.popup-effect.animate
-                    .popup
-                        img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
-                        p Name: xxxx
-                        p Age:
-                        p Birthday:
-                        p.editContent.mt-4
-                            | Description: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                            | placerat placerat dolor.
-                        p.editContent.mt-4
-                            | Life story: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                            | placerat placerat dolor.
-                        a.close(href='#gallery') ×
-                // //popup
-                // popup
-                #gal2.popup-effect.animate
-                    .popup
-                        img.img-fluid(src='../images/oldwoman.jpeg', alt='Popup Image')
-                        p Name: xxxx
-                        p Age:
-                        p Birthday:
-                        p.editContent.mt-4
-                            | Description: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                            | placerat placerat dolor.
-                        p.editContent.mt-4
-                            | Life story: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                            | placerat placerat dolor.
-                        a.close(href='#gallery') ×
-                // //popup
-                // popup
-                #gal3.popup-effect.animate
-                    .popup
-                        img.img-fluid(src='../images/man.jpeg', alt='Popup Image')
-                        p Name: xxxx
-                        p Age:
-                        p Birthday:
-                        p.editContent.mt-4
-                            | Description: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                            | placerat placerat dolor.
-                        p.editContent.mt-4
-                            | Life story: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                            | placerat placerat dolor.
-                        a.close(href='#gallery') ×
-                // //popup3
-                // popup
-                #gal4.popup-effect.animate
-                    .popup
-                        img.img-fluid(src='../images/woman.jpeg', alt='Popup Image')
-                        p Name: xxxx
-                        p Age:
-                        p Birthday:
-                        p.editContent.mt-4
-                            | Description: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                            | placerat placerat dolor.
-                        p.editContent.mt-4
-                            | Life story: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                            | placerat placerat dolor.
-                        a.close(href='#gallery') ×
-                // //popup
+                                h6.main-title-w3pvt.text-center #{profile[i].name}
+                    // popup
+                    div(id='gal'+i.toString()).popup-effect.animate
+                        .popup
+                            img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
+                            p Name: #{profile[i].name}
+                            p Birthday: #{profile[i].birthday}
+                            p.editContent.mt-4
+                                | Description: #{profile[i].description}
+                            p.editContent.mt-4
+                                | Life story: #{profile[i].life_story}
+                            a.close(href='#gallery') ×
