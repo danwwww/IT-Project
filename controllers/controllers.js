@@ -48,7 +48,7 @@ const createUser = function (req, res) {
 
         }
         else {
-            console.log("new");
+            console.log("new user added");
         }
     });
 
@@ -94,6 +94,17 @@ const logOut = function(req, res) {
  * below:  navigation bar operations
  * -------------------------------------------------------------------------------------------------------------------
  * */
+
+/**/
+const welcome = function(req, res){
+    res.sendFile(path.join(__dirname, '../views/login.html'));
+
+}
+
+
+
+
+
 /*list all items to be shown on the 'my family treasure'
 * */
 const findAllItems = function (req, res) {
@@ -120,6 +131,9 @@ const findAllUsers = function (req, res) {
     });
 };
 
+
+
+
 const findAllProfiles = function (req, res) {
     Profiles.find({}, function (err, user) {
         if (!err) {
@@ -128,6 +142,21 @@ const findAllProfiles = function (req, res) {
             res.sendStatus(400);
         }
     });
+};
+
+//delete an item
+const deleteItem = function(req, res) {
+    console.log("deleteItem function called");
+    items.remove(
+        {name: req.body.itemName}, function(err, result) {
+            if (err) {
+                console.log("called deleteItem but error");
+                console.log(err);
+            } else {
+                console.log("called deleteItem, deletion succeed and trying to direct to artifacts page");
+                res.redirect("showArtifacts");
+            }
+        });
 };
 
 
@@ -150,6 +179,7 @@ const showArtifacts = function (req, res) {
                 if (!err) {
 
                     console.log("currently  on artifacts page");
+                    app.use("/javascripts", express.static("./outJavascripts"));
                     res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
 
                 } else {
@@ -385,6 +415,7 @@ module.exports.logOut = logOut;
 
 module.exports.findAllItems = findAllItems;
 module.exports.findAllUsers = findAllUsers;
+module.exports.deleteItem = deleteItem;
 module.exports.getAccount = getAccount;
 module.exports.updateAccount = updateAccount;
 module.exports.showArtifacts = showArtifacts;

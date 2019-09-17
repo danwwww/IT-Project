@@ -1,5 +1,7 @@
-doctype html
-html(lang='en')
+extends layout
+
+block content
+    .main
     head
         meta(charset='UTF-8')
         title Artifacts
@@ -42,3 +44,10 @@ html(lang='en')
                             p.editContent.mt-4
                                 | Description: #{item[i].description}
                             a.close(href='#gallery')&times;
+                            //form#deleteItem(name="deleteItem", method="post", action="/deleteItem")
+                            //    input#input_name(type="hidden", placeholder="", name="itemName", value="a")
+                            //    button#submit_project(type="submit") delete
+                            //button#deleteItem(name="deleteItem", method="post", action="/deleteItem") Delete
+                            script(src='controllers/controllers.js')
+                            button(onclick="deleteItem()", title="Delete")
+                                |  Delete

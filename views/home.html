@@ -11,11 +11,15 @@
 <div class="fileInputContainer">
     <input class="fileInput" type="file" name="" id="" />
 </div>
-<div class="text">
-    <textarea type="text" placeholder="Write your family sentences"></textarea>
-</div>
-<div class="btn">
-    <button>Submit</button>
+<div class="content-bottom">
+    <form action = "/saveMessage" method = POST>
+    <div class="text">
+        <textarea type="text" name = "messageBoard" id = "messageBoard" placeholder="Write your family sentences"></textarea>
+    </div>
+    <div class="btn">
+        <button type="submit" class="btn" >Save</button>
+    </div>
+    </form>
 </div>
 </body>
 </html>
