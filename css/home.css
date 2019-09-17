@@ -1,5 +1,4 @@
 /*Default styling for the website, simple and clean*/
-
 body {
     background: url(../images/bg_home.jpeg) no-repeat center;
     /*background-size: cover;*/
@@ -55,7 +54,7 @@ body {
 .btn {
     position: relative;
     margin-left: 54%;
-    top: 260px;
+    top: 140px;
 }
 
 .btn button {
