@@ -20,6 +20,7 @@ const path = require('path');
 
 /*done: open welcome page*/
 const welcome = function(req, res){
+    console.log("called welcome");
     res.sendFile(path.join(__dirname, '../views/login.html'));
 
 }
@@ -292,14 +293,14 @@ const handleLogin = function(req, res) {
         console.log(req.body.userId);
         console.log(req.body.psw);
         if (!user) {
-            confirm('userId not found');
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID does not exist, please try again"});
             //should direct to error page later
 
         } else {
             if (req.body.psw === user.passwordHash) {
                 req.session.user = user;
                 updateUser(req, res);
-                //do something!
+                //login successful
                 Message.findOne(function(err, message) {
                     console.log(message);
                     res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
@@ -309,7 +310,7 @@ const handleLogin = function(req, res) {
             else {
                 /**should jump to error message page then automatically jump to the login page after a few seconds
                  * */
-                res.send(' email and password not match');
+                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID and password do not match, please try again"});
             }
         }
     });

@@ -8,9 +8,13 @@ html(lang='en')
         .bg
             br
             br
-            h2 Sorry, your 'User Id' or 'Password' is wrong, please check it!
+            h2 #{errorMessage}
             br
-            button Return to Login page
+            button(onclick="move()") Return to Login Page
+            script.
+                function move() {
+                    window.location.href = '/'
+                }
             br
             br
             br
