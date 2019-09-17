@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 //these are from items.js
-const Items = mongoose.model('item_table');
-const Users = mongoose.model('account_table');
-const Profiles = mongoose.model('profile_table');
+const Items = mongoose.model('item_tables');
+const Users = mongoose.model('account_tables');
+const Profiles = mongoose.model('profile_tables');
+const Message = mongoose.model('message_tables');
 
 //const Families = mongoose.model('family_table');
 
@@ -65,7 +66,7 @@ const createUser = function (req, res) {
             if (!err) {
                 /** the file is to be made and changed
                  * */
-                res.sendFile(path.join(__dirname, '../views/home.html'));
+                res.render(path.join(__dirname, '../views/home.jade'), {messages : Message[0]});
             }
             else {
                 res.end("register failed");
@@ -94,15 +95,6 @@ const logOut = function(req, res) {
  * below:  navigation bar operations
  * -------------------------------------------------------------------------------------------------------------------
  * */
-
-/**/
-const welcome = function(req, res){
-    res.sendFile(path.join(__dirname, '../views/login.html'));
-
-}
-
-
-
 
 
 /*list all items to be shown on the 'my family treasure'
@@ -308,7 +300,10 @@ const handleLogin = function(req, res) {
                 req.session.user = user;
                 updateUser(req, res);
                 //do something!
-                res.sendFile(path.join(__dirname, '../views/home.html'));
+                Message.findOne(function(err, message) {
+                    console.log(message);
+                    res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
+                });
 
             }
             else {
@@ -345,8 +340,10 @@ const getHome = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            res.sendFile(path.join(__dirname, '../views/home.html'));
-
+            Message.findOne(function(err, message) {
+                console.log(message);
+                res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
+            });
         }
     }); else {
         console.log("in validating function, validation failed");
@@ -396,6 +393,25 @@ const updateAccount = function(req, res){
     updateUser(req, res);
     getAccount(req, res);
 };
+
+
+/* save message at home page*/
+const saveMessage = function(req, res) {
+    console.log("saveMessage function called");
+    var message = req.body.message;
+    Users.findOne({ id: req.body.userId }, function(err, user) {
+        Message.findOneAndUpdate(req.body.message, {message: req.body.message},function(err, user) {});
+        console.log(req.body.message);
+        console.log(message);
+        res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
+    });
+    // res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
+
+};
+
+
+
+
 /**-------------------------------------------------------------------------------------------------------------------
  * above:  navigation bar operations
  * -------------------------------------------------------------------------------------------------------------------
@@ -408,6 +424,8 @@ const updateAccount = function(req, res){
 
 module.exports.welcome = welcome;
 module.exports.getHome = getHome;
+
+module.exports.saveMessage = saveMessage;
 
 module.exports.createUser = createUser;
 module.exports.handleLogin = handleLogin;

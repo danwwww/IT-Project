@@ -24,6 +24,15 @@ const itemSchema = mongoose.Schema(
     }
 );
 
+const messageSchema = mongoose.Schema(
+    {
+        "familyId" : String,
+        "message" : String,
+
+    }
+);
+
+
 /*user*/
 const userSchema = mongoose.Schema(
     {
@@ -42,7 +51,11 @@ const userSchema = mongoose.Schema(
         "passwordHash": {
             type: String,
             required: true
-        }
+        },
+        "familyId1" : String,
+        "familyId2" : String,
+        "familyId3" : String,
+        "currentFamily" : String,
     }
 );
 
@@ -57,6 +70,7 @@ const profileSchema = mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('item_table', itemSchema);
-module.exports = mongoose.model('account_table', userSchema);
-module.exports = mongoose.model('profile_table', profileSchema);
+module.exports = mongoose.model('item_tables', itemSchema);
+module.exports = mongoose.model('message_tables', messageSchema);
+module.exports = mongoose.model('account_tables', userSchema);
+module.exports = mongoose.model('profile_tables', profileSchema);

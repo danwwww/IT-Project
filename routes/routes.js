@@ -24,7 +24,7 @@ router.get('/logout', controller.logOut);
 router.post('/register', controller.createUser);
 
 router.get('/home', controller.getHome);
-
+router.post('/saveMessage', controller.saveMessage);
 
 router.get('/account', controller.getAccount);
 
