@@ -76,7 +76,7 @@ body {
     float: left;
 }
 
-.search .btn button {
+.btn button {
     background: rgba(153, 102, 51, 0.6);
     border: none;
     color: #fff;
@@ -100,19 +100,22 @@ body {
     background-image: none;
     border: 1px solid transparent;
     border-radius: 30px;
-    position: absolute;
+    position: relative;
     top: 110px;
-    width: 7%;
+    width: 10%;
 }
 
 .search div .btn {
     position: absolute;
     top: 230px;
-    text-align: center;
 }
 
 .btn {
-    margin-right: 9%;
+    position: relative;
+    text-align: center;
+    top: -30px;
+    width: 90%;
+    margin-left: 0;
 }
 
 .search .main {
