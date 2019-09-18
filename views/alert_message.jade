@@ -10,10 +10,10 @@ html(lang='en')
             br
             h2 #{errorMessage}
             br
-            button(onclick="move()") Return to Login Page
+            button(onclick="move()") Return to #{returnPage} page
             script.
                 function move() {
-                    window.location.href = '/'
+                    window.location.href = "/#{returnPage}"
                 }
             br
             br

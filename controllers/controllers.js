@@ -33,24 +33,24 @@ const createUser = function (req, res) {
      * */
     Users.findOne({ id: req.body.userId }, function(err, user) {
         if (user) {
-            console.log("existed");
-            res.send('userId already exist');
+            console.log("user existed");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID already existed", returnPage:"login"});
             //should direct to error page later
 
         }
         else {
-            console.log("new");
+            console.log("new id");
         }
     });
-    Users.findOne({ id: req.body.email }, function(err, user) {
-        if (user) {
-            console.log("existed");
-            res.send('user email already exist');
+    Users.findOne({ id: req.body.email }, function(err, email) {
+        if (email) {
+            console.log("email existed");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User email already existed", returnPage:"login"});
             //should direct to error page later
 
         }
         else {
-            console.log("new user added");
+            console.log("new email");
         }
     });
 
@@ -67,10 +67,12 @@ const createUser = function (req, res) {
             if (!err) {
                 /** the file is to be made and changed
                  * */
-                res.render(path.join(__dirname, '../views/home.jade'), {messages : Message[0]});
+                console.log("register successful, now going to home page");
+                console.log(Message[0]);
+                res.render(path.join(__dirname, '../views/home.jade'), {messages : " "});
             }
             else {
-                res.end("register failed");
+                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Registration failed, please try again", returnPage:"login"});
                 /**should also jump to error message page
                  * */
             }
@@ -261,10 +263,10 @@ const submitUploadArtifacts = function (req, res) {
         if (!err) {
             /** the file is to be made and changed
              * */
-            res.send('submit successful');
+            res.redirect("/artifacts");
         }
         else {
-            res.end("sumbit fail");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Artifacts",returnPage :"artifacts"});
             /**should also jump to error message page
              * */
         }
@@ -285,10 +287,10 @@ const submitUploadProfiles = function (req, res) {
         if (!err) {
             /** the file is to be made and changed
              * */
-            res.send('submit successful');
+            res.redirect("/family");
         }
         else {
-            res.end("sumbit fail");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Profile",returnPage :"family"});
             /**should also jump to error message page
              * */
         }
@@ -303,7 +305,7 @@ const handleLogin = function(req, res) {
         console.log(req.body.userId);
         console.log(req.body.psw);
         if (!user) {
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID does not exist, please try again"});
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID does not exist, please try again", returnPage:"home"});
             //should direct to error page later
 
         } else {
@@ -320,7 +322,7 @@ const handleLogin = function(req, res) {
             else {
                 /**should jump to error message page then automatically jump to the login page after a few seconds
                  * */
-                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID and password do not match, please try again"});
+                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID and password do not match, please try again", returnPage:"home"});
             }
         }
     });
