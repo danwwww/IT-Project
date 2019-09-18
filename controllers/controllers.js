@@ -6,7 +6,7 @@ const Users = mongoose.model('account_tables');
 const Profiles = mongoose.model('profile_tables');
 const Message = mongoose.model('message_tables');
 
-//const Families = mongoose.model('family_table');
+//const Families = mongoose.model('family_tables');
 
 
 
@@ -172,7 +172,7 @@ const showArtifacts = function (req, res) {
                 if (!err) {
 
                     console.log("currently  on artifacts page");
-                    app.use("/javascripts", express.static("./outJavascripts"));
+                    // app.use("/javascripts", express.static("./outJavascripts"));
                     res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
 
                 } else {
@@ -404,7 +404,8 @@ const saveMessage = function(req, res) {
         Message.findOneAndUpdate(req.body.message, {message: req.body.message},function(err, user) {});
         console.log(req.body.message);
         console.log(message);
-        res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
+        //res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
+        getHome(req, res);
     });
     // res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
 

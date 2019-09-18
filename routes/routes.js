@@ -50,6 +50,7 @@ router.post('/directory/deleteItem',controller.deleteItem);
 
 //handle login logic
 router.post('/login', controller.handleLogin);
+router.get('/login', controller.welcome);
 
 router.post('/', controller.createUser);
 
