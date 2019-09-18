@@ -48,6 +48,28 @@ block content
                             //    input#input_name(type="hidden", placeholder="", name="itemName", value="a")
                             //    button#submit_project(type="submit") delete
                             //button#deleteItem(name="deleteItem", method="post", action="/deleteItem") Delete
-                            script(src='controllers/controllers.js')
-                            button(onclick="deleteItem()", title="Delete")
-                                |  Delete
+                            //script(src='views/helperFunctions.js')
+                            //button(onclick="window.deleteItem('a')", title="Delete")
+                            //    |  Delete
+                            //
+
+                            script var itemName = {item[i].name}
+                            button(onclick="deleteItem(item)") Delete
+                                script.
+                                    function deleteItem(itemName) {
+                                        if (confirm("Are you sure to delete this item?")) {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open("DELETE", "/deleteItem/" + itemName, true);
+                                            xhr.onload = function () {
+                                                var items = JSON.parse(xhr.responseText);
+                                                if (xhr.readyState == 4 && xhr.status == "200") {
+                                                    console.table(items);
+                                                    //window.location.href("artifact_test.jade", items);
+
+                                                } else {
+                                                    console.error(items);
+                                                }
+                                            }
+                                            xhr.send(null);
+                                        }
+                                    }

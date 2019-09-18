@@ -140,14 +140,18 @@ const findAllProfiles = function (req, res) {
 //delete an item
 const deleteItem = function(req, res) {
     console.log("deleteItem function called");
-    items.remove(
-        {name: req.body.itemName}, function(err, result) {
+    var itemName = req.params.name;
+    Items.remove(
+        {name: itemName}, function(err, result) {
+            console.log(itemName);
             if (err) {
                 console.log("called deleteItem but error");
                 console.log(err);
             } else {
                 console.log("called deleteItem, deletion succeed and trying to direct to artifacts page");
-                res.redirect("showArtifacts");
+                //res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
+                //res.send(result);
+                showArtifacts(req, res);
             }
         });
 };

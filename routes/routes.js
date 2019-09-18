@@ -43,9 +43,9 @@ router.post('/upload/profiles/submit', controller.submitUploadProfiles);
 router.get('/upload/profiles', controller.uploadProfiles);
 
 //Find all list items
-router.get('/directory/items/api',controller.findAllItems);
+router.get('/items/api',controller.findAllItems);
 
-router.post('/directory/deleteItem',controller.deleteItem);
+router.delete('/deleteItem/:name',controller.deleteItem);
 
 
 //handle login logic
