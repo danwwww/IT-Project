@@ -10,7 +10,11 @@ html(lang='en')
     body
         .search
             .btn
-                button(onclick="window.open('upload.html')") UPLOAD
+                button(onclick="move()") Add Profile
+                    script.
+                        function move() {
+                            window.location.href = '/uploadProfiles'
+                        }
             .main
                 -for(var i=0;i<profile.length;i++)
                     .col-lg-4
@@ -31,5 +35,15 @@ html(lang='en')
                             p.editContent.mt-4
                                 | Life story: #{profile[i].life_story}
                             a.close(href='#gallery') ×
-                            button(id="btn1") EDIT
-                            button(id="btn2") Delete
+                            button(id="btn1") Edit
+                            script var profileID = {profile[i].id}
+                            button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
+                                script.
+                                    function deleteProfile(profileID) {
+                                        if (confirm("Are you sure to delete this profile?")) {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open("DELETE", "/deleteProfile/" + profileID, true);
+                                            window.location.href = "/family";
+                                            xhr.send(null);
+                                        }
+                                    }

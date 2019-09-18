@@ -1,8 +1,11 @@
 doctype html
 html(lang='en')
+
+block content
+    .main
     head
         meta(charset='UTF-8')
-        title Family
+        title Artifacts
         link(rel='stylesheet', href='../css/artifacts.css')
         link(href='../css/style.css', type='text/css', rel='stylesheet', media='all')
         link(href='../css/font-awesome.min.css', rel='stylesheet')
@@ -15,7 +18,11 @@ html(lang='en')
                 br
                 br
             .btn
-                button UPLOAD
+                button(onclick="move()") Add Artifact
+                    script.
+                        function move() {
+                            window.location.href = '/uploadArtifacts'
+                        }
             .main
                 -for(var i=0;i<item.length;i++)
                     .col-lg-4
@@ -40,7 +47,7 @@ html(lang='en')
                             p Current Location: #{item[i].location}
                             p.editContent.mt-4
                                 | Description: #{item[i].description}
-                            a.close(href='#gallery') ×
+                            a.close(href='#gallery')&times;
                             //form#deleteItem(name="deleteItem", method="post", action="/deleteItem")
                             //    input#input_name(type="hidden", placeholder="", name="itemName", value="a")
                             //    button#submit_project(type="submit") delete

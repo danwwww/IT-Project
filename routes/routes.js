@@ -31,7 +31,7 @@ router.post('/account', controller.updateAccount);
 
 router.get('/artifacts', controller.showArtifacts);
 
-router.get('/upload/artifacts', controller.uploadArtifacts);
+router.get('/uploadArtifacts', controller.uploadArtifacts);
 
 router.post('/upload/artifacts/submit', controller.submitUploadArtifacts);
 
@@ -39,10 +39,11 @@ router.get('/family', controller.showProfiles);
 
 router.post('/upload/profiles/submit', controller.submitUploadProfiles);
 
-router.get('/upload/profiles', controller.uploadProfiles);
+router.get('/uploadProfiles', controller.uploadProfiles);
 
 
 router.delete('/deleteItem/:id',controller.deleteItem);
+router.delete('/deleteProfile/:id',controller.deleteProfile);
 
 
 //handle login logic

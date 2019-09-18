@@ -144,6 +144,24 @@ const deleteItem = function(req, res) {
         });
 };
 
+//delete a profile
+const deleteProfile = function(req, res) {
+    console.log("deleteProfile function called");
+    var profileID = req.params.id;
+    Profiles.remove(
+        {_id:profileID}, function(err, profiles) {
+            console.log(profileID);
+            //if deletion has failed, print error message
+            if (err) {
+                console.log("called deleteProfile but error");
+                console.log(err);
+            }
+            //if deletion has succeeded, refresh item page
+            else {
+                console.log("called deleteProfile, deletion succeed and trying to direct to family page");
+            }
+        });
+};
 
 /*show artifacts page*/
 const showArtifacts = function (req, res) {
@@ -427,6 +445,7 @@ module.exports.logOut = logOut;
 
 module.exports.findAllUsers = findAllUsers;
 module.exports.deleteItem = deleteItem;
+module.exports.deleteProfile = deleteProfile;
 module.exports.getAccount = getAccount;
 module.exports.updateAccount = updateAccount;
 module.exports.showArtifacts = showArtifacts;
