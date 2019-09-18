@@ -140,10 +140,10 @@ const findAllProfiles = function (req, res) {
 //delete an item
 const deleteItem = function(req, res) {
     console.log("deleteItem function called");
-    var itemName = req.params.name;
+    var itemID = req.params.id;
     Items.remove(
-        {name: itemName}, function(err, result) {
-            console.log(itemName);
+        {_id:itemID}, function(err, items) {
+            console.log(itemID);
             if (err) {
                 console.log("called deleteItem but error");
                 console.log(err);
