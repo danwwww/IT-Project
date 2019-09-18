@@ -16,7 +16,6 @@ router.get('/', controller.welcome);
 
 //table testers
 router.get('/users', controller.findAllUsers);
-router.get('/items', controller.findAllItems);
 router.get('/profiles', controller.findAllProfiles);
 
 router.get('/logout', controller.logOut);
@@ -42,8 +41,6 @@ router.post('/upload/profiles/submit', controller.submitUploadProfiles);
 
 router.get('/upload/profiles', controller.uploadProfiles);
 
-//Find all list items
-router.get('/items/api',controller.findAllItems);
 
 router.delete('/deleteItem/:id',controller.deleteItem);
 

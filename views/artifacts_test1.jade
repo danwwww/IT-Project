@@ -59,7 +59,15 @@ block content
                                         if (confirm("Are you sure to delete this item?")) {
                                             var xhr = new XMLHttpRequest();
                                             xhr.open("DELETE", "/deleteItem/" + itemID, true);
-                                            window.location.href="/artifacts";
+                                            xhr.onload = function () {
+                                                // var items = JSON.parse(xhr.responseText);
+                                                // if (xhr.readyState == 4 && xhr.status == "200") {
+                                                //     window.location.href="artifact_test.jade";
+                                                //
+                                                // } else {
+                                                //     console.error(items);
+                                                // }
+                                            }
                                             xhr.send(null);
                                         }
                                     }

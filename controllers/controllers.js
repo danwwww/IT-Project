@@ -98,19 +98,7 @@ const logOut = function(req, res) {
  * */
 
 
-/*list all items to be shown on the 'my family treasure'
-* */
-const findAllItems = function (req, res) {
-    validateUser(req, res);
-    console.log("should have called validated");
-    Items.find({}, function (err, items) {
-        if (!err) {
-            res.send(items);
-        } else {
-            res.sendStatus(400);
-        }
-    });
-};
+
 
 /*list all users
 * */
@@ -144,14 +132,14 @@ const deleteItem = function(req, res) {
     Items.remove(
         {_id:itemID}, function(err, items) {
             console.log(itemID);
+            //if deletion has failed, print error message
             if (err) {
                 console.log("called deleteItem but error");
                 console.log(err);
-            } else {
+            }
+            //if deletion has succeeded, refresh item page
+            else {
                 console.log("called deleteItem, deletion succeed and trying to direct to artifacts page");
-                //res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
-                //res.send(result);
-                showArtifacts(req, res);
             }
         });
 };
@@ -437,7 +425,6 @@ module.exports.createUser = createUser;
 module.exports.handleLogin = handleLogin;
 module.exports.logOut = logOut;
 
-module.exports.findAllItems = findAllItems;
 module.exports.findAllUsers = findAllUsers;
 module.exports.deleteItem = deleteItem;
 module.exports.getAccount = getAccount;
