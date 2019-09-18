@@ -89,6 +89,7 @@ h6.main-title-w3pvt {
     text-align: left;
 }
 
+
 .popup button{
     background: rgba(153, 102, 51, 0.6);
     border: none;
@@ -115,9 +116,17 @@ h6.main-title-w3pvt {
     border-radius: 30px;
     position: absolute;
     width: 15%;
+    bottom: 2%;
+}
+
+#btn1 {
+    float: left;
+    left: 62%;
+}
+
+#btn2 {
     float: left;
     left: 80%;
-    bottom: 2%;
 }
 
 /* //popup */
