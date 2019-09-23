@@ -19,7 +19,7 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     text-align: center;
-    min-height: 120vh;
+    min-height: 125vh;
 }
 
 /* Css used in upload_artifacts.html */
@@ -281,6 +281,10 @@ body {
     width: 350px;
 }
 
+.addProfile form span input {
+    width: 69px;
+}
+
 .addProfile form textarea {
     width: 350px;
 }
@@ -310,5 +314,6 @@ body {
     -ms-border-radius: 35px;
     -o-border-radius: 35px;
     text-align: center;
+    margin-left: 30%;
 }
 

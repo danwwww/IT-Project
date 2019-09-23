@@ -66,10 +66,9 @@ const profileSchema = mongoose.Schema(
         "name": String,
         "year": Number,
         "month": Number,
-        "date": Number,
+        "day": Number,
         "description": String,
         "life_story": String,
-
         "year_passed": String,
     }
 );
