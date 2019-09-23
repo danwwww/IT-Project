@@ -33,7 +33,7 @@ html(lang='en')
                                                 img.img-fluid(src='../images/oldman.jpeg', alt=' ')
                                             .project-content
                                                 h2 #{profile[i].name}
-                                                span #{profile[i].year}
+                                                span #{profile[i].year}~#{profile[i].year_passed}
                                     .cd-timeline-block
                                         .cd-timeline-img.cd-picture
                                             img(src='../images/camera-icon.png', alt='Picture')
@@ -42,7 +42,7 @@ html(lang='en')
                                                 img.img-fluid(src='../images/oldman.jpeg', alt=' ')
                                             .project-content
                                                 h2 #{profile[i+1].name}
-                                                span #{profile[i+1].year}
+                                                span #{profile[i+1].year}~#{profile[i+1].year_passed}
                                     div(id='gal' + i.toString()).popup-effect.animate
                                         .popup
                                             img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
@@ -69,7 +69,7 @@ html(lang='en')
                                         .popup
                                             img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
                                             p Name: #{profile[i+1].name}
-                                            p Birthday: #{profile[i].year}/#{profile[i].month}/#{profile[i].date}
+                                            p Birthday: #{profile[i+1].year}/#{profile[i+1].month}/#{profile[i+1].date}
                                             p.editContent.mt-4
                                                 | Description: #{profile[i+1].description}
                                             p.editContent.mt-4
@@ -95,7 +95,7 @@ html(lang='en')
                                             img.img-fluid(src='../images/oldman.jpeg', alt=' ')
                                         .project-content
                                             h2 #{profile[count-1].name}
-                                            span #{profile[count-1].year}
+                                            span #{profile[i].year}~#{profile[i].year_passed}
                                 div(id='gal' + (count-1).toString()).popup-effect.animate
                                     .popup
                                         img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
@@ -128,7 +128,7 @@ html(lang='en')
                                                 img.img-fluid(src='../images/oldman.jpeg', alt=' ')
                                             .project-content
                                                 h2 #{profile[i].name}
-                                                span #{profile[i].year}
+                                                span #{profile[i].year}~#{profile[i].year_passed}
                                     .cd-timeline-block
                                         .cd-timeline-img.cd-picture
                                             img(src='../images/camera-icon.png', alt='Picture')
@@ -137,7 +137,7 @@ html(lang='en')
                                                 img.img-fluid(src='../images/oldman.jpeg', alt=' ')
                                             .project-content
                                                 h2 #{profile[i + 1].name}
-                                                span #{profile[i + 1].year}
+                                                span #{profile[i+1].year}~#{profile[i+1].year_passed}
                                     div(id='gal' + i.toString()).popup-effect.animate
                                         .popup
                                             img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
@@ -164,7 +164,7 @@ html(lang='en')
                                         .popup
                                             img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
                                             p Name: #{profile[i+1].name}
-                                            p Birthday: #{profile[i].year}/#{profile[i].month}/#{profile[i].date}
+                                            p Birthday: #{profile[i+1].year}/#{profile[i+1].month}/#{profile[i+1].date}
                                             p.editContent.mt-4
                                                 | Description: #{profile[i+1].description}
                                             p.editContent.mt-4
