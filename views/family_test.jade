@@ -6,6 +6,9 @@ html(lang='en')
         link(rel='stylesheet', href='../css/family.css')
         link(href='../css/style.css', type='text/css', rel='stylesheet', media='all')
         link(href='../css/font-awesome.min.css', rel='stylesheet')
+        link(rel='stylesheet', type='text/css', href='../css/profile/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', href='../css/profile/font-awesome.min.css')
+        link(rel='stylesheet', type='text/css', href='../css/profile/profile-style.css')
         script(type='text/javascript', src='head.js')
     body
         .search
@@ -16,34 +19,38 @@ html(lang='en')
                             window.location.href = '/uploadProfiles'
                         }
             .main
-                -for(var i=0;i<profile.length;i++)
-                    .col-lg-4
-                        .img-grid
-                            .Portfolio-grid1
-                                a(href='#'+'gal'+i.toString())
-                                    img.img-fluid(src='../images/oldman.jpeg', alt=' ')
-                            .port-desc.text-center
-                                h6.main-title-w3pvt.text-center #{profile[i].name}
-                    // popup
-                    div(id='gal'+i.toString()).popup-effect.animate
-                        .popup
-                            img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
-                            p Name: #{profile[i].name}
-                            p Birthday: #{profile[i].birthday}
-                            p.editContent.mt-4
-                                | Description: #{profile[i].description}
-                            p.editContent.mt-4
-                                | Life story: #{profile[i].life_story}
-                            a.close(href='#gallery') ×
-                            button(id="btn1") Edit
-                            script var profileID = {profile[i].id}
-                            button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
-                                script.
-                                    function deleteProfile(profileID) {
-                                        if (confirm("Are you sure to delete this profile?")) {
-                                            var xhr = new XMLHttpRequest();
-                                            xhr.open("DELETE", "/deleteProfile/" + profileID, true);
-                                            window.location.href = "/family";
-                                            xhr.send(null);
+                .row
+                    -for(var i=0;i<profile.length;i++)
+                        .col-md-12
+                            section#cd-timeline-2.cd-container
+                                .cd-timeline-block
+                                    .cd-timeline-img.cd-picture
+                                        img(src='../images/camera-icon.png', alt='Picture')
+                                    .cd-timeline-content.projects
+                                        a(href='#' + 'gal' + i.toString())
+                                            img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                        .project-content
+                                            h2 #{profile[i].name}
+                                            span #{profile[i].birthday}
+                        div(id='gal' + i.toString()).popup-effect.animate
+                            .popup
+                                img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
+                                p Name: #{profile[i].name}
+                                p Birthday: #{profile[i].birthday}
+                                p.editContent.mt-4
+                                    | Description: #{profile[i].description}
+                                p.editContent.mt-4
+                                    | Life story: #{profile[i].life_story}
+                                a.close(href='#gallery') ×
+                                button(id="btn1") Edit
+                                script var profileID = {profile[i].id}
+                                button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
+                                    script.
+                                        function deleteProfile(profileID) {
+                                            if (confirm("Are you sure to delete this profile?")) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open("DELETE", "/deleteProfile/" + profileID, true);
+                                                window.location.href = "/family";
+                                                xhr.send(null);
+                                            }
                                         }
-                                    }
