@@ -7,7 +7,10 @@ html(lang='en')
         script(type='text/javascript', src='head.js')
     body
         .fileInputContainer
-            input.fileInput(type='file', name='familyPhoto', id='familyPhoto')
+            form(action='/savePhoto', method='POST')
+                input.fileInput(type='file', name='familyPhoto',id='familyPhoto',accept='image/*')
+                .btn
+                    button.btn(type='submit') Save
         .content-bottom
             form(action='/saveMessage', method='POST')
                 .text

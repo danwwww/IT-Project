@@ -24,6 +24,7 @@ router.post('/register', controller.createUser);
 
 router.get('/home', controller.getHome);
 router.post('/saveMessage', controller.saveMessage);
+router.post('/savePhoto', controller.savePhoto);
 
 router.get('/account', controller.getAccount);
 

@@ -18,7 +18,7 @@ const itemSchema = mongoose.Schema(
         "owner": String,
         "location": String,
         "description": String,
-        "photo": String,
+        "photo": Object,
         "category":String,
 
     }
@@ -28,6 +28,7 @@ const messageSchema = mongoose.Schema(
     {
         "familyId" : String,
         "message" : String,
+        "photo":Object,
 
     }
 );
@@ -73,7 +74,16 @@ const profileSchema = mongoose.Schema(
     }
 );
 
+/*profiles*/
+const familyPhotoSchema = mongoose.Schema(
+    {
+        img:
+        {data: Buffer, contentType:String}
+    }
+);
+
 module.exports = mongoose.model('item_tables', itemSchema);
 module.exports = mongoose.model('message_tables', messageSchema);
 module.exports = mongoose.model('account_tables', userSchema);
 module.exports = mongoose.model('profile_tables', profileSchema);
+module.exports = mongoose.model('familyPhoto_tables', familyPhotoSchema);

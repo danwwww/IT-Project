@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
+var express = require('express');
+var fs = require('fs');
 //these are from items.js
 const Items = mongoose.model('item_tables');
 const Users = mongoose.model('account_tables');
 const Profiles = mongoose.model('profile_tables');
 const Message = mongoose.model('message_tables');
+const FamilyPhotos = mongoose.model('familyPhoto_tables');
+
 
 //const Families = mongoose.model('family_tables');
 
@@ -427,7 +431,39 @@ const saveMessage = function(req, res) {
 };
 
 
+/* save photo at home page*/
+const savePhoto = function(req, res) {
+    console.log("savePhoto function called");
+    console.log(req.body.familyPhoto);
+    var familyPhoto = new FamilyPhotos();
+    familyPhoto.img.data = req.body.familyPhoto;
+    familyPhoto.img.contentType = 'image/png';
+    console.log("-------");
+    console.log((req.body.familyPhoto).toString('base64'));
+    console.log(familyPhoto.img.data.toString('base64'));
+    console.log(familyPhoto.img.contentType);
+    familyPhoto.save();
+    res.render(path.join(__dirname, '../views/photo_test.jade'), {familyPhoto: familyPhoto.img.data.toString('base64')});
+};
 
+// const savePhoto= function(req, res) {
+//     var multiparty = require("multiparty");
+//     var form = new multiparty.Form();
+//     form.parse(req, function(err,fields,files){
+//         var img = files.familyPhoto;
+//         var fs = require("fs");
+//         fs.readFile(img.path, function(err, data){
+//             var path = "./public/images/"+img.originalFilename;
+//             fs.writeFile(path, data, function(error) {
+//                 if(error) console.log(error);
+//                 res.render('phpto_test', {familyPhoto:img});
+//             });
+//         });
+//
+//     });
+//
+//
+// }
 
 /**-------------------------------------------------------------------------------------------------------------------
  * above:  navigation bar operations
@@ -443,6 +479,7 @@ module.exports.welcome = welcome;
 module.exports.getHome = getHome;
 
 module.exports.saveMessage = saveMessage;
+module.exports.savePhoto = savePhoto;
 
 module.exports.createUser = createUser;
 module.exports.handleLogin = handleLogin;
