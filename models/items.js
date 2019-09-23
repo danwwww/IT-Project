@@ -64,7 +64,9 @@ const userSchema = mongoose.Schema(
 const profileSchema = mongoose.Schema(
     {
         "name": String,
-        "birthday": String,
+        "year": Number,
+        "month": Number,
+        "date": Number,
         "description": String,
         "life_story": String,
     }

@@ -216,7 +216,7 @@ const showProfiles = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            Profiles.find({}, function (err, profiles) {
+            Profiles.find({}, function (err, profiles){
                 if (!err) {
                     console.log("currently on family page");
                     res.render(path.join(__dirname, '../views/family_test.jade'), {profile : profiles});
@@ -224,7 +224,7 @@ const showProfiles = function (req, res) {
                 } else {
                     res.sendStatus(400);
                 }
-            });
+            }).sort( { year: 1, month: 1 ,date:1});
 
         }
     }); else {
