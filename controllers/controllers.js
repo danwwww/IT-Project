@@ -277,9 +277,12 @@ const submitUploadArtifacts = function (req, res) {
 const submitUploadProfiles = function (req, res) {
     const profile = new Profiles({
         "name": req.body.name,
-        "birthday": req.body.birthday,
+        "year": req.body.year,
+        "month": req.body.month,
+        "day": req.body.day,
         "description": req.body.description,
         "life_story": req.body.life_story,
+        "year_passed": req.body.year_passed,
     });
 
     profile.save(function (err) {
