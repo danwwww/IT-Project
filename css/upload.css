@@ -7,7 +7,7 @@ body {
     -o-background-size: cover;
     -ms-background-size: cover;
     position: relative;
-    min-height: 140vh;
+    min-height: 160vh;
 }
 
 .main {
@@ -19,7 +19,7 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     text-align: center;
-    min-height: 125vh;
+    min-height: 120vh;
 }
 
 /* Css used in upload_artifacts.html */
@@ -202,7 +202,6 @@ body {
     color: white;
     font-family: 'Mukta', sans-serif;
     font-size: 20px;
-    margin-left: 23%;
     cursor: pointer;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
@@ -214,6 +213,7 @@ body {
     -moz-border-radius: 35px;
     -ms-border-radius: 35px;
     -o-border-radius: 35px;
+    text-align: center;
 }
 
 
@@ -298,7 +298,6 @@ body {
     color: white;
     font-family: 'Mukta', sans-serif;
     font-size: 20px;
-    margin-left: 23%;
     cursor: pointer;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
@@ -310,5 +309,6 @@ body {
     -moz-border-radius: 35px;
     -ms-border-radius: 35px;
     -o-border-radius: 35px;
+    text-align: center;
 }
 
