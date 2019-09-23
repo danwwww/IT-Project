@@ -9,12 +9,11 @@
     <link href="../css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/profile/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/profile/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/profile/templatemo-style.css">
+    <link rel="stylesheet" type="text/css" href="../css/profile/profile-style.css">
     <script type="text/javascript" src="head.js"></script>
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/modernizr.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM">
-    </script>
+
 </head>
 <body>
 <div class="search">
@@ -31,11 +30,11 @@
                         <div class="cd-timeline-content projects">
                             <a href="#gal1">
                                 <img src="../images/oldwoman.jpeg" alt="">
+                            </a>
                             <div class="project-content">
                                 <h2>Donec at scelerisque</h2>
                                 <span>18 December 2084</span>
                             </div>
-                            </a>
                         </div>
                     </div>
 
@@ -124,22 +123,6 @@
     </div>
     <!-- //popup -->
     <!-- popup-->
-    <div id="gal4" class="popup-effect animate">
-        <div class="popup">
-            <img src="../images/man.jpeg" alt="Popup Image" class="img-fluid" />
-            <p>Name: xxxx</p>
-            <p>Birthday:</p>
-            <p class="editContent mt-4">Description: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                placerat placerat dolor.</p>
-            <p class="editContent mt-4">Life story: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
-                placerat placerat dolor.</p>
-            <a class="close" href="#gallery">&times;</a>
-            <button id="btn1">EDIT</button>
-            <button id="btn2">DELETE</button>
-        </div>
-    </div>
-    <!-- //popup3 -->
-    <!-- popup-->
     <div id="gal3" class="popup-effect animate">
         <div class="popup">
             <img src="../images/woman.jpeg" alt="Popup Image" class="img-fluid" />
@@ -155,29 +138,23 @@
         </div>
     </div>
     <!-- //popup -->
+    <!-- popup-->
+    <div id="gal4" class="popup-effect animate">
+        <div class="popup">
+            <img src="../images/man.jpeg" alt="Popup Image" class="img-fluid" />
+            <p>Name: xxxx</p>
+            <p>Birthday:</p>
+            <p class="editContent mt-4">Description: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
+                placerat placerat dolor.</p>
+            <p class="editContent mt-4">Life story: Nulla viverra pharetra se, eget pulvinar neque pharetra ac int.
+                placerat placerat dolor.</p>
+            <a class="close" href="#gallery">&times;</a>
+            <button id="btn1">EDIT</button>
+            <button id="btn2">DELETE</button>
+        </div>
+    </div>
+    <!-- //popup -->
 </div>
 </div>
-<!-- Javascripts -->
-<script>
-    function initialize()
-    {
-        var mapProp = {
-            center: new google.maps.LatLng(40.7828839,-73.9652425),
-            zoom: 15,
-            scrollwheel: false,
-            mapTypeId:google.maps.MapTypeId.ROADMAP
-        };
-        var map=new google.maps.Map(document.getElementById("templatemo-map")
-            ,mapProp);
-    }
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-    google.maps.event.addDomListener(window, 'resize', function()
-    {
-        map.setCenter(center);
-    });
-</script>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../js/custom.js"></script>
 </body>
 </html>
