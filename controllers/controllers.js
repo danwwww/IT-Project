@@ -390,7 +390,7 @@ const getAccount = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            res.sendFile(path.join(__dirname, '../views/account.html'));
+            res.render(path.join(__dirname, '../views/account.jade'), {username : user.username, familyId :user.familyId});
 
         }
     }); else {
@@ -402,15 +402,14 @@ const getAccount = function (req, res) {
 };
 
 /* User entered new information to their account, update it*/
-const updateAccount = function(req, res){
-    if (req.body.uname){
-        req.session.user.username = req.body.uname;
+const updateUsername = function(req, res){
+    console.log("called updateAccount");
+    if (req.body.username){
+        console.log(req.body.username);
+        console.log(req.session.user.username);
+        Users.findOneAndUpdate(req.session.user.username, {username: req.body.username},function(err, user) {});
+        req.session.user.username = req.body.username;
     }
-
-    if (req.body.familyId){
-        req.session.user.familyId = req.body.familyId;
-    }
-    updateUser(req, res);
     getAccount(req, res);
 };
 
@@ -489,7 +488,7 @@ module.exports.findAllUsers = findAllUsers;
 module.exports.deleteItem = deleteItem;
 module.exports.deleteProfile = deleteProfile;
 module.exports.getAccount = getAccount;
-module.exports.updateAccount = updateAccount;
+module.exports.updateUsername = updateUsername;
 module.exports.showArtifacts = showArtifacts;
 module.exports.uploadArtifacts = uploadArtifacts;
 module.exports.submitUploadArtifacts = submitUploadArtifacts;

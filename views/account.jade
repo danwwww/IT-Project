@@ -1,0 +1,60 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Account
+        link(rel='stylesheet', href='../css/account.css')
+        script(type='text/javascript', src='head.js')
+    body
+        .main
+            .img-grid
+                a(href='#gal1')
+                    button(onclick='') Create Family Account
+                a(href='#gal2')
+                    button(onclick='') Join Family
+                a
+                    button(onclick='window.open("login.html")') Log Out
+            // popup
+            #gal1.popup-effect.animate
+                .popup
+                    p
+                        label Name of the Family:
+                        input(type='text', name='name')
+                    br
+                    p
+                        label ID of the Family:
+                        input(type='text', name='name')
+                    br
+                    p
+                        label Family Password:
+                        input(type='text', name='name')
+                    br
+                    button(onclick='') Confirm
+                    a.close(href='#gallery') ×
+            // popup
+            #gal2.popup-effect.animate
+                .popup
+                    p
+                        label ID of the Family:
+                        input(type='text', name='name')
+                    br
+                    p
+                        label Family Password:
+                        input(type='text', name='name')
+                    br
+                    button(onclick='') Confirm
+                    a.close(href='#gallery') ×
+            .update
+                form#date(action='/updateUsername', method='POST')
+                    p
+                        label Change Username:
+                        input(type='text', name='username',placeholder = '#{username}')
+                        button(onclick='updateAccount()') Change
+                    br
+                    p
+                        label Current Family ID:
+                        input(type='text', name='familyId', placeholder = '#{familyId}')
+                        button(onclick='') Switch
+                    br
+            .agenda
+                input.inputstyle(type='file')
