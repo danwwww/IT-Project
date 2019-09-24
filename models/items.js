@@ -10,6 +10,10 @@ const itemSchema = mongoose.Schema(
             type: String,
             required: true
         },
+        img: {
+            data: Buffer,
+            contentType: String
+        },
         "date": String,
         "owner": String,
         "keeper": String,
@@ -82,8 +86,19 @@ const familyPhotoSchema = mongoose.Schema(
     }
 );
 
+/*family*/
+const familySchema = mongoose.Schema(
+    {
+        "name": String,
+        "id": Number,
+        "pwd": String,
+    }
+);
+
+
 module.exports = mongoose.model('item_tables', itemSchema);
 module.exports = mongoose.model('message_tables', messageSchema);
 module.exports = mongoose.model('account_tables', userSchema);
 module.exports = mongoose.model('profile_tables', profileSchema);
 module.exports = mongoose.model('familyPhoto_tables', familyPhotoSchema);
+module.exports = mongoose.model('family_tables', familySchema);

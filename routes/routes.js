@@ -26,6 +26,8 @@ router.get('/home', controller.getHome);
 router.post('/saveMessage', controller.saveMessage);
 router.post('/savePhoto', controller.savePhoto);
 
+router.post('/saveMessage', controller.saveMessage);
+
 router.get('/account', controller.getAccount);
 
 router.post('/updateAccount', controller.updateAccount);
@@ -45,6 +47,9 @@ router.get('/uploadProfiles', controller.uploadProfiles);
 
 router.delete('/deleteItem/:id',controller.deleteItem);
 router.delete('/deleteProfile/:id',controller.deleteProfile);
+
+router.post('/createFamily', controller.createFamily);
+
 
 
 //handle login logic
