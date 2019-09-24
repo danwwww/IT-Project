@@ -28,7 +28,7 @@ router.post('/savePhoto', controller.savePhoto);
 
 router.get('/account', controller.getAccount);
 
-router.post('/updateUsername', controller.updateUsername);
+router.post('/updateAccount', controller.updateAccount);
 
 router.get('/artifacts', controller.showArtifacts);
 

@@ -1,3 +1,6 @@
+
+
+
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 var express = require('express');
@@ -390,7 +393,7 @@ const getAccount = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            res.render(path.join(__dirname, '../views/account.jade'), {username : user.username, familyId :user.familyId});
+            res.render(path.join(__dirname, '../views/account.jade'), {username : user.username, familyId :user.currentFamily});
 
         }
     }); else {
@@ -401,8 +404,8 @@ const getAccount = function (req, res) {
 
 };
 
-/* User update  username in account page*/
-const updateUsername = function(req, res){
+/* User update  user account in account page*/
+const updateAccount = function(req, res){
     console.log("called updateAccount");
     if (req.body.username){
         console.log(req.body.username);
@@ -410,9 +413,35 @@ const updateUsername = function(req, res){
         Users.findOneAndUpdate(req.session.user.username, {username: req.body.username},function(err, user) {});
         updateUser(req,res);
     }
+    else if (req.body.familyId){
+        console.log("input id ="+req.body.familyId);
+        console.log("session.famid="+req.session.user.currentFamily);
+        //before letting switch, check if the user has already joined a family with this id
+        if (req.body.familyId != req.session.user.familyId1 && req.body.familyId != req.session.user.familyId2 && req.body.familyId != req.session.user.familyId3){
+            console.log("wromg familyId");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {
+                errorMessage:"Families you have already joined include "+req.session.user.familyId1 +", " +
+                    req.session.user.familyId2+", and "+ req.session.user.familyId3 +", while your input was not one of them, please check again!", returnPage:"account"});
+        }
+        else{
+            console.log("correct family id");
+            Users.findOneAndUpdate(req.session.user.currentFamily, {currentFamily: req.body.familyId},function(err, user) {});
+            req.session.user.currentFamily = req.body.familyId;
+            updateUser(req,res);
+        }
 
+    }
+    //in case of db is slower than page direction, add a timer
+    setInterval(intervalFunc, 3000);
+    console.log("timer finished");
     getAccount(req, res);
+
 };
+
+
+function intervalFunc() {
+    console.log('timertimertimer!');
+}
 
 
 /* save message at home page*/
@@ -489,7 +518,7 @@ module.exports.findAllUsers = findAllUsers;
 module.exports.deleteItem = deleteItem;
 module.exports.deleteProfile = deleteProfile;
 module.exports.getAccount = getAccount;
-module.exports.updateUsername = updateUsername;
+module.exports.updateAccount = updateAccount;
 module.exports.showArtifacts = showArtifacts;
 module.exports.uploadArtifacts = uploadArtifacts;
 module.exports.submitUploadArtifacts = submitUploadArtifacts;
