@@ -8,6 +8,7 @@ const Users = mongoose.model('account_tables');
 const Profiles = mongoose.model('profile_tables');
 const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
+const Family = mongoose.model('family_tables');
 
 
 //const Families = mongoose.model('family_tables');
@@ -16,10 +17,47 @@ const FamilyPhotos = mongoose.model('familyPhoto_tables');
 
 const path = require('path');
 
+
+
+
+const multer = require('multer');
+
+/** Storage Engine */
+const storageEngine = multer.diskStorage({
+    destination: './public/files',
+    filename: function(req, file, fn){
+        fn(null,  new Date().getTime().toString()+'-'+file.fieldname+path.extname(file.originalname));
+    }
+});
+
+//init
+
+const upload =  multer({
+    storage: storageEngine,
+    limits: { fileSize:200000 },
+    fileFilter: function(req, file, callback){
+        validateFile(file, callback);
+    }
+}).single('photo');
+
+
+const validateFile = function(file, cb ){
+    allowedFileTypes = /jpeg|jpg|png|gif/;
+    const extension = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimeType  = allowedFileTypes.test(file.mimetype);
+    if(extension && mimeType){
+        return cb(null, true);
+    }else{
+        cb("Invalid file type. Only JPEG, PNG and GIF file are allowed.")
+    }
+}
+
 /**-------------------------------------------------------------------------------------------------------------------
  * below: login related operations
  * -------------------------------------------------------------------------------------------------------------------
  * */
+
+
 
 
 /*done: open welcome page*/
@@ -57,9 +95,6 @@ const createUser = function (req, res) {
             console.log("new email");
         }
     });
-
-
-
         const user = new Users({
             "id":req.body.userId,
             "username":req.body.username,
@@ -84,6 +119,37 @@ const createUser = function (req, res) {
 };
 
 
+/*create new family*/
+const createFamily = function (req, res) {
+    /*check if family id exist*/
+    Family.findOne({ id: req.body.familyId }, function(err, family) {
+        if (family) {
+            console.log("family existed");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"family ID already existed", returnPage:"account"});
+        }
+        else {
+            console.log("new family id");
+        }
+    });
+    const family = new Family({
+        "id":req.body.familyId,
+        "name":req.body.familyName,
+        "pwd":req.body.familyPassword,
+    });
+    family.save(function (err) {
+        console.log(err);
+        if (!err) {
+            console.log("create family successful, now going to home page");
+            console.log(Message[0]);
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"create family successful, now going to home page", returnPage:"account"});
+        }
+        else {
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"create family failed, please try again", returnPage:"account"});
+            /**should also jump to error message page
+             * */
+        }
+    });
+};
 
 /* User logged out, direct them to log in screen and remove session data*/
 const logOut = function(req, res) {
@@ -262,6 +328,37 @@ const submitUploadArtifacts = function (req, res) {
         "category": req.body.category,
     });
 
+
+    upload(req, res,(error) => {
+        if (error) {
+            res.send('fail');
+        } else {
+            if (req.body.image == undefined) {
+
+                res.send('file undefined');
+
+            } else {
+
+                /**
+                 * Create new record in mongoDB
+                 */
+                var fullPath = "files/" + req.body.image;
+
+                var document = {
+                    path: fullPath,
+                };
+
+                var photo = new Photo(document);
+                photo.save(function (error) {
+                    if (error) {
+                        throw error;
+                    }
+                    console.log("file save success");
+                });
+            }
+        }
+    });
+
     item.save(function (err) {
         console.log(err);
         if (!err) {
@@ -431,8 +528,18 @@ const saveMessage = function(req, res) {
 
 
 /* save photo at home page*/
+var formidable = require("formidable");
 const savePhoto = function(req, res) {
     console.log("savePhoto function called");
+
+    var form = new formidable.IncomingForm();
+    console.log("about to parse");
+    form.parse(req, function(error, fields, files) {
+        console.log("parsing done");
+        console.log(files.upload.path);
+    });
+
+
     console.log(req.body.familyPhoto);
     var familyPhoto = new FamilyPhotos();
     familyPhoto.img.data = req.body.familyPhoto;
@@ -497,4 +604,6 @@ module.exports.findAllProfiles = findAllProfiles;
 module.exports.showProfiles = showProfiles;
 module.exports.uploadProfiles = uploadProfiles;
 module.exports.submitUploadProfiles = submitUploadProfiles;
+
+module.exports.createFamily = createFamily;
 

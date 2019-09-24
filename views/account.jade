@@ -17,20 +17,21 @@ html(lang='en')
             // popup
             #gal1.popup-effect.animate
                 .popup
-                    p
-                        label Name of the Family:
-                        input(type='text', name='name')
-                    br
-                    p
-                        label ID of the Family:
-                        input(type='text', name='name')
-                    br
-                    p
-                        label Family Password:
-                        input(type='text', name='name')
-                    br
-                    button(onclick='') Confirm
-                    a.close(href='#gallery') ×
+                    form#date(action='/createfamily', method='POST')
+                        p
+                            label Name of the Family:
+                            input(type='text', name='familyName')
+                        br
+                        p
+                            label ID of the Family:
+                            input(type='text', name='familyId')
+                        br
+                        p
+                            label Family Password:
+                            input(type='text', name='familyPassword')
+                        br
+                        button(onclick='updateAccount()') Confirm
+                        a.close(href='#gallery') ×
             // popup
             #gal2.popup-effect.animate
                 .popup
