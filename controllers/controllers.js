@@ -498,15 +498,16 @@ const getAccount = function (req, res) {
 
 };
 
-/* User entered new information to their account, update it*/
+/* User update  username in account page*/
 const updateUsername = function(req, res){
     console.log("called updateAccount");
     if (req.body.username){
         console.log(req.body.username);
         console.log(req.session.user.username);
         Users.findOneAndUpdate(req.session.user.username, {username: req.body.username},function(err, user) {});
-        req.session.user.username = req.body.username;
+        updateUser(req,res);
     }
+
     getAccount(req, res);
 };
 
