@@ -24,15 +24,13 @@ body {
 
 /* Css used in upload_artifacts.html */
 .img-grid button{
-    float: left;
+    text-align: center;
     height: 80px;
     background-color: rgba(153, 102, 51, 0.6);
     font-family: 'Mukta', sans-serif;
     width: 18%;
     position: relative;
-    top: 85px;
-    left: 13%;
-    margin-right: 10%;
+    top: 40px;
     color: white;
     font-size: 20px;
     cursor: pointer;
@@ -46,6 +44,7 @@ body {
     -moz-border-radius: 35px;
     -ms-border-radius: 35px;
     -o-border-radius: 35px;
+    margin: 50px;
 }
 
 
@@ -169,7 +168,7 @@ body {
 
 .addDiscription {
     position: relative;
-    top: 210px;
+    top: 80px;
     height: 400px;
     font-family: 'Mukta', sans-serif;
     font-size: 18px;

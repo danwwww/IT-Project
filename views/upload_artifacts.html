@@ -10,15 +10,14 @@
 <body>
 <div class="main">
     <div class="img-grid">
-        <a href="#gal4">
-            <button onclick="">Add Image & Video</button>
-        </a>
-        <a href="#gal5">
-            <button onclick="">Add Documents</button>
-        </a>
-        <a href="#gal6">
-            <button onclick="">Add URL</button>
-        </a>
+        <span>
+            <a href="#gal4">
+                <button onclick="">Add Image</button>
+            </a>
+            <a href="#gal5">
+                <button onclick="">Add Video</button>
+            </a>
+        </span>
     </div>
 
     <!-- popup-->
@@ -44,7 +43,7 @@
         <div class="popup">
             <form action="" >
                 <div class="div1">
-                    <div class="div2">Choose Document</div>
+                    <div class="div2">Choose Video</div>
                     <input type="file" class="inputstyle" name="image[]" multiple/>
                 </div>
                 <div class="div1">
@@ -55,16 +54,6 @@
         </div>
     </div>
 
-
-    <!-- popup-->
-    <div id="gal6" class="popup-effect animate">
-        <div class="popup">
-            <p><label>Add URL: </label>
-                <input type = "text" name = "name"></p><br>
-            <button onclick="">Confirm</button>
-            <a class="close" href="#gallery">&times;</a>
-        </div>
-    </div>
 
     <div class="addDiscription">
         <form action="/upload/artifacts/submit" id="upload" method = POST>
