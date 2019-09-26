@@ -45,72 +45,6 @@ const validateFile = function(file, cb ){
     }
 }
 
-/**-------------------------------------------------------------------------------------------------------------------
- * below: login related operations
- * -------------------------------------------------------------------------------------------------------------------
- * */
-
-
-
-
-/*done: open welcome page*/
-const welcome = function(req, res){
-    console.log("called welcome");
-    res.sendFile(path.join(__dirname, '../views/login.html'));
-
-}
-
-
-
-/*Create a new user with entered username, password, email */
-const createUser = function (req, res) {
-    /** check if account has already existed
-     * */
-    Users.findOne({ id: req.body.userId }, function(err, user) {
-        if (user) {
-            console.log("user existed");
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID already existed", returnPage:"login"});
-            //should direct to error page later
-
-        }
-        else {
-            console.log("new id");
-        }
-    });
-    Users.findOne({ id: req.body.email }, function(err, email) {
-        if (email) {
-            console.log("email existed");
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User email already existed", returnPage:"login"});
-            //should direct to error page later
-
-        }
-        else {
-            console.log("new email");
-        }
-    });
-        const user = new Users({
-            "id":req.body.userId,
-            "username":req.body.username,
-            "email":req.body.email,
-            "passwordHash":req.body.psw,
-        });
-        user.save(function (err) {
-            console.log(err);
-            if (!err) {
-                /** the file is to be made and changed
-                 * */
-                console.log("register successful, now going to home page");
-                console.log(Message[0]);
-                res.render(path.join(__dirname, '../views/home.jade'), {messages : " "});
-            }
-            else {
-                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Registration failed, please try again", returnPage:"login"});
-                /**should also jump to error message page
-                 * */
-            }
-        });
-};
-
 
 /*create new family*/
 const createFamily = function (req, res) {
@@ -163,32 +97,6 @@ const logOut = function(req, res) {
  * */
 
 
-
-
-/*list all users
-* */
-const findAllUsers = function (req, res) {
-    Users.find({}, function (err, user) {
-        if (!err) {
-            res.send(user);
-        } else {
-            res.sendStatus(400);
-        }
-    });
-};
-
-
-
-
-const findAllProfiles = function (req, res) {
-    Profiles.find({}, function (err, user) {
-        if (!err) {
-            res.send(user);
-        } else {
-            res.sendStatus(400);
-        }
-    });
-};
 
 //delete an item
 const deleteItem = function(req, res) {
@@ -395,37 +303,6 @@ const submitUploadProfiles = function (req, res) {
 };
 
 
-/* User attempted a log in, check email and password against database. If successful store their user information in
- * session data to help templating and updating user info whilst on the site */
-const handleLogin = function(req, res) {
-    Users.findOne({ id: req.body.userId }, function(err, user) {
-        console.log(req.body.userId);
-        console.log(req.body.psw);
-        if (!user) {
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID does not exist, please try again", returnPage:"home"});
-            //should direct to error page later
-
-        } else {
-            if (req.body.psw === user.passwordHash) {
-                req.session.user = user;
-                updateUser(req, res);
-                //login successful
-                Message.findOne(function(err, message) {
-                    console.log(message);
-                    res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
-                });
-
-            }
-            else {
-                /**should jump to error message page then automatically jump to the login page after a few seconds
-                 * */
-                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User ID and password do not match, please try again", returnPage:"home"});
-            }
-        }
-    });
-};
-
-
 
 
 /*Update user information*/
@@ -475,7 +352,7 @@ const updateAccount = function(req, res){
         console.log("session.famid="+req.session.user.currentFamily);
         //before letting switch, check if the user has already joined a family with this id
         if (req.body.familyId != req.session.user.familyId1 && req.body.familyId != req.session.user.familyId2 && req.body.familyId != req.session.user.familyId3){
-            console.log("wromg familyId");
+            console.log("wrong familyId");
             res.render(path.join(__dirname, '../views/alert_message.jade'), {
                 errorMessage:"Families you have already joined include "+req.session.user.familyId1 +", " +
                     req.session.user.familyId2+", and "+ req.session.user.familyId3 +", while your input was not one of them, please check again!", returnPage:"account"});
@@ -506,22 +383,18 @@ function intervalFunc() {
 
 /*--------------------Function Exports---------------------------*/
 
-module.exports.welcome = welcome;
 
-module.exports.createUser = createUser;
-module.exports.handleLogin = handleLogin;
 module.exports.logOut = logOut;
 
-module.exports.findAllUsers = findAllUsers;
 module.exports.deleteItem = deleteItem;
 module.exports.deleteProfile = deleteProfile;
 module.exports.getAccount = getAccount;
 module.exports.updateAccount = updateAccount;
 module.exports.showArtifacts = showArtifacts;
 module.exports.uploadArtifacts = uploadArtifacts;
+
 module.exports.submitUploadArtifacts = submitUploadArtifacts;
 
-module.exports.findAllProfiles = findAllProfiles;
 module.exports.showProfiles = showProfiles;
 module.exports.uploadProfiles = uploadProfiles;
 module.exports.submitUploadProfiles = submitUploadProfiles;

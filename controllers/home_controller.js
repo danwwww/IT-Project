@@ -10,7 +10,6 @@ const multer = require('multer');
 //these are from items.js
 const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
-const Family = mongoose.model('family_tables');
 const Users = mongoose.model('account_tables');
 var current_user_id;
 
