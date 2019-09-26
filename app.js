@@ -27,7 +27,7 @@ require('./models/db.js');
 //not yet
 var routes = require('./routes/routes.js');
 app.use('/',routes);
-
+app.use('/public', express.static('public'));
 // Start the server
 // not yet
 app.listen(PORT, function(){

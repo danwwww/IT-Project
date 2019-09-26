@@ -1,10 +1,11 @@
-
-
-
-const mongoose = require('mongoose');
-mongoose.set('useFindAndModify', false);
+//import modules
 var express = require('express');
+var formidable = require("formidable");
 var fs = require('fs');
+const mongoose = require('mongoose');
+const path = require('path');
+const multer = require('multer');
+mongoose.set('useFindAndModify', false);
 //these are from items.js
 const Items = mongoose.model('item_tables');
 const Users = mongoose.model('account_tables');
@@ -13,17 +14,6 @@ const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
 const Family = mongoose.model('family_tables');
 
-
-//const Families = mongoose.model('family_tables');
-
-
-
-const path = require('path');
-
-
-
-
-const multer = require('multer');
 
 /** Storage Engine */
 const storageEngine = multer.diskStorage({
@@ -443,36 +433,6 @@ const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
 
-/* User navigated to home Page*/
-const getHome = function (req, res) {
-    console.log("in validateUser: validating");
-
-    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
-        console.log("in validateUser: user ="+user);
-        if (!user) {
-
-            // if the user isn't found in the DB, reset the session info and
-
-            // redirect the user to the login page
-            req.session.reset();
-            res.redirect('/');
-        } else {
-            console.log(user);
-            res.locals.user = user;
-            console.log("in validating function, validation successed");
-            Message.findOne(function(err, message) {
-                console.log(message);
-                res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
-            });
-        }
-    }); else {
-        console.log("in validating function, validation failed");
-        req.session.reset();
-        res.redirect('/');
-    }
-
-
-};
 
 const getAccount = function (req, res) {
     console.log("in validateUser: validating");
@@ -541,81 +501,12 @@ function intervalFunc() {
 }
 
 
-/* save message at home page*/
-const saveMessage = function(req, res) {
-    console.log("saveMessage function called");
-    var message = req.body.message;
-    Users.findOne({ id: req.body.userId }, function(err, user) {
-        Message.findOneAndUpdate(req.body.message, {message: req.body.message},function(err, user) {});
-        console.log(req.body.message);
-        console.log(message);
-        //res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
-        getHome(req, res);
-    });
-    // res.render(path.join(__dirname, '../views/home.jade'), {messages : message});
-
-};
-
-
-/* save photo at home page*/
-var formidable = require("formidable");
-const savePhoto = function(req, res) {
-    console.log("savePhoto function called");
-
-    var form = new formidable.IncomingForm();
-    console.log("about to parse");
-    form.parse(req, function(error, fields, files) {
-        console.log("parsing done");
-        console.log(files.upload.path);
-    });
-
-
-    console.log(req.body.familyPhoto);
-    var familyPhoto = new FamilyPhotos();
-    familyPhoto.img.data = req.body.familyPhoto;
-    familyPhoto.img.contentType = 'image/png';
-    console.log("-------");
-    console.log((req.body.familyPhoto).toString('base64'));
-    console.log(familyPhoto.img.data.toString('base64'));
-    console.log(familyPhoto.img.contentType);
-    familyPhoto.save();
-    res.render(path.join(__dirname, '../views/photo_test.jade'), {familyPhoto: familyPhoto.img.data.toString('base64')});
-};
-
-// const savePhoto= function(req, res) {
-//     var multiparty = require("multiparty");
-//     var form = new multiparty.Form();
-//     form.parse(req, function(err,fields,files){
-//         var img = files.familyPhoto;
-//         var fs = require("fs");
-//         fs.readFile(img.path, function(err, data){
-//             var path = "./public/images/"+img.originalFilename;
-//             fs.writeFile(path, data, function(error) {
-//                 if(error) console.log(error);
-//                 res.render('phpto_test', {familyPhoto:img});
-//             });
-//         });
-//
-//     });
-//
-//
-// }
-
-/**-------------------------------------------------------------------------------------------------------------------
- * above:  navigation bar operations
- * -------------------------------------------------------------------------------------------------------------------
- * */
-
 
 
 
 /*--------------------Function Exports---------------------------*/
 
 module.exports.welcome = welcome;
-module.exports.getHome = getHome;
-
-module.exports.saveMessage = saveMessage;
-module.exports.savePhoto = savePhoto;
 
 module.exports.createUser = createUser;
 module.exports.handleLogin = handleLogin;

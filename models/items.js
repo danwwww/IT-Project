@@ -81,8 +81,8 @@ const profileSchema = mongoose.Schema(
 /*profiles*/
 const familyPhotoSchema = mongoose.Schema(
     {
-        img:
-        {data: Buffer, contentType:String}
+        "path": String,
+        "family_id": String
     }
 );
 

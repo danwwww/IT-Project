@@ -7,10 +7,11 @@ html(lang='en')
         script(type='text/javascript', src='head.js')
     body
         .fileInputContainer
-            form(action='/savePhoto', method='POST')
-                input.fileInput(type='file', name='familyPhoto',id='familyPhoto',accept='image/*')
+            form(action='./savePhoto', enctype='multipart/form-data', method='post')
+                input(type='file', name='upload', multiple='multiple')
                 .btn
                     button.btn(type='submit') Save
+            img(src='#{image_path}')
         .content-bottom
             form(action='/saveMessage', method='POST')
                 .text
