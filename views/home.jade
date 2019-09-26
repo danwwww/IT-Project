@@ -7,10 +7,13 @@ html(lang='en')
         script(type='text/javascript', src='head.js')
     body
         .fileInputContainer
-            form(action='/savePhoto', method='POST')
-                input.fileInput(type='file', name='familyPhoto',id='familyPhoto',accept='image/*')
+            form(action='/savePhoto', method='POST',enctype="multipart/form-data")
+                input.fileInput(type='file', name='familyPhoto',id='familyPhoto',accept='image/*' )
                 .btn
                     button.btn(type='submit') Save
+                | .file-path-wrapper
+                | input.file-path.validate(type='text' )
+
         .content-bottom
             form(action='/saveMessage', method='POST')
                 .text

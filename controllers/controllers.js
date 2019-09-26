@@ -1,6 +1,3 @@
-
-
-
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 var express = require('express');
@@ -14,16 +11,10 @@ const FamilyPhotos = mongoose.model('familyPhoto_tables');
 const Family = mongoose.model('family_tables');
 
 
-//const Families = mongoose.model('family_tables');
-
-
 
 const path = require('path');
-
-
-
-
 const multer = require('multer');
+
 
 /** Storage Engine */
 const storageEngine = multer.diskStorage({
@@ -34,14 +25,14 @@ const storageEngine = multer.diskStorage({
 });
 
 //init
-
-const upload =  multer({
-    storage: storageEngine,
-    limits: { fileSize:200000 },
-    fileFilter: function(req, file, callback){
-        validateFile(file, callback);
-    }
-}).single('photo');
+//
+// const uploadPhoto =  multer({
+//     storage: storageEngine,
+//     limits: { fileSize:200000 },
+//     fileFilter: function(req, file, callback){
+//         validateFile(file, callback);
+//     }
+// }).single('photo');
 
 
 const validateFile = function(file, cb ){
@@ -292,7 +283,7 @@ const showProfiles = function (req, res) {
             Profiles.find({}, function (err, profiles){
                 if (!err) {
                     console.log("currently on family page");
-                    res.render(path.join(__dirname, '../views/family_test.jade'), {profile : profiles});
+                    res.render(path.join(__dirname, '../views/family.jade'), {profile : profiles});
 
                 } else {
                     res.sendStatus(400);
@@ -443,6 +434,11 @@ const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
 
+
+
+
+
+
 /* User navigated to home Page*/
 const getHome = function (req, res) {
     console.log("in validateUser: validating");
@@ -501,7 +497,7 @@ const getAccount = function (req, res) {
 
 };
 
-/* User update  user account in account page*/
+/* update  user account in account page*/
 const updateAccount = function(req, res){
     console.log("called updateAccount");
     if (req.body.username){
@@ -529,16 +525,83 @@ const updateAccount = function(req, res){
 
     }
     //in case of db is slower than page direction, add a timer
-    setInterval(intervalFunc, 3000);
-    console.log("timer finished");
+
     getAccount(req, res);
 
 };
 
 
-function intervalFunc() {
-    console.log('timertimertimer!');
-}
+
+/* go to edit profile*/
+const editProfile = function(req, res){
+    console.log("called editProfile");
+    console.log("profile_id = "+req.params.id);
+    var profileID = req.params.id;
+    Profiles.findOne({_id: profileID}, req.body, function(err, profile) {
+        if (err) {
+            console.log("did not find this id");
+            console.log(err);
+        }
+        else {
+            console.log("found this id");
+            res.render(path.join(__dirname, '../views/edit_profile.jade'), {name : profile.name,
+                year: profile.year, month: profile.month, day: profile.day, description: profile.description,
+                life_story: profile.life_story, year_passed: profile.year_passed});
+            console.log("rendered");
+        }
+    });
+};
+
+/* save edited profile*/
+const saveProfile = function(req, res){
+    console.log("called saveProfile");
+    var profileID = req.params.profileID;
+    Profiles.findOneAndUpdate({_id: profileID}, function(err, profile) {
+        console.log("filling missing fields");
+        //fill the fields if not entered
+        if (!req.body.name){
+            console.log("entered name = "+ req.body.name);
+            req.body.name = profile.name;
+            console.log("assigned name = "+ req.body.name);
+        }
+        if (!req.body.year){
+            console.log("entered year = "+ req.body.year);
+            req.body.year = profile.year;
+            console.log("assigned year = "+ req.body.year);
+        }
+        if (!req.body.month){
+            console.log("entered month = "+ req.body.month);
+            req.body.month = profile.month;
+            console.log("entered month = "+ req.body.month);
+        }
+        if (!req.body.day){
+            console.log("entered day = "+ req.body.day);
+            req.body.day = profile.day;
+            console.log("assigned day = "+ req.body.day);
+        }
+        if (!req.body.description){
+            console.log("entered description = "+ req.body.description);
+            req.body.description = profile.description;
+            console.log("assigned description = "+ req.body.description);
+        }
+        if (!req.body.life_story){
+            console.log("entered ls = "+ req.body.life_story);
+            req.body.life_story = profile.life_story;
+            console.log("assigned description = "+ req.body.life_story);
+        }
+        if (!req.body.year_passed){
+            console.log("entered yp = "+ req.body.year_passed);
+            req.body.year_passed = profile.year_passed;
+            console.log("assigned yp = "+ req.body.year_passed);
+        }
+
+    });
+
+    Profiles.findOneAndUpdate({ "_id": profileID }, { "$set": { "name": req.body.name, "year": req.body.year,
+            "month": req.body.month, "day": req.body.day,"description":req.body.description,
+        "life_story":req.body.life_story, "year_passed":req.body.year_passed}},function(err, profile) {});
+    showProfiles(req,res);
+};
 
 
 /* save message at home page*/
@@ -557,30 +620,31 @@ const saveMessage = function(req, res) {
 };
 
 
-/* save photo at home page*/
-var formidable = require("formidable");
-const savePhoto = function(req, res) {
-    console.log("savePhoto function called");
-
-    var form = new formidable.IncomingForm();
-    console.log("about to parse");
-    form.parse(req, function(error, fields, files) {
-        console.log("parsing done");
-        console.log(files.upload.path);
-    });
-
-
-    console.log(req.body.familyPhoto);
-    var familyPhoto = new FamilyPhotos();
-    familyPhoto.img.data = req.body.familyPhoto;
-    familyPhoto.img.contentType = 'image/png';
-    console.log("-------");
-    console.log((req.body.familyPhoto).toString('base64'));
-    console.log(familyPhoto.img.data.toString('base64'));
-    console.log(familyPhoto.img.contentType);
-    familyPhoto.save();
-    res.render(path.join(__dirname, '../views/photo_test.jade'), {familyPhoto: familyPhoto.img.data.toString('base64')});
-};
+// /* save photo at home page*/
+// var formidable = require("formidable");
+// const savePhoto = function(req, res) {
+//     console.log("savePhoto function called");
+//
+//     var form = new formidable.IncomingForm();
+//     console.log("about to parse");
+//     form.parse(req, function(error, fields, files) {
+//         console.log("parsing done");
+//         console.log(files.upload.path);
+//     });
+//
+//
+//     console.log("req.body.familyPhoto="+req.body.familyPhoto);
+//     console.log("req.files="+req.files);
+//     var familyPhoto = new FamilyPhotos();
+//     familyPhoto.img.data = req.body.familyPhoto;
+//     familyPhoto.img.contentType = 'image/png';
+//     console.log("-------");
+//     console.log(("req.body.familyPhoto).toString('base64')="+req.body.familyPhoto).toString('base64'));
+//     console.log(familyPhoto.img.data.toString('base64'));
+//     console.log(familyPhoto.img.contentType);
+//     familyPhoto.save();
+//     res.render(path.join(__dirname, '../views/photo_test.jade'), {familyPhoto: familyPhoto.img.data.toString('base64')});
+// };
 
 // const savePhoto= function(req, res) {
 //     var multiparty = require("multiparty");
@@ -605,8 +669,49 @@ const savePhoto = function(req, res) {
  * above:  navigation bar operations
  * -------------------------------------------------------------------------------------------------------------------
  * */
+// const uploadPhoto =  multer({
+//     storage: storageEngine,
+//     limits: { fileSize:200000 },
+//     fileFilter: function(req, file, callback){
+//         validateFile(file, callback);
+//     }
+// }).single('photo');
+// var validateFile = function(file, cb ){
+//     allowedFileTypes = /jpeg|jpg|png|gif/;
+//     const extension = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
+//     const mimeType  = allowedFileTypes.test(file.mimetype);
+//     if(extension && mimeType){
+//         return cb(null, true);
+//     }else{
+//         cb("Invalid file type. Only JPEG, PNG and GIF file are allowed.")
+//     }
+// }
+const savePhoto = function(req, res) {
 
+        if(req.file == undefined){
 
+            res.redirect('/?msg=2');
+        }else{
+
+            /**
+             * Create new record in mongoDB
+             */
+            var fullPath = "files/"+req.file.filename;
+            var document = {
+                path:     fullPath,
+                caption:   req.body.caption
+            };
+
+            var photo = new FamilyPhotos(document);
+            photo.save(function(error){
+                if(error){
+                    throw error;
+                }
+                res.render(path.join(__dirname, '../views/photo_test.jade'), {familyPhoto : familyPhoto});
+            });
+        }
+
+};
 
 
 /*--------------------Function Exports---------------------------*/
@@ -616,6 +721,7 @@ module.exports.getHome = getHome;
 
 module.exports.saveMessage = saveMessage;
 module.exports.savePhoto = savePhoto;
+module.exports.saveProfile = saveProfile;
 
 module.exports.createUser = createUser;
 module.exports.handleLogin = handleLogin;
@@ -633,6 +739,7 @@ module.exports.submitUploadArtifacts = submitUploadArtifacts;
 module.exports.findAllProfiles = findAllProfiles;
 module.exports.showProfiles = showProfiles;
 module.exports.uploadProfiles = uploadProfiles;
+module.exports.editProfile = editProfile;
 module.exports.submitUploadProfiles = submitUploadProfiles;
 
 module.exports.createFamily = createFamily;

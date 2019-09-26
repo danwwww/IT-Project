@@ -25,7 +25,7 @@ router.post('/register', controller.createUser);
 router.get('/home', controller.getHome);
 router.post('/saveMessage', controller.saveMessage);
 router.post('/savePhoto', controller.savePhoto);
-
+router.post('/saveProfile', controller.saveProfile);
 router.post('/saveMessage', controller.saveMessage);
 
 router.get('/account', controller.getAccount);
@@ -41,6 +41,8 @@ router.post('/upload/artifacts/submit', controller.submitUploadArtifacts);
 router.get('/family', controller.showProfiles);
 
 router.post('/upload/profiles/submit', controller.submitUploadProfiles);
+
+router.get('/editProfile/:id', controller.editProfile);
 
 router.get('/uploadProfiles', controller.uploadProfiles);
 

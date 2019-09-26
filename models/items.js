@@ -82,7 +82,9 @@ const profileSchema = mongoose.Schema(
 const familyPhotoSchema = mongoose.Schema(
     {
         img:
-        {data: Buffer, contentType:String}
+        {data: Buffer, contentType:String},
+        path:  { type: String },
+        caption: { type: String }
     }
 );
 

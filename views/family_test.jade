@@ -53,7 +53,17 @@ html(lang='en')
                                             p.editContent.mt-4
                                                 | Life story: #{profile[i].life_story}
                                             a.close(href='#gallery') ×
-                                            button(id="btn1") Edit
+                                            script var profileID = {profile[i].id}
+                                            button(id="btn1" onclick=`editProfile(${JSON.stringify(profile[i].id)})`) Edit
+                                                script.
+                                                    function editProfile(profileID) {
+                                                        if (confirm("Are you sure to edit this profile?")) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.open("GET", "/editProfile/" + profileID, true);
+                                                            window.location.href = "/editProfile/" + profileID;
+                                                            xhr.send(null);
+                                                        }
+                                                    }
                                             script var profileID = {profile[i].id}
                                             button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
                                                 script.
@@ -75,7 +85,17 @@ html(lang='en')
                                             p.editContent.mt-4
                                                 | Life story: #{profile[i+1].life_story}
                                             a.close(href='#gallery') ×
-                                            button(id="btn1") Edit
+                                            script var profileID = {profile[i+1].id}
+                                            button(id="btn1" onclick=`editProfile(${JSON.stringify(profile[i+1].id)})`) Edit
+                                                script.
+                                                    function editProfile(profileID) {
+                                                        if (confirm("Are you sure to edit this profile?")) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.open("GET", "/editProfile/" + profileID, true);
+                                                            window.location.href = "/editProfile/" + profileID;
+                                                            xhr.send(null);
+                                                        }
+                                                    }
                                             script var profileID = {profile[i+1].id}
                                             button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i+1].id)})`) Delete
                                                 script.
@@ -106,7 +126,17 @@ html(lang='en')
                                         p.editContent.mt-4
                                             | Life story: #{profile[count-1].life_story}
                                         a.close(href='#gallery') ×
+                                        script var profileID = {profile[count-1].id}
                                         button(id="btn1") Edit
+                                            script.
+                                                function editProfile(profileID) {
+                                                    if (confirm("Are you sure to edit this profile?")) {
+                                                        var xhr = new XMLHttpRequest();
+                                                        xhr.open("GET", "/editProfile/" + profileID, true);
+                                                        window.location.href = "/family";
+                                                        xhr.send(null);
+                                                    }
+                                                }
                                         script var profileID = {profile[count-1].id}
                                         button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[count-1].id)})`) Delete
                                             script.
@@ -148,7 +178,17 @@ html(lang='en')
                                             p.editContent.mt-4
                                                 | Life story: #{profile[i].life_story}
                                             a.close(href='#gallery') ×
+                                            script var profileID = {profile[i].id}
                                             button(id="btn1") Edit
+                                                script.
+                                                    function editProfile(profileID) {
+                                                        if (confirm("Are you sure to edit this profile?")) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.open("GET", "/editProfile/" + profileID, true);
+                                                            window.location.href = "/editProfile/" + profileID;
+                                                            xhr.send(null);
+                                                        }
+                                                    }
                                             script var profileID = {profile[i].id}
                                             button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
                                                 script.
@@ -156,7 +196,7 @@ html(lang='en')
                                                         if (confirm("Are you sure to delete this profile?")) {
                                                             var xhr = new XMLHttpRequest();
                                                             xhr.open("DELETE", "/deleteProfile/" + profileID, true);
-                                                            window.location.href = "/family";
+                                                            window.location.href = "/editProfile/" + profileID;
                                                             xhr.send(null);
                                                         }
                                                     }
@@ -170,7 +210,17 @@ html(lang='en')
                                             p.editContent.mt-4
                                                 | Life story: #{profile[i+1].life_story}
                                             a.close(href='#gallery') ×
+                                            script var profileID = {profile[i+1].id}
                                             button(id="btn1") Edit
+                                                script.
+                                                    function editProfile(profileID) {
+                                                        if (confirm("Are you sure to edit this profile?")) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.open("GET", "/editProfile/" + profileID, true);
+                                                            window.location.href = "/editProfile/" + profileID;
+                                                            xhr.send(null);
+                                                        }
+                                                    }
                                             script var profileID = {profile[i+1].id}
                                             button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i+1].id)})`) Delete
                                                 script.

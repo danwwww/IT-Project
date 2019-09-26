@@ -1,0 +1,41 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Upload a profile
+        link(rel='stylesheet', href='../css/upload.css')
+        script(type='text/javascript', src='head.js')
+    body
+        .main
+            .upload-document
+                .div3 Add Image & Video
+                input.input(type='file', name='image[]', multiple='')
+            .addProfile
+                form#upload(action='/saveProfile', method='POST')
+                    p
+                        label Name:
+                        input(type='text', name='name', placeholder='#{name}')
+                    br
+                    p
+                        label Birthday:
+                        span
+                            input(type='text', name='year', placeholder='#{year}')
+                            | Year
+                            input(type='text', name='month',, placeholder='#{month}')
+                            | Month
+                            input(type='text', name='day', placeholder='#{day}')
+                            | Day
+                    br
+                    p
+                        label Description:
+                        textarea(cols='50', rows='8',placeholder='#{description}')
+                    br
+                    p
+                        label Life Story:
+                        textarea(cols='50', rows='8',, placeholder='#{life_story}')
+                    br
+                    p
+                        label Year passed:
+                        input(type='text', name='year_passed',, placeholder='#{year_passed}')
+                    br
+                    button.btn(onclick='saveProfile()') Save Changes

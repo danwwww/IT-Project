@@ -10,5 +10,9 @@ html(lang='en')
             br
             p 我的photo呢？？？？#{familyPhoto}！！！！！
             img(src='data:image/jpg;base64,#{familyPhoto}')
+            | |
+            .col.s3
+                img.responsive-img(src="#{pic['path']}", alt='image')
+                p.center-align.caption #{pic['caption']}
             br
 
