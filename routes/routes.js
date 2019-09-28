@@ -60,6 +60,7 @@ router.delete('/deleteItem/:id',controller.deleteItem);
 router.delete('/deleteProfile/:id',controller.deleteProfile);
 
 router.post('/createFamily', controller.createFamily);
+router.post('/joinFamily', controller.joinFamily);
 
 
 

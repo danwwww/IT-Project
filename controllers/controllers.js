@@ -68,7 +68,7 @@ const createFamily = function (req, res) {
                     Users.findOneAndUpdate({id: user.id}, {familyId1: req.body.familyId}, function (err, user) {
                     });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
-                        errorMessage: "create family successful, now going to home page",
+                        errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
                     });
                     console.log('join family to family 2 successful');
@@ -76,14 +76,14 @@ const createFamily = function (req, res) {
                     Users.findOneAndUpdate({id: user.id}, {familyId2: req.body.familyId}, function (err, user) {
                     });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
-                        errorMessage: "create family successful, now going to home page",
+                        errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
                     });
                 }else if(!user.familyId3 || user.familyId3 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId3: req.body.familyId}, function (err, user) {
                     });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
-                        errorMessage: "create family successful, now going to home page",
+                        errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
                     });
                 } else {
@@ -96,6 +96,73 @@ const createFamily = function (req, res) {
         }
     });
 };
+
+/*user join family*/
+const joinFamily = function (req, res) {
+    console.log("1");
+    /*check if family id exist*/
+    Family.findOne({ id: req.body.familyId }, function(err, family1) {
+        if (!family1) {
+            console.log("family ID don't exist");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"family ID don't exist", returnPage:"account"});
+        }
+        else {
+            console.log("new family id");
+            const family = new Family({
+                "id": req.body.familyId,
+                "pwd": req.body.familyPassword,
+            });
+            /*find true family password and check matches the user's input*/
+            Family.findOne({ id: req.body.familyId }, function(err, family2){
+                if(family2){
+                    const trueFamilyPassword = family2.pwd;
+                    if(trueFamilyPassword != req.body.familyPassword){
+                        console.log('family password dont match');
+                        res.render(path.join(__dirname, '../views/alert_message.jade'), {
+                            errorMessage: "join family failed, password don't match",
+                            returnPage: "account"
+                        });
+                    }else{
+                        /*check if use family is full, if not, add to the new family*/
+                        Users.findOne({'id': req.session.user.id}, function (err, user) {
+                            if (!user.familyId1 || user.familyId1 == "") {
+                                Users.findOneAndUpdate({id: user.id}, {familyId1: req.body.familyId}, function (err, user) {
+                                });
+                                res.render(path.join(__dirname, '../views/alert_message.jade'), {
+                                    errorMessage: "join family successful, now going to account page",
+                                    returnPage: "account"
+                                });
+                                console.log('join family to family 2 successful');
+                            } else if(!user.familyId2 || user.familyId2 == ""){
+                                Users.findOneAndUpdate({id: user.id}, {familyId2: req.body.familyId}, function (err, user) {
+                                });
+                                res.render(path.join(__dirname, '../views/alert_message.jade'), {
+                                    errorMessage: "join family successful, now going to account page",
+                                    returnPage: "account"
+                                });
+                            }else if(!user.familyId3 || user.familyId3 == ""){
+                                Users.findOneAndUpdate({id: user.id}, {familyId3: req.body.familyId}, function (err, user) {
+                                });
+                                res.render(path.join(__dirname, '../views/alert_message.jade'), {
+                                    errorMessage: "join family successful, now going to account page",
+                                    returnPage: "account"
+                                });
+                            } else {
+                                res.render(path.join(__dirname, '../views/alert_message.jade'), {
+                                    errorMessage: "join family failed, because you have joined 3 families",
+                                    returnPage: "account"
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+
+
+        }
+    });
+};
+
 
 /* User logged out, direct them to log in screen and remove session data*/
 const logOut = function(req, res) {
@@ -419,4 +486,5 @@ module.exports.uploadProfiles = uploadProfiles;
 module.exports.submitUploadProfiles = submitUploadProfiles;
 
 module.exports.createFamily = createFamily;
+module.exports.joinFamily = joinFamily;
 
