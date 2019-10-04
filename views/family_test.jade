@@ -6,7 +6,7 @@ html(lang='en')
         link(rel='stylesheet', href='../css/family.css')
         link(href='../css/style.css', type='text/css', rel='stylesheet', media='all')
         link(href='../css/font-awesome.min.css', rel='stylesheet')
-        link(rel='stylesheet', type='text/css', href='../css/profile/bootstrap.min.css')
+        //link(rel='stylesheet', type='text/css', href='../css/profile/bootstrap.min.css')
         link(rel='stylesheet', type='text/css', href='../css/profile/font-awesome.min.css')
         link(rel='stylesheet', type='text/css', href='../css/profile/profile-style.css')
         script(type='text/javascript', src='head.js')
@@ -74,15 +74,18 @@ html(lang='en')
                                                 span
                                                     label Name:
                                                     input(type='text', name='name',placeholder = '#{profile[i+1].name}')
-                                            p Birthday: #{profile[i+1].year}/#{profile[i+1].month}/#{profile[i+1].date}
+                                            p
+                                                label Birthday:
+                                                span
+                                                    input(type = "text", name = "date",placeholder='#{profile[i+1].year}/#{profile[i+1].month}/#{profile[i+1].day}')
                                             p.editContent.mt-4
                                                 span
                                                     label Description:
-                                                    input(type='text', name='name',placeholder = '#{profile[i + 1].description}')
+                                                    textarea(type='text', name='name',placeholder = '#{profile[i + 1].description}')
                                             p.editContent.mt-4
                                                 span
                                                     label Life story:
-                                                    input(type='text', name='name',placeholder = '#{profile[i+1].life_story}')
+                                                    textarea(type='text', name='name',placeholder = '#{profile[i+1].life_story}')
                                             a.close(href='#gallery') ×
                                             button(id="btn1") Edit
                                             script var profileID = {profile[i+1].id}
