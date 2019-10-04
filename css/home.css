@@ -85,8 +85,9 @@ input[type="file"]{
 
 .content-bottom .btn {
     position: relative;
-    margin-left: 44%;
-    top: 60px;
+    top: 140px;
+    float:right;
+    margin-right: 14%;
 }
 
 .btn button {
