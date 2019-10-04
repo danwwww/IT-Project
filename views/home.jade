@@ -6,12 +6,32 @@ html(lang='en')
         link(rel='stylesheet', href='../css/home.css')
         script(type='text/javascript', src='head.js')
     body
-        .fileInputContainer
+        //.fileInputContainer
             form(action='./savePhoto', enctype='multipart/form-data', method='post')
                 input(type='file', name='upload', multiple='multiple')
                 .btn
                     button.btn(type='submit') Save
             img(src='#{image_path}')
+        .fileInputContainer
+            form(action='./savePhoto', enctype='multipart/form-data', method='post')
+                img#prevView(src='../images/photo_example.jpeg', alt='', width='525')
+                input(type='file', name='upload', id='', value='', onchange='prev(this)')
+                .btn
+                    button.btn(type='submit') Save
+            script(type='text/javascript').
+                function prev(event) {
+                    //获取展示图片的区域
+                    var img = document.getElementById("prevView");
+                    //获取文件对象
+                    let file = event.files[0];
+                    //获取文件阅读器
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function () {
+                        //给img的src设置图片url
+                        img.setAttribute("src", this.result);
+                    }
+                }
         .content-bottom
             form(action='/saveMessage', method='POST')
                 .text

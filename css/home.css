@@ -12,6 +12,37 @@ body {
 }
 
 .fileInputContainer{
+    width: 49%;
+    float: left;
+    position: relative;
+}
+
+.fileInputContainer form {
+    position: relative;
+    width: 525px;
+    height: 525px;
+    top: 220px;
+    margin-left: 20%;
+}
+
+input[type="file"]{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 525px;
+    width: 525px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.fileInputContainer .btn {
+    position: relative;
+    margin-left: 10%;
+    top: 20px;
+    float: left;
+}
+/*
+.fileInputContainer{
     height:350px;
     position:relative;
     width: 49%;
@@ -32,6 +63,7 @@ body {
     filter:alpha(opacity=0);
     cursor:pointer;
 }
+*/
 
 .text {
     position: relative;
@@ -54,14 +86,9 @@ body {
 .content-bottom .btn {
     position: relative;
     margin-left: 44%;
-    top: 140px;
+    top: 60px;
 }
-.fileInputContainer .btn {
-    position: relative;
-    margin-left: 20%;
-    top: 180px;
-    float: left;
-}
+
 .btn button {
     background: rgba(153, 102, 51, 0.6);
     border: none;
