@@ -62,6 +62,7 @@ const createFamily = function (req, res) {
                 "pwd": req.body.familyPassword,
             });
             family.save();
+            fs.writeFileSync("views/user_images/familyPhotos/"+req.body.familyId+".jpg", fs.readFileSync("views/user_images/familyPhotos/noFamily.jpg"));
             /*check if use family is full, if not, add to the new family*/
             Users.findOne({'id': req.session.user.id}, function (err, user) {
                 if (!user.familyId1 || user.familyId1 == "") {
