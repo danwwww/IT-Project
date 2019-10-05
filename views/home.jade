@@ -20,15 +20,11 @@ html(lang='en')
                     button(type='submit') Save
             script(type='text/javascript').
                 function prev(event) {
-                    //获取展示图片的区域
                     var img = document.getElementById("prevView");
-                    //获取文件对象
                     let file = event.files[0];
-                    //获取文件阅读器
                     let reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = function () {
-                        //给img的src设置图片url
                         img.setAttribute("src", this.result);
                     }
                 }
