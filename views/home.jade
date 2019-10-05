@@ -14,7 +14,7 @@ html(lang='en')
             img(src='#{image_path}')
         .fileInputContainer
             form(action='./savePhoto', enctype='multipart/form-data', method='post')
-                img#prevView(src='../images/photo_example.jpeg', alt='', width='525')
+                img#prevView(src='#{image_path}', alt='', width='525')
                 input(type='file', name='upload', id='', value='', onchange='prev(this)')
                 .btn
                     button(type='submit') Save
