@@ -46,7 +46,7 @@ const createUser = function (req, res) {
         "username":req.body.username,
         "email":req.body.email,
         "passwordHash":req.body.psw,
-        "currentFamily":"noFamily",
+        "currentFamily":req.body.currentFamily,
     });
     user.save(function (err) {
         console.log(err);
