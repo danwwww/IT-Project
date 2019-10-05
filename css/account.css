@@ -154,23 +154,60 @@ body {
 }
 
 .agenda{
-    height:150px;
     position:relative;
     width: 30%;
-    top: -160px;
+    top: -190px;
     float: left;
 
 }
-.agenda input{
-    background:url(../images/agenda.JPG);
-    background-size: 340px 340px;
+.agenda form{
     width: 340px;
     height: 340px;
-    left: 18%;
-    overflow: hidden;
-    position:absolute;
-    right:0;
-    top:0;
-    filter:alpha(opacity=0);
-    cursor:pointer;
+    position: relative;
+    margin-left: 18%;
+}
+
+input[type="file"]{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 340px;
+    width: 340px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.agenda .btn {
+    position: relative;
+    margin-left: 26%;
+    top: 0px;
+    float: left;
+}
+
+.btn button {
+    background: rgba(153, 102, 51, 0.6);
+    border: none;
+    color: #fff;
+    margin: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    position: absolute;
+    width: 100px;
 }

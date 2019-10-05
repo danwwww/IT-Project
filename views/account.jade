@@ -59,4 +59,18 @@ html(lang='en')
                         button(onclick='') Switch
                     br
             .agenda
-                input.inputstyle(type='file')
+                form(action='', enctype='multipart/form-data', method='post')
+                    img#prevView(src='../images/agenda.jpg', alt='', width='340')
+                    input(type='file', name='upload', id='', value='', onchange='prev(this)')
+                    .btn
+                        button(type='submit') Save
+                script(type='text/javascript').
+                    function prev(event) {
+                        var img = document.getElementById("prevView");
+                        let file = event.files[0];
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                            img.setAttribute("src", this.result);
+                        }
+                    }
