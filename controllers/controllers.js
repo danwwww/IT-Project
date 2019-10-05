@@ -23,8 +23,6 @@ const storageEngine = multer.diskStorage({
     }
 });
 
-//init
-
 const upload =  multer({
     storage: storageEngine,
     limits: { fileSize:200000 },
@@ -32,7 +30,6 @@ const upload =  multer({
         validateFile(file, callback);
     }
 }).single('photo');
-
 
 const validateFile = function(file, cb ){
     allowedFileTypes = /jpeg|jpg|png|gif/;
@@ -44,23 +41,6 @@ const validateFile = function(file, cb ){
         cb("Invalid file type. Only JPEG, PNG and GIF file are allowed.")
     }
 }
-
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
- * above:  login related operations
- * -------------------------------------------------------------------------------------------------------------------
- * */
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
- * below:  navigation bar operations
- * -------------------------------------------------------------------------------------------------------------------
- * */
-
-
 
 //delete an item
 const deleteItem = function(req, res) {
@@ -106,7 +86,6 @@ const showArtifacts = function (req, res) {
     if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
         console.log("in validateUser: user ="+user);
         if (!user) {
-
             // if the user isn't found in the DB, reset the session info and
             // redirect the user to the login page
             req.session.reset();
@@ -180,7 +159,6 @@ const uploadProfiles = function (req, res) {
     res.sendFile(path.join(__dirname, '../views/upload_profile.html'));
 };
 
-
 /*submit upload artifacts*/
 const submitUploadArtifacts = function (req, res) {
     const item = new Items({
@@ -192,7 +170,6 @@ const submitUploadArtifacts = function (req, res) {
         "description": req.body.keeper,
         "category": req.body.category,
     });
-
 
     upload(req, res,(error) => {
         if (error) {
@@ -266,14 +243,10 @@ const submitUploadProfiles = function (req, res) {
     });
 };
 
-
-
-
 /*Update user information*/
 const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
-
 
 const getAccount = function (req, res) {
     console.log("in validateUser: validating");
