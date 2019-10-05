@@ -14,6 +14,30 @@ const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
 const Family = mongoose.model('family_tables');
 
+const getAccount = function (req, res) {
+    console.log("in get Account");
+    if (req.session && req.session.user) Users.findOne({id: req.session.user.id}, function (err, user) {
+        console.log("in validateUser: user ="+user);
+        if (!user) {
+            // if the user isn't found in the DB, reset the session info and
+            // redirect the user to the login page
+            req.session.reset();
+            res.redirect('/');
+        } else {
+            console.log(user);
+            res.locals.user = user;
+            console.log("in validating function, validation successed");
+            res.render(path.join(__dirname, '../views/account.jade'), {username : user.username, familyId :user.currentFamily});
+
+        }
+    }); else {
+        console.log("in validating function, validation failed");
+        req.session.reset();
+        res.redirect('/');
+    }
+
+};
+
 /*create new family*/
 const createFamily = function (req, res) {
     /*check if family id exist*/
@@ -35,6 +59,8 @@ const createFamily = function (req, res) {
                 if (!user.familyId1 || user.familyId1 == "") {
                     Users.findOneAndUpdate({id: user.id}, {familyId1: req.body.familyId}, function (err, user) {
                     });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
@@ -43,12 +69,16 @@ const createFamily = function (req, res) {
                 } else if(!user.familyId2 || user.familyId2 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId2: req.body.familyId}, function (err, user) {
                     });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
                     });
                 }else if(!user.familyId3 || user.familyId3 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId3: req.body.familyId}, function (err, user) {
+                    });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
                     });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
@@ -134,32 +164,40 @@ const joinFamily = function (req, res) {
 /* User update  user account in account page*/
 const updateAccount = function(req, res){
     console.log("called updateAccount");
+    //if change username
     if (req.body.username){
         console.log(req.body.username);
         console.log(req.session.user.username);
         Users.findOneAndUpdate(req.session.user.username, {username: req.body.username},function(err, user) {});
         updateUser(req,res);
     }
+    //if swtich familyId
     else if (req.body.familyId){
         console.log("input id ="+req.body.familyId);
         console.log("session.famid="+req.session.user.currentFamily);
+        console.log("session user ="+req.session.user);
         //before letting switch, check if the user has already joined a family with this id
-        if (req.body.familyId != req.session.user.familyId1 && req.body.familyId != req.session.user.familyId2 && req.body.familyId != req.session.user.familyId3){
-            console.log("wrong familyId");
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {
-                errorMessage:"Families you have already joined include "+req.session.user.familyId1 +", " +
-                    req.session.user.familyId2+", and "+ req.session.user.familyId3 +", while your input was not one of them, please check again!", returnPage:"account"});
-        }
-        else{
-            console.log("correct family id");
-            Users.findOneAndUpdate(req.session.user.currentFamily, {currentFamily: req.body.familyId},function(err, user) {});
-            req.session.user.currentFamily = req.body.familyId;
-            updateUser(req,res);
-        }
-
+        Users.findOne({'id': req.session.user.id}, function (err, user) {
+            const fam1 = user.familyId1;
+            const fam2 = user.familyId2;
+            const fam3 = user.familyId3;
+            if (req.body.familyId != fam1 && req.body.familyId != fam2 && req.body.familyId != fam3){
+                console.log("wrong familyId");
+                res.render(path.join(__dirname, '../views/alert_message.jade'), {
+                    errorMessage:"Families you have already joined include "+fam1 +", " +
+                        fam2+", and "+ fam3 +", " +
+                        "while your input was not one of them, please check again!", returnPage:"account"});
+            }
+            else{
+                console.log("correct family id");
+                Users.findOneAndUpdate(req.session.user.currentFamily, {currentFamily: req.body.familyId},function(err, user) {});
+                req.session.user.currentFamily = req.body.familyId;
+                updateUser(req,res);
+            }
+        });
     }
     //in case of db is slower than page direction, add a timer
-    setInterval(intervalFunc, 3000);
+    //setInterval(intervalFunc, 3000);
     console.log("timer finished");
     getAccount(req, res);
 
@@ -177,7 +215,11 @@ const logOut = function(req, res) {
     res.redirect('/');
 };
 
+const updateUser = function (req) {
+    Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
+};
 /*--------------------Function Exports---------------------------*/
+module.exports.getAccount = getAccount;
 module.exports.logOut = logOut;
 module.exports.createFamily = createFamily;
 module.exports.joinFamily = joinFamily;

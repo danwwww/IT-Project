@@ -16,7 +16,7 @@ var current_user_id;
 /* User navigated to home Page*/
 const getHome = function (req, res) {
     console.log("in validateUser: validating");
-    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
+    if (req.session && req.session.user) Users.findOne({id: req.session.user.id}, function (err, user) {
         console.log("in validateUser: user ="+user);
         if (!user) {
 

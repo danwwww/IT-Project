@@ -13,7 +13,7 @@ const Profiles = mongoose.model('profile_tables');
 const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
 const Family = mongoose.model('family_tables');
-
+var current_user_id;
 
 /** Storage Engine */
 const storageEngine = multer.diskStorage({
@@ -248,38 +248,10 @@ const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
 
-const getAccount = function (req, res) {
-    console.log("in validateUser: validating");
-
-    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
-        console.log("in validateUser: user ="+user);
-        if (!user) {
-
-            // if the user isn't found in the DB, reset the session info and
-
-            // redirect the user to the login page
-            req.session.reset();
-            res.redirect('/');
-        } else {
-            console.log(user);
-            res.locals.user = user;
-            console.log("in validating function, validation successed");
-            res.render(path.join(__dirname, '../views/account.jade'), {username : user.username, familyId :user.currentFamily});
-
-        }
-    }); else {
-        console.log("in validating function, validation failed");
-        req.session.reset();
-        res.redirect('/');
-    }
-
-};
-
 /*--------------------Function Exports---------------------------*/
 
 module.exports.deleteItem = deleteItem;
 module.exports.deleteProfile = deleteProfile;
-module.exports.getAccount = getAccount;
 module.exports.showArtifacts = showArtifacts;
 module.exports.uploadArtifacts = uploadArtifacts;
 module.exports.submitUploadArtifacts = submitUploadArtifacts;

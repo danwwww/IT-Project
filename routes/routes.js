@@ -34,7 +34,7 @@ router.get('/home', home_controller.getHome);
 router.post('/saveMessage', home_controller.saveMessage);
 router.post('/savePhoto', home_controller.savePhoto);
 
-router.get('/account', controller.getAccount);
+router.get('/account', account_controller.getAccount);
 router.get('/artifacts', controller.showArtifacts);
 router.get('/uploadArtifacts', controller.uploadArtifacts);
 router.post('/upload/artifacts/submit', controller.submitUploadArtifacts);
