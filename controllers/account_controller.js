@@ -186,7 +186,7 @@ const updateAccount = function(req, res){
         Users.findOne({'id': req.session.user.id}, function (err, user) {
             ProfilePhotos.findOne({ user_id: user.id }, function(err, profilePhoto) {
                 res.render(path.join(__dirname, '../views/account.jade'), {image_path:profilePhoto.path,
-                    username : user.username, familyId :user.currentFamily});
+                    username : req.body.username, familyId :user.currentFamily});
             });
         });
     }
@@ -222,7 +222,7 @@ const updateAccount = function(req, res){
                     //if the user has a profile
                     else{
                         res.render(path.join(__dirname, '../views/account.jade'), {image_path:profilePhoto.path,
-                            username : user.username, familyId :user.currentFamily});
+                            username : user.username, familyId :req.body.familyId});
                     }
                 });
             }
