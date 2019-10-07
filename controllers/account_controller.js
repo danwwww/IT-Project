@@ -13,9 +13,11 @@ const Profiles = mongoose.model('profile_tables');
 const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
 const Family = mongoose.model('family_tables');
+var currentFamily;
 
 const getAccount = function (req, res) {
     console.log("in get Account");
+    console.log("get account timer finished");
     if (req.session && req.session.user) Users.findOne({id: req.session.user.id}, function (err, user) {
         console.log("in validateUser: user ="+user);
         if (!user) {
@@ -59,8 +61,8 @@ const createFamily = function (req, res) {
                 if (!user.familyId1 || user.familyId1 == "") {
                     Users.findOneAndUpdate({id: user.id}, {familyId1: req.body.familyId}, function (err, user) {
                     });
-                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    });
+                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    // });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
@@ -69,8 +71,8 @@ const createFamily = function (req, res) {
                 } else if(!user.familyId2 || user.familyId2 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId2: req.body.familyId}, function (err, user) {
                     });
-                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    });
+                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    // });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
@@ -78,8 +80,8 @@ const createFamily = function (req, res) {
                 }else if(!user.familyId3 || user.familyId3 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId3: req.body.familyId}, function (err, user) {
                     });
-                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    });
+                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    // });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
@@ -166,10 +168,14 @@ const updateAccount = function(req, res){
     console.log("called updateAccount");
     //if change username
     if (req.body.username){
-        console.log(req.body.username);
-        console.log(req.session.user.username);
+        req.session.user.username= req.body.username;
+        console.log("req.body.username="+req.body.username);
+        console.log("req.session.user.username="+req.session.user.username);
         Users.findOneAndUpdate(req.session.user.username, {username: req.body.username},function(err, user) {});
         updateUser(req,res);
+        Users.findOne({'id': req.session.user.id}, function (err, user) {
+            res.render(path.join(__dirname, '../views/account.jade'), {username : req.body.username, familyId :user.currentFamily});
+        });
     }
     //if swtich familyId
     else if (req.body.familyId){
@@ -178,9 +184,9 @@ const updateAccount = function(req, res){
         console.log("session user ="+req.session.user);
         //before letting switch, check if the user has already joined a family with this id
         Users.findOne({'id': req.session.user.id}, function (err, user) {
-            const fam1 = user.familyId1;
-            const fam2 = user.familyId2;
-            const fam3 = user.familyId3;
+            var fam1 = user.familyId1;
+            var fam2 = user.familyId2;
+            var fam3 = user.familyId3;
             if (req.body.familyId != fam1 && req.body.familyId != fam2 && req.body.familyId != fam3){
                 console.log("wrong familyId");
                 res.render(path.join(__dirname, '../views/alert_message.jade'), {
@@ -191,21 +197,27 @@ const updateAccount = function(req, res){
             else{
                 console.log("correct family id");
                 Users.findOneAndUpdate(req.session.user.currentFamily, {currentFamily: req.body.familyId},function(err, user) {});
+                currentFamily = req.body.familyId;
                 req.session.user.currentFamily = req.body.familyId;
                 updateUser(req,res);
+                res.render(path.join(__dirname, '../views/account.jade'), {username : user.username, familyId :currentFamily});
             }
         });
     }
     //in case of db is slower than page direction, add a timer
-    //setInterval(intervalFunc, 3000);
-    console.log("timer finished");
-    getAccount(req, res);
+    //intervalFunc(50000);
+
 
 };
 
 
-function intervalFunc() {
-    console.log('timertimertimer!');
+function intervalFunc(time) {
+    i = 0;
+    while(i<time){
+        time -= Math.random();
+        console.log(time);
+    }
+    console.log("**********timer finished***************");
 }
 
 

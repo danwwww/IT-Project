@@ -30,33 +30,33 @@ const createUser = function (req, res) {
         }
         else {
             console.log("new id");
-        }
-    });
-    Users.findOne({ id: req.body.email }, function(err, email) {
-        if (email) {
-            console.log("email existed");
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User email already existed", returnPage:"login"});
-        }
-        else {
-            console.log("new email");
-        }
-    });
-    const user = new Users({
-        "id":req.body.userId,
-        "username":req.body.username,
-        "email":req.body.email,
-        "passwordHash":req.body.psw,
-        "currentFamily":"noFamily",
-    });
-    user.save(function (err) {
-        console.log(err);
-        if (!err) {
-            console.log("register successful, now going to home page");
-            console.log(Message[0]);
-            res.render(path.join(__dirname, '../views/home.jade'), {messages : " ",image_path :"/user_images/familyPhotos/"+user.currentFamily+".jpg"});
-        }
-        else {
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Registration failed, please try again", returnPage:"login"});
+            Users.findOne({ id: req.body.email }, function(err, email) {
+                if (email) {
+                    console.log("email existed");
+                    res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"User email already existed", returnPage:"login"});
+                }
+                else {
+                    console.log("new email");
+                    const user = new Users({
+                        "id":req.body.userId,
+                        "username":req.body.username,
+                        "email":req.body.email,
+                        "passwordHash":req.body.psw,
+                        "currentFamily":"noFamily",
+                    });
+                    user.save(function (err) {
+                        console.log(err);
+                        if (!err) {
+                            console.log("register successful, now going to home page");
+                            console.log(Message[0]);
+                            res.redirect("/home");
+                        }
+                        else {
+                            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Registration failed, please try again", returnPage:"login"});
+                        }
+                    });
+                }
+            });
         }
     });
 };
@@ -78,7 +78,8 @@ const handleLogin = function(req, res) {
                 //login successful
                 Message.findOne(function(err, message) {
                     console.log(message);
-                    res.render(path.join(__dirname, '../views/home.jade'), {messages : message,image_path:"/user_images/familyPhotos/"+user.currentFamily+".jpg"});
+                    console.log("in handle login, current fam="+user.currentFamily);
+                    res.redirect("/home");
                 });
             }
             else {
