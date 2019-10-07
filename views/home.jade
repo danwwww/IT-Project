@@ -6,15 +6,9 @@ html(lang='en')
         link(rel='stylesheet', href='../css/home.css')
         script(type='text/javascript', src='head.js')
     body
-        //.fileInputContainer
-            form(action='./savePhoto', enctype='multipart/form-data', method='post')
-                input(type='file', name='upload', multiple='multiple')
-                .btn
-                    button.btn(type='submit') Save
-            img(src='#{image_path}')
         .fileInputContainer
             form(action='./savePhoto', enctype='multipart/form-data', method='post')
-                img#prevView(src='#{image_path}', alt='', width='525')
+                img#prevView(src='#{image_path}', alt='', height='525',width='525')
                 input(type='file', name='upload', id='', value='', onchange='prev(this)')
                 .btn
                     button(type='submit') Save

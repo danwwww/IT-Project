@@ -34,7 +34,7 @@ router.get('/home', home_controller.getHome);
 router.post('/saveMessage', home_controller.saveMessage);
 router.post('/savePhoto', home_controller.savePhoto);
 
-router.get('/account', account_controller.getAccount);
+
 router.get('/artifacts', controller.showArtifacts);
 router.get('/uploadArtifacts', controller.uploadArtifacts);
 router.post('/upload/artifacts/submit', controller.submitUploadArtifacts);
@@ -43,15 +43,17 @@ router.post('/upload/profiles/submit', controller.submitUploadProfiles);
 router.get('/uploadProfiles', controller.uploadProfiles);
 
 
+
 router.delete('/deleteItem/:id',controller.deleteItem);
 router.delete('/deleteProfile/:id',controller.deleteProfile);
 
 //handle account page operations
+router.get('/account', account_controller.getAccount);
 router.post('/createFamily', account_controller.createFamily);
 router.post('/joinFamily', account_controller.joinFamily);
 router.get('/logout', account_controller.logOut);
 router.post('/updateAccount', account_controller.updateAccount);
-
+router.post('/saveProfilePhoto', account_controller.saveProfilePhoto);
 
 
 

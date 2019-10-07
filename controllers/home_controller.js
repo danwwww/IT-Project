@@ -83,8 +83,6 @@ const savePhoto = function(req, res) {
                     "yet, so you may not upload a family photo", returnPage:"account"});
         }
     });
-
-
     var form = new formidable.IncomingForm();
     //current_user_id = req.body.userId;
     console.log("about to parse");

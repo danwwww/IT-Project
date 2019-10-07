@@ -9,9 +9,7 @@ mongoose.set('useFindAndModify', false);
 //these are from items.js
 const Items = mongoose.model('item_tables');
 const Users = mongoose.model('account_tables');
-const Profiles = mongoose.model('profile_tables');
-const Message = mongoose.model('message_tables');
-const FamilyPhotos = mongoose.model('familyPhoto_tables');
+const ProfilePhotos = mongoose.model('profilePhoto_tables');
 const Family = mongoose.model('family_tables');
 var currentFamily;
 
@@ -29,8 +27,20 @@ const getAccount = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            res.render(path.join(__dirname, '../views/account.jade'), {username : user.username, familyId :user.currentFamily});
-
+            ProfilePhotos.findOne({ user_id: user.id }, function(err, profilePhoto) {
+                //if the user has no user profile
+                if (!profilePhoto){
+                    console.log("user has no profile photo");
+                    res.render(path.join(__dirname, '../views/account.jade'), {image_path:"../images/agenda.jpg",
+                        username : user.username, familyId :user.currentFamily});
+                }
+                //if the user has a profile
+                else{
+                    console.log("user has profile photo");
+                    res.render(path.join(__dirname, '../views/account.jade'), {image_path:profilePhoto.path,
+                        username : user.username, familyId :user.currentFamily});
+                }
+            });
         }
     }); else {
         console.log("in validating function, validation failed");
@@ -174,7 +184,10 @@ const updateAccount = function(req, res){
         Users.findOneAndUpdate(req.session.user.username, {username: req.body.username},function(err, user) {});
         updateUser(req,res);
         Users.findOne({'id': req.session.user.id}, function (err, user) {
-            res.render(path.join(__dirname, '../views/account.jade'), {username : req.body.username, familyId :user.currentFamily});
+            ProfilePhotos.findOne({ user_id: user.id }, function(err, profilePhoto) {
+                res.render(path.join(__dirname, '../views/account.jade'), {image_path:profilePhoto.path,
+                    username : user.username, familyId :user.currentFamily});
+            });
         });
     }
     //if swtich familyId
@@ -200,14 +213,21 @@ const updateAccount = function(req, res){
                 currentFamily = req.body.familyId;
                 req.session.user.currentFamily = req.body.familyId;
                 updateUser(req,res);
-                res.render(path.join(__dirname, '../views/account.jade'), {username : user.username, familyId :currentFamily});
+                ProfilePhotos.findOne({ user_id: user.id }, function(err, profilePhoto) {
+                    //if the user has no user profile
+                    if (!profilePhoto){
+                        res.render(path.join(__dirname, '../views/account.jade'), {image_path:"../images/agenda.jpg",
+                            username : user.username, familyId :user.currentFamily});
+                    }
+                    //if the user has a profile
+                    else{
+                        res.render(path.join(__dirname, '../views/account.jade'), {image_path:profilePhoto.path,
+                            username : user.username, familyId :user.currentFamily});
+                    }
+                });
             }
         });
     }
-    //in case of db is slower than page direction, add a timer
-    //intervalFunc(50000);
-
-
 };
 
 
@@ -230,9 +250,46 @@ const logOut = function(req, res) {
 const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
+
+const saveProfilePhoto = function(req, res) {
+    var form = new formidable.IncomingForm();
+    current_user_id = req.session.user.id
+    console.log("about to parse");
+    console.log("in savephoto, current_user_id)="+current_user_id);
+    form.parse(req, function(error, fields, files) {
+        Users.findOne({ id: current_user_id }, function(err, user) {
+            fs.writeFileSync("views/user_images/profilePhotos/"+user.id+".jpg", fs.readFileSync(files.upload.path));
+            var profilePhoto = new ProfilePhotos();
+            profilePhoto.path = "user_images/profilePhotos/"+user.id+".jpg";
+            console.log("new image path="+profilePhoto.path);
+
+            ProfilePhotos.findOne({ user_id: user.id }, function(err, profilePhoto) {
+                // if the user is first time having a profile photo, save it in database
+                if (!profilePhoto){
+                    console.log("first time uploading photo");
+                    const photo = new ProfilePhotos({
+                        "path":"user_images/profilePhotos/"+user.id+".jpg",
+                        "user_id":user.id,
+                    });
+                    photo.save(function (err) {});
+                }
+                //if the user is updating the photo, update in database
+                else{
+                    console.log("updating photo");
+                    ProfilePhotos.findOneAndUpdate({user_id: user.id},{path:profilePhoto.path}, function(err, user) {});
+                }
+                res.render(path.join(__dirname, '../views/account.jade'), {image_path: "user_images/profilePhotos/"+user.id+".jpg",
+                    username : user.username, familyId :currentFamily});
+            });
+        });
+    });
+};
+
+
 /*--------------------Function Exports---------------------------*/
 module.exports.getAccount = getAccount;
 module.exports.logOut = logOut;
 module.exports.createFamily = createFamily;
 module.exports.joinFamily = joinFamily;
 module.exports.updateAccount = updateAccount;
+module.exports.saveProfilePhoto = saveProfilePhoto;

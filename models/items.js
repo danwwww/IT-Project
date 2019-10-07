@@ -86,6 +86,13 @@ const familyPhotoSchema = mongoose.Schema(
     }
 );
 
+const profilePhotoSchema = mongoose.Schema(
+    {
+        "path": String,
+        "user_id": String
+    }
+);
+
 /*family*/
 const familySchema = mongoose.Schema(
     {
@@ -101,4 +108,5 @@ module.exports = mongoose.model('message_tables', messageSchema);
 module.exports = mongoose.model('account_tables', userSchema);
 module.exports = mongoose.model('profile_tables', profileSchema);
 module.exports = mongoose.model('familyPhoto_tables', familyPhotoSchema);
+module.exports = mongoose.model('profilePhoto_tables', profilePhotoSchema);
 module.exports = mongoose.model('family_tables', familySchema);
