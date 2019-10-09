@@ -162,8 +162,9 @@ const submitUploadArtifacts = function (req, res) {
     var form = new formidable.IncomingForm();
     console.log("about to parse");
     form.parse(req, function(error, fields, files) {
-        fs.writeFileSync("views/user_images/artifactsPhotos/"+req.body.name+".jpg", fs.readFileSync(files.upload.image.path));
-        fs.writeFileSync("views/user_videos/artifactsVideos/"+req.body.name+".mp4", fs.readFileSync(files.upload.video.path));
+        var name = req.body.name;
+        fs.writeFileSync("views/user_images/artifactsPhotos/"+name+".jpg", fs.readFileSync(files.image.path));
+        fs.writeFileSync("views/user_videos/artifactsVideos/"+name+".mp4", fs.readFileSync(files.video.path));
         var item = new Items({
             "name": req.body.name,
             "date": req.body.year,
