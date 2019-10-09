@@ -128,7 +128,7 @@ const showProfiles = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            Profiles.find({}, function (err, profiles){
+            Profiles.find({familyId: req.session.user.currentFamily}, function (err, profiles){
                 if (!err) {
                     console.log("currently on family page");
                     res.render(path.join(__dirname, '../views/family_test.jade'), {profile : profiles});
@@ -225,6 +225,7 @@ const submitUploadProfiles = function (req, res) {
         "description": req.body.description,
         "life_story": req.body.life_story,
         "year_passed": req.body.year_passed,
+        "familyId": req.session.user.currentFamily,
     });
 
     profile.save(function (err) {
@@ -232,7 +233,7 @@ const submitUploadProfiles = function (req, res) {
         if (!err) {
             /** the file is to be made and changed
              * */
-            res.redirect("/family");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully To Add a New Profile",returnPage :"family"});
         }
         else {
             res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Profile",returnPage :"family"});

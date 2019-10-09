@@ -67,6 +67,7 @@ const profileSchema = mongoose.Schema(
         "description": String,
         "life_story": String,
         "year_passed": String,
+        "familyId": String,
     }
 );
 
