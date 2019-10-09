@@ -162,20 +162,20 @@ const submitUploadArtifacts = function (req, res) {
     var form = new formidable.IncomingForm();
     console.log("about to parse");
     form.parse(req, function(error, fields, files) {
-        var name = req.body.name;
+        var name = fields.name;
         fs.writeFileSync("views/user_images/artifactsPhotos/"+name+".jpg", fs.readFileSync(files.image.path));
         fs.writeFileSync("views/user_videos/artifactsVideos/"+name+".mp4", fs.readFileSync(files.video.path));
         var item = new Items({
-            "name": req.body.name,
-            "date": req.body.year,
-            "owner": req.body.owner,
-            "keeper": req.body.keeper,
-            "location": req.body.keeper,
-            "description": req.body.keeper,
-            "category": req.body.category,
+            "name": fields.name,
+            "date": fields.year,
+            "owner": fields.owner,
+            "keeper": fields.keeper,
+            "location": fields.keeper,
+            "description": fields.keeper,
+            "category": fields.category,
             "familyId":req.session.user.currentFamily,
-            "image": "views/user_images/artifactsPhotos/"+req.body.name+".jpg",
-            "video": "views/user_videos/artifactsVideos/"+req.body.name+".mp4",
+            "image": "views/user_images/artifactsPhotos/"+fields.name+".jpg",
+            "video": "views/user_videos/artifactsVideos/"+fields.name+".mp4",
         });
         item.save(function (err) {
             console.log(err);
