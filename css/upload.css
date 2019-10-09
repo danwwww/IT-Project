@@ -47,124 +47,13 @@ body {
     margin: 50px;
 }
 
-
-
-
-/* popup */
-.popup-effect {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    transition: opacity 0ms;
-    visibility: hidden;
-    opacity: 0;
-    z-index: 99;
-    /*overflow-y: auto;*/
-}
-
-.popup-effect:target {
-    visibility: visible;
-    opacity: 1;
-}
-
-.popup {
-    background: #fff;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -o-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -moz-border-radius: 4px;
-    max-width: 500px;
-    max-height: 500px;
-    position: relative;
-    margin: 15em auto;
-    padding: 3em 2em;
-    z-index: 999;
-    text-align: center;
-}
-
-.popup .close {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    transition: all 200ms;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #000;
-}
-
-.popup .close:hover {
-    color: #875532;
-}
-
-.popup p {
-    text-align: left;
-    font-size: 18px;
-}
-
-.popup input {
-    width: 200px;
-}
-
-.popup button {
-    background-color: rgba(153, 102, 51, 0.6);
-    color: white;
-    font-family: 'Mukta', sans-serif;
-    text-align: center;
-    font-size: 18px;
-
-}
-
-.div1 {
+#label1 {
     float: left;
-    height: 32px;
-    background-color: rgba(153, 102, 51, 0.6);
-    width: 40%;
-    position: relative;
-    cursor: pointer;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    border-radius: 35px;
-    -webkit-border-radius: 35px;
-    -moz-border-radius: 35px;
-    -ms-border-radius: 35px;
-    -o-border-radius: 35px;
-    left: 8%;
-    top: -10px;
-    margin-right: 5%;
 }
 
-
-.div2 {
-    color: white;
-    font-family: 'Mukta', sans-serif;
-    text-align: center;
-    padding-top: 5px;
-    font-size: 18px;
+form a {
+    width: 350px;
 }
-
-.inputstyle {
-    width: 144px;
-    height: 41px;
-    cursor: pointer;
-    font-size: 30px;
-    outline: medium none;
-    position: absolute;
-    filter: alpha(opacity=0);
-    -moz-opacity: 0;
-    opacity: 0;
-    left: 0px;
-    top: 0px;
-}
-
-
 
 .addDiscription {
     position: relative;
@@ -264,7 +153,7 @@ body {
 
 .addProfile {
     position: relative;
-    top: 180px;
+    top: 80px;
     height: 400px;
     font-family: 'Mukta', sans-serif;
     font-size: 18px;
@@ -316,3 +205,30 @@ body {
     margin-left: 30%;
 }
 
+.btn button {
+    background: rgba(153, 102, 51, 0.6);
+    border: none;
+    color: #fff;
+    margin: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    position: absolute;
+    width: 100px;
+}

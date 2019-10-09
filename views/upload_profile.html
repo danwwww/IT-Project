@@ -9,12 +9,20 @@
 </head>
 <body>
 <div class="main">
-    <div class="upload-document">
-        <div class="div3">Add Image & Video</div>
-        <input type="file" class="input" name="image[]" multiple/>
-    </div>
     <div class="addProfile">
         <form action="/upload/profiles/submit" id="upload" method = POST>
+            <p>
+                <span>
+                    <label id="label1">Choose an image:</label>
+                    <input type= "file" name="imagename" accept="image/*">
+                </span>
+            </p><br>
+            <p>
+                <span>
+                    <label id="label1">Choose a video:</label>
+                    <input type= "file" name="videoname" accept="video/*">
+                </span>
+            </p><br>
             <p><label>Name: </label>
                 <input type = "text" name = "name"></p><br>
             <p><label>Birthday: </label>

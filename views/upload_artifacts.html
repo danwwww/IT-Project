@@ -9,54 +9,20 @@
 </head>
 <body>
 <div class="main">
-    <div class="img-grid">
-        <span>
-            <a href="#gal4">
-                <button onclick="">Add Image</button>
-            </a>
-            <a href="#gal5">
-                <button onclick="">Add Video</button>
-            </a>
-        </span>
-    </div>
-
-    <!-- popup-->
-    <div id="gal4" class="popup-effect animate">
-        <div class="popup">
-
-            <form action="" >
-                <div class="div1">
-                    <div class="div2">Choose Image</div>
-                    <input type="file" class="inputstyle" name="image" multiple/>
-                </div>
-
-                <div class="div1">
-                    <div class="div2">Confirm</div>
-                </div>
-            </form>
-            <a class="close" href="#gallery">&times;</a>
-        </div>
-    </div>
-
-    <!-- popup-->
-    <div id="gal5" class="popup-effect animate">
-        <div class="popup">
-            <form action="" >
-                <div class="div1">
-                    <div class="div2">Choose Video</div>
-                    <input type="file" class="inputstyle" name="image[]" multiple/>
-                </div>
-                <div class="div1">
-                    <div class="div2">Confirm</div>
-                </div>
-            </form>
-            <a class="close" href="#gallery">&times;</a>
-        </div>
-    </div>
-
-
     <div class="addDiscription">
         <form action="/upload/artifacts/submit" id="upload" method = POST>
+            <p>
+                <span>
+                    <label id="label1">Choose an image:</label>
+                    <input type= "file" name="imagename" accept="image/*">
+                </span>
+            </p><br>
+            <p>
+                <span>
+                    <label id="label1">Choose a video:</label>
+                    <input type= "file" name="videoname" accept="video/*">
+                </span>
+            </p><br>
             <p><label>Name of the Artifact: </label>
                 <input type = "text" name = "name"></p><br>
             <p><label>Category: </label>
