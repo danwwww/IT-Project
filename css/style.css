@@ -115,18 +115,19 @@ h6.main-title-w3pvt {
     border: 1px solid transparent;
     border-radius: 30px;
     position: absolute;
-    width: 15%;
     bottom: 2%;
 }
 
 #btn1 {
     float: left;
-    left: 62%;
+    left: 50%;
+    width: 23%;
 }
 
 #btn2 {
     float: left;
-    left: 80%;
+    left: 75%;
+    width: 15%;
 }
 
 /* //popup */

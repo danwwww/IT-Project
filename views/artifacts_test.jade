@@ -79,7 +79,7 @@ block content
                                 a.close(href='#gallery')&times;
 
                             script var itemID = {item[i].id}
-                            button(onclick=`editItem(${JSON.stringify(item[i].id)})`) Save Changes
+                            button(id='btn1' onclick=`editItem(${JSON.stringify(item[i].id)})`) Save Changes
                                 script.
                                     function editItem(itemID) {
                                         if (confirm("Are you sure to delete this item?")) {
@@ -89,7 +89,7 @@ block content
                                             xhr.send(null);
                                         }
                                     }
-                            button(onclick=`deleteItem(${JSON.stringify(item[i].id)})`) Delete
+                            button(id='btn2' onclick=`deleteItem(${JSON.stringify(item[i].id)})`) Delete
                                 script.
                                     function deleteItem(itemID) {
                                         if (confirm("Are you sure to delete this item?")) {
