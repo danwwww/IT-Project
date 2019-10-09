@@ -71,8 +71,8 @@ const createFamily = function (req, res) {
                 if (!user.familyId1 || user.familyId1 == "") {
                     Users.findOneAndUpdate({id: user.id}, {familyId1: req.body.familyId}, function (err, user) {
                     });
-                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    // });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
@@ -81,8 +81,8 @@ const createFamily = function (req, res) {
                 } else if(!user.familyId2 || user.familyId2 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId2: req.body.familyId}, function (err, user) {
                     });
-                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    // });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
@@ -90,8 +90,8 @@ const createFamily = function (req, res) {
                 }else if(!user.familyId3 || user.familyId3 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId3: req.body.familyId}, function (err, user) {
                     });
-                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    // });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
