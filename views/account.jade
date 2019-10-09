@@ -61,7 +61,7 @@ html(lang='en')
             .agenda
                 fileInputContainer
                     form(action='./saveProfilePhoto', enctype='multipart/form-data', method='post')
-                        img#prevView(src='#{image_path}', alt='', height= '340',width='340')
+                        img#prevView(src='#{image_path}', alt='',height='340')
                         input(type='file', name='upload', id='', value='', onchange='prev(this)')
                         .btn
                             button(type='submit') Save

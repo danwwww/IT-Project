@@ -217,7 +217,7 @@ const updateAccount = function(req, res){
                     //if the user has no user profile
                     if (!profilePhoto){
                         res.render(path.join(__dirname, '../views/account.jade'), {image_path:"../images/agenda.jpg",
-                            username : user.username, familyId :user.currentFamily});
+                            username : user.username, familyId :req.body.familyId});
                     }
                     //if the user has a profile
                     else{
@@ -279,7 +279,7 @@ const saveProfilePhoto = function(req, res) {
                     ProfilePhotos.findOneAndUpdate({user_id: user.id},{path:profilePhoto.path}, function(err, user) {});
                 }
                 res.render(path.join(__dirname, '../views/account.jade'), {image_path: "user_images/profilePhotos/"+user.id+".jpg",
-                    username : user.username, familyId :currentFamily});
+                    username : user.username, familyId :user.currentFamily});
             });
         });
     });
