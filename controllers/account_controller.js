@@ -11,6 +11,7 @@ const Items = mongoose.model('item_tables');
 const Users = mongoose.model('account_tables');
 const ProfilePhotos = mongoose.model('profilePhoto_tables');
 const Family = mongoose.model('family_tables');
+const Message = mongoose.model('message_tables');
 var currentFamily;
 
 const getAccount = function (req, res) {
@@ -66,13 +67,21 @@ const createFamily = function (req, res) {
                 "pwd": req.body.familyPassword,
             });
             family.save();
+
+            //add a default message to current family
+            const message = new Message({
+                "familyId": req.body.familyId,
+                "message":"Click here to write your family message!",
+            });
+            message.save();
+
             /*check if use family is full, if not, add to the new family*/
             Users.findOne({'id': req.session.user.id}, function (err, user) {
                 if (!user.familyId1 || user.familyId1 == "") {
                     Users.findOneAndUpdate({id: user.id}, {familyId1: req.body.familyId}, function (err, user) {
                     });
-                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    // });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
@@ -81,8 +90,8 @@ const createFamily = function (req, res) {
                 } else if(!user.familyId2 || user.familyId2 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId2: req.body.familyId}, function (err, user) {
                     });
-                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    // });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
@@ -90,8 +99,8 @@ const createFamily = function (req, res) {
                 }else if(!user.familyId3 || user.familyId3 == ""){
                     Users.findOneAndUpdate({id: user.id}, {familyId3: req.body.familyId}, function (err, user) {
                     });
-                    // Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
-                    // });
+                    Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
+                    });
                     res.render(path.join(__dirname, '../views/alert_message.jade'), {
                         errorMessage: "create family successful, now going to account page",
                         returnPage: "account"
