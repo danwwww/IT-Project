@@ -29,7 +29,7 @@ block content
                         .img-grid
                             .Portfolio-grid1
                                 a(href= '#'+'gal'+i.toString())
-                                    img.img-fluid(src='../images/sword.jpg', alt=' ')
+                                    img.img-fluid(src='#{item[i].image}', alt=' ',height='340')
                             .port-desc.text-center
                                 h6.main-title-w3pvt.text-center #{item[i].name}
                                 p #{item[i].description}
@@ -39,7 +39,7 @@ block content
                     div(id='gal'+i.toString()).popup-effect.animate
                         .popup
                             form#date(action='/updateItem', method='POST')
-                                img.img-fluid(src='../images/sword.jpg', alt='Popup Image')
+                                img.img-fluid(src='#{item[i].image}', alt='Popup Image')
                                 p
                                     label Name:
                                     input(type='text', name='name',placeholder = '#{item[i].name}')

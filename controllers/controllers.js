@@ -97,7 +97,7 @@ const showArtifacts = function (req, res) {
             Items.find({familyId: req.session.user.currentFamily}, function (err, items) {
                 if (!err) {
                     console.log("currently  on artifacts page");
-                    // app.use("/javascripts", express.static("./outJavascripts"));
+                    console.log(items);
                     res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
                 } else {
                     res.sendStatus(400);
@@ -174,18 +174,20 @@ const submitUploadArtifacts = function (req, res) {
             "description": fields.description,
             "category": fields.category,
             "familyId":req.session.user.currentFamily,
-            "image": "views/user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
-            "video": "views/user_videos/artifactsVideos/"+fields.name+".mp4",
+            "image": "user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
+            "video": "user_videos/artifactsVideos/"+fields.name+".mp4",
         });
         console.log("image path="+item.image);
         item.save(function (err) {
             console.log(err);
             if (!err) {
-                /** the file is to be made and changed
-                 * */
+                //adding successful
+                //res.render(path.join(__dirname, '../views/alert_message.jade'));
+
                 res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully Added a New Artifact",returnPage :"artifacts"});
             }
             else {
+                //adding failed
                 res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Artifacts",returnPage :"artifacts"});
                 /**should also jump to error message page
                  * */
