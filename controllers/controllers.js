@@ -159,59 +159,36 @@ const uploadProfiles = function (req, res) {
 
 /*submit upload artifacts*/
 const submitUploadArtifacts = function (req, res) {
-    const item = new Items({
-        "name": req.body.name,
-        "date": req.body.year,
-        "owner": req.body.owner,
-        "keeper": req.body.keeper,
-        "location": req.body.keeper,
-        "description": req.body.keeper,
-        "category": req.body.category,
-        "familyId":req.session.user.currentFamily,
-    });
-
-    upload(req, res,(error) => {
-        if (error) {
-            res.send('fail');
-        } else {
-            if (req.body.image == undefined) {
-
-                res.send('file undefined');
-
-            } else {
-
-                /**
-                 * Create new record in mongoDB
-                 */
-                var fullPath = "files/" + req.body.image;
-
-                var document = {
-                    path: fullPath,
-                };
-
-                var photo = new Photo(document);
-                photo.save(function (error) {
-                    if (error) {
-                        throw error;
-                    }
-                    console.log("file save success");
-                });
+    var form = new formidable.IncomingForm();
+    console.log("about to parse");
+    form.parse(req, function(error, fields, files) {
+        fs.writeFileSync("views/user_images/artifactsPhotos/"+req.body.name+".jpg", fs.readFileSync(files.upload.image.path));
+        fs.writeFileSync("views/user_videos/artifactsVideos/"+req.body.name+".mp4", fs.readFileSync(files.upload.video.path));
+        var item = new Items({
+            "name": req.body.name,
+            "date": req.body.year,
+            "owner": req.body.owner,
+            "keeper": req.body.keeper,
+            "location": req.body.keeper,
+            "description": req.body.keeper,
+            "category": req.body.category,
+            "familyId":req.session.user.currentFamily,
+            "image": "views/user_images/artifactsPhotos/"+req.body.name+".jpg",
+            "video": "views/user_videos/artifactsVideos/"+req.body.name+".mp4",
+        });
+        item.save(function (err) {
+            console.log(err);
+            if (!err) {
+                /** the file is to be made and changed
+                 * */
+                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully Added a New Artifact",returnPage :"artifacts"});
             }
-        }
-    });
-
-    item.save(function (err) {
-        console.log(err);
-        if (!err) {
-            /** the file is to be made and changed
-             * */
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully Added a New Artifact",returnPage :"artifacts"});
-        }
-        else {
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Artifacts",returnPage :"artifacts"});
-            /**should also jump to error message page
-             * */
-        }
+            else {
+                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Artifacts",returnPage :"artifacts"});
+                /**should also jump to error message page
+                 * */
+            }
+        });
     });
 };
 
