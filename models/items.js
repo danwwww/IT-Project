@@ -70,6 +70,8 @@ const profileSchema = mongoose.Schema(
         "life_story": String,
         "year_passed": String,
         "familyId": String,
+        "image": String,
+        "video": String
     }
 );
 

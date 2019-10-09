@@ -198,29 +198,38 @@ const submitUploadArtifacts = function (req, res) {
 
 /*submit upload profiles*/
 const submitUploadProfiles = function (req, res) {
-    const profile = new Profiles({
-        "name": req.body.name,
-        "year": req.body.year,
-        "month": req.body.month,
-        "day": req.body.day,
-        "description": req.body.description,
-        "life_story": req.body.life_story,
-        "year_passed": req.body.year_passed,
-        "familyId": req.session.user.currentFamily,
-    });
-
-    profile.save(function (err) {
-        console.log(err);
-        if (!err) {
-            /** the file is to be made and changed
-             * */
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully To Add a New Profile",returnPage :"family"});
-        }
-        else {
-            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Profile",returnPage :"family"});
-            /**should also jump to error message page
-             * */
-        }
+    var form = new formidable.IncomingForm();
+    console.log("about to parse");
+    form.parse(req, function(error, fields, files) {
+        var name = fields.name;
+        fs.writeFileSync("views/user_images/profilePhotos/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg", fs.readFileSync(files.image.path));
+        fs.writeFileSync("views/user_videos/profileVideos/"+name+".mp4", fs.readFileSync(files.video.path));
+        var profile = new Profiles({
+            "name": fields.name,
+            "year": fields.year,
+            "month": fields.month,
+            "day": fields.day,
+            "description": fields.description,
+            "life_story": fields.life_story,
+            "year_passed": fields.year_passed,
+            "familyId": req.session.user.currentFamily,
+            "image": "user_images/profilePhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
+            "video": "user_videos/profileVideos/"+fields.name+".mp4",
+        });
+        console.log("image path="+profile.image);
+        profile.save(function (err) {
+            console.log(err);
+            if (!err) {
+                /** the file is to be made and changed
+                 * */
+                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully To Add a New Profile",returnPage :"family"});
+            }
+            else {
+                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Profile",returnPage :"family"});
+                /**should also jump to error message page
+                 * */
+            }
+        });
     });
 };
 

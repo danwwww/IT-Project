@@ -30,7 +30,7 @@ html(lang='en')
                                             img(src='../images/arrow-down.png', alt='Picture')
                                         .cd-timeline-content.projects
                                             a(href='#' + 'gal' + i.toString())
-                                                img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                                img.img-fluid(src='#{profile[i].image}', alt=' ')
                                             .project-content
                                                 h2 #{profile[i].name}
                                                 span #{profile[i].year}~#{profile[i].year_passed}
@@ -39,13 +39,16 @@ html(lang='en')
                                             img(src='../images/arrow-down.png', alt='Picture')
                                         .cd-timeline-content.projects
                                             a(href='#' + 'gal' + (i+1).toString())
-                                                img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                                img.img-fluid(src='#{profile[i+1].image}', alt=' ')
                                             .project-content
                                                 h2 #{profile[i+1].name}
                                                 span #{profile[i+1].year}~#{profile[i+1].year_passed}
                                     div(id='gal' + i.toString()).popup-effect.animate
                                         .popup
-                                            img.img-fluid(src='', alt='Popup Image')
+                                            img.img-fluid(src='#{profile[i].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[i].video}', controls width="370")
                                             p
                                                 label Name:
                                                 input(type='text', name='name',placeholder = '#{profile[i].name}')
@@ -69,7 +72,10 @@ html(lang='en')
                                                     }
                                     div(id='gal' + (i+1).toString()).popup-effect.animate
                                         .popup
-                                            img.img-fluid(src='', alt='Popup Image')
+                                            img.img-fluid(src='#{profile[i+1].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[i+1].video}', controls width="370")
                                             p
                                                 span
                                                     label Name:
@@ -104,15 +110,18 @@ html(lang='en')
                                         img(src='../images/arrow-down.png', alt='Picture')
                                     .cd-timeline-content.projects
                                         a(href='#' + 'gal' + (count-1).toString())
-                                            img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                            img.img-fluid(src='#{profile[count-1].image}', alt=' ')
                                         .project-content
                                             h2 #{profile[count-1].name}
-                                            span #{profile[i].year}~#{profile[i].year_passed}
+                                            span #{profile[count-1].year}~#{profile[count-1].year_passed}
                                 div(id='gal' + (count-1).toString()).popup-effect.animate
                                     .popup
-                                        img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
+                                        img.img-fluid(src='#{profile[count-1].image}', alt='Popup Image')
+                                        br
+                                        br
+                                        video(src='#{profile[count-1].video}', controls width="370")
                                         p Name: #{profile[count-1].name}
-                                        p Birthday: #{profile[i].year}/#{profile[i].month}/#{profile[i].date}
+                                        p Birthday: #{profile[count-1].year}/#{profile[count-1].month}/#{profile[count-1].date}
                                         p.editContent.mt-4
                                             | Description: #{profile[count-1].description}
                                         p.editContent.mt-4
@@ -137,7 +146,7 @@ html(lang='en')
                                             img(src='../images/arrow-down.png', alt='Picture')
                                         .cd-timeline-content.projects
                                             a(href='#' + 'gal' + i.toString())
-                                                img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                                img.img-fluid(src='#{profile[i].image}', alt=' ')
                                             .project-content
                                                 h2 #{profile[i].name}
                                                 span #{profile[i].year}~#{profile[i].year_passed}
@@ -146,13 +155,16 @@ html(lang='en')
                                             img(src='../images/arrow-down.png', alt='Picture')
                                         .cd-timeline-content.projects
                                             a(href='#' + 'gal' + (i + 1).toString())
-                                                img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                                img.img-fluid(src='#{profile[i+1].image}', alt=' ')
                                             .project-content
                                                 h2 #{profile[i + 1].name}
                                                 span #{profile[i+1].year}~#{profile[i+1].year_passed}
                                     div(id='gal' + i.toString()).popup-effect.animate
                                         .popup
-                                            img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
+                                            img.img-fluid(src='#{profile[i].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[i].video}', controls width="370")
                                             p Name: #{profile[i].name}
                                             p Birthday: #{profile[i].year}/#{profile[i].month}/#{profile[i].date}
                                             p.editContent.mt-4
@@ -174,7 +186,10 @@ html(lang='en')
                                                     }
                                     div(id='gal' + (i+1).toString()).popup-effect.animate
                                         .popup
-                                            img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
+                                            img.img-fluid(src='#{profile[i+1].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[i+1].video}', controls width="370")
                                             p Name: #{profile[i+1].name}
                                             p Birthday: #{profile[i+1].year}/#{profile[i+1].month}/#{profile[i+1].date}
                                             p.editContent.mt-4
