@@ -48,6 +48,8 @@ const createUser = function (req, res) {
                         console.log(err);
                         if (!err) {
                             console.log("register successful, now going to account page and join a family");
+                            req.session.user = user;
+                            updateUser(req,res);
                             console.log(Message[0]);
                             res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"register successful, now going to account page and join a family", returnPage:"account"});
                         }

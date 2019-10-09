@@ -29,27 +29,27 @@ const getHome = function (req, res) {
             current_user_id = user.id;
             console.log("in getHome, current_user_id)="+current_user_id);
             console.log("in validating function, validation successed");
-            Message.findOne(function(err, message) {
+            Message.findOne({familyId: user.currentFamily }, function(err, message)  {
                 console.log("message="+message);
                 console.log("current fam="+user.currentFamily);
                 //check if the user has joined a family but the family has no photo
                 FamilyPhotos.findOne({family_id: user.currentFamily }, function(err, photo) {
                     //if has no family photo
                     if (!photo){
+                        //if the user doesn't not have a family, ask to join
+                        console.log("user has family without photo");
+                        res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/addPhoto.jpg"})
+                    }
+                    //if finds corresponding family photo
+                    else{
                         // if the user has a family but the family has no photo, ask to upload
                         if (user.currentFamily == "noFamily"){
                             console.log("user has no family");
-                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message,image_path:"/user_images/familyPhotos/noFamily.jpg"});
+                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/noFamily.jpg"});
+                        }else{
+                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/"+user.currentFamily+".jpg"});
+
                         }
-                        //if the user doesn't not have a family, ask to join
-                        else{
-                            console.log("user has family without photo");
-                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message,image_path:"/user_images/familyPhotos/addPhoto.jpg"});
-                        }
-                        }
-                    //if finds corresponding family photo
-                    else{
-                        res.render(path.join(__dirname, '../views/home.jade'), {messages : message,image_path:"/user_images/familyPhotos/"+user.currentFamily+".jpg"});
                     }
                 });
             });
