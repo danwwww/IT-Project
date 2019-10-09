@@ -10,19 +10,13 @@ const itemSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        img: {
-            data: Buffer,
-            contentType: String
-        },
         "date": String,
-        "owner": String,
         "keeper": String,
         "location": String,
         "description": String,
         "owner": String,
         "location": String,
         "description": String,
-        "photo": Object,
         "category":String,
 
     }
@@ -32,8 +26,6 @@ const messageSchema = mongoose.Schema(
     {
         "familyId" : String,
         "message" : String,
-        "photo":Object,
-
     }
 );
 
@@ -97,7 +89,7 @@ const profilePhotoSchema = mongoose.Schema(
 const familySchema = mongoose.Schema(
     {
         "name": String,
-        "id": Number,
+        "id": String,
         "pwd": String,
     }
 );
