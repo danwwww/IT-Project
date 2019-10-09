@@ -47,9 +47,9 @@ const createUser = function (req, res) {
                     user.save(function (err) {
                         console.log(err);
                         if (!err) {
-                            console.log("register successful, now going to home page");
+                            console.log("register successful, now going to account page and join a family");
                             console.log(Message[0]);
-                            res.redirect("/home");
+                            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"register successful, now going to account page and join a family", returnPage:"account"});
                         }
                         else {
                             res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Registration failed, please try again", returnPage:"login"});

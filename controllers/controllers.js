@@ -94,13 +94,11 @@ const showArtifacts = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            Items.find({}, function (err, items) {
+            Items.find({familyId: req.session.user.currentFamily}, function (err, items) {
                 if (!err) {
-
                     console.log("currently  on artifacts page");
                     // app.use("/javascripts", express.static("./outJavascripts"));
                     res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
-
                 } else {
                     res.sendStatus(400);
                 }
@@ -169,6 +167,7 @@ const submitUploadArtifacts = function (req, res) {
         "location": req.body.keeper,
         "description": req.body.keeper,
         "category": req.body.category,
+        "familyId":req.session.user.currentFamily,
     });
 
     upload(req, res,(error) => {
@@ -206,7 +205,7 @@ const submitUploadArtifacts = function (req, res) {
         if (!err) {
             /** the file is to be made and changed
              * */
-            res.redirect("/artifacts");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully Added a New Artifact",returnPage :"artifacts"});
         }
         else {
             res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Artifacts",returnPage :"artifacts"});

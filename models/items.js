@@ -18,7 +18,7 @@ const itemSchema = mongoose.Schema(
         "location": String,
         "description": String,
         "category":String,
-
+        "familyId": String,
     }
 );
 

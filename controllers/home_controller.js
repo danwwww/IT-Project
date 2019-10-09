@@ -41,7 +41,7 @@ const getHome = function (req, res) {
                             console.log("user has no family");
                             res.render(path.join(__dirname, '../views/home.jade'), {messages : message,image_path:"/user_images/familyPhotos/noFamily.jpg"});
                         }
-                        //if the user doesn not have a family, ask to join
+                        //if the user doesn't not have a family, ask to join
                         else{
                             console.log("user has family without photo");
                             res.render(path.join(__dirname, '../views/home.jade'), {messages : message,image_path:"/user_images/familyPhotos/addPhoto.jpg"});
