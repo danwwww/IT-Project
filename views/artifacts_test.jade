@@ -29,7 +29,7 @@ block content
                         .img-grid
                             .Portfolio-grid1
                                 a(href= '#'+'gal'+i.toString())
-                                    img.img-fluid(#{item[i].photo}, alt=' ')
+                                    img.img-fluid(src='../images/sword.jpg', alt=' ')
                             .port-desc.text-center
                                 h6.main-title-w3pvt.text-center #{item[i].name}
                                 p #{item[i].description}
@@ -38,26 +38,55 @@ block content
                     // popup
                     div(id='gal'+i.toString()).popup-effect.animate
                         .popup
-                            img.img-fluid(#{item[i].photo}, alt='Popup Image')
-                            p Name: #{item[i].name}
-                            p Category: #{item[i].category}
-                            p Year: #{item[i].date}
-                            p Owner: #{item[i].owner}
-                            p Current Keeper: #{item[i].keeper}
-                            p Current Location: #{item[i].location}
-                            p.editContent.mt-4
-                                | Description: #{item[i].description}
-                            a.close(href='#gallery')&times;
-                            //form#deleteItem(name="deleteItem", method="post", action="/deleteItem")
-                            //    input#input_name(type="hidden", placeholder="", name="itemName", value="a")
-                            //    button#submit_project(type="submit") delete
-                            //button#deleteItem(name="deleteItem", method="post", action="/deleteItem") Delete
-                            //script(src='views/helperFunctions.js')
-                            //button(onclick="window.deleteItem('a')", title="Delete")
-                            //    |  Delete
-                            //
+                            form#date(action='/updateItem', method='POST')
+                                img.img-fluid(src='../images/sword.jpg', alt='Popup Image')
+                                p
+                                    label Name:
+                                    input(type='text', name='name',placeholder = '#{item[i].name}')
+                                p
+                                    label Category:
+                                    input(type='text', name='category',placeholder = '#{item[i].category}')
+                                p
+                                    label Date:
+                                    input(type='text', name='category',placeholder = '#{item[i].date}')
+
+                                p
+                                    label Owner:
+                                    input(type='text', name='category',placeholder = '#{item[i].owner}')
+
+                                p
+                                    label Keeper:
+                                    input(type='text', name='category',placeholder = '#{item[i].keeper}')
+
+                                p
+                                    label Location:
+                                    input(type='text', name='category',placeholder = '#{item[i].location}')
+
+                                p.editContent.mt-4
+                                    label Description:
+                                    input(type='text', name='category',placeholder = '#{item[i].description}')
+
+                                //p Name: #{item[i].name}
+                                //p Category: #{item[i].category}
+                                //p Year: #{item[i].date}
+                                //p Owner: #{item[i].owner}
+                                //p Current Keeper: #{item[i].keeper}
+                                ////p Current Location: #{item[i].location}
+                                //p.editContent.mt-4
+                                //    | Description: #{item[i].description}
+                                a.close(href='#gallery')&times;
 
                             script var itemID = {item[i].id}
+                            button(onclick=`editItem(${JSON.stringify(item[i].id)})`) Save Changes
+                                script.
+                                    function editItem(itemID) {
+                                        if (confirm("Are you sure to delete this item?")) {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open("DELETE", "/deleteItem/" + itemID, true);
+                                            window.location.href = "/artifacts";
+                                            xhr.send(null);
+                                        }
+                                    }
                             button(onclick=`deleteItem(${JSON.stringify(item[i].id)})`) Delete
                                 script.
                                     function deleteItem(itemID) {

@@ -163,7 +163,7 @@ const submitUploadArtifacts = function (req, res) {
     console.log("about to parse");
     form.parse(req, function(error, fields, files) {
         var name = fields.name;
-        fs.writeFileSync("views/user_images/artifactsPhotos/"+name+".jpg", fs.readFileSync(files.image.path));
+        fs.writeFileSync("views/user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg", fs.readFileSync(files.image.path));
         fs.writeFileSync("views/user_videos/artifactsVideos/"+name+".mp4", fs.readFileSync(files.video.path));
         var item = new Items({
             "name": fields.name,
@@ -174,9 +174,10 @@ const submitUploadArtifacts = function (req, res) {
             "description": fields.description,
             "category": fields.category,
             "familyId":req.session.user.currentFamily,
-            "image": "views/user_images/artifactsPhotos/"+fields.name+".jpg",
+            "image": "views/user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
             "video": "views/user_videos/artifactsVideos/"+fields.name+".mp4",
         });
+        console.log("image path="+item.image);
         item.save(function (err) {
             console.log(err);
             if (!err) {

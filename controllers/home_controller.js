@@ -114,7 +114,7 @@ const savePhoto = function(req, res) {
 
             Message.findOne(function(err, message) {
                 console.log(message);
-                res.render(path.join(__dirname, '../views/home.jade'), {messages : message,image_path:familyPhoto.path});
+                res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:familyPhoto.path});
             });
         });
     });

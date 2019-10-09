@@ -11,7 +11,6 @@ router.use(bodyParser.json());
 const controller = require('../controllers/controllers.js');
 const home_controller = require('../controllers/home_controller.js');
 const login_controller = require('../controllers/login_controller.js');
-const image_tester_controller = require('../controllers/image_tester_controller.js');
 const account_controller = require('../controllers/account_controller.js');
 
 
@@ -24,10 +23,6 @@ router.get('/login', login_controller.welcome);
 router.post('/', login_controller.createUser);
 router.get('/', login_controller.welcome);
 router.post('/register', login_controller.createUser);
-
-//handle image tester operations
-router.get('/image', image_tester_controller.image);
-router.post('/uploadImage', image_tester_controller.uploadImage);
 
 //handle home page operations
 router.get('/home', home_controller.getHome);
