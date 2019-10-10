@@ -32,6 +32,7 @@ document.writeln("        <div class=\"header-bottom\">");
 document.writeln("            <div class=\"container\">");
 document.writeln("                <div class=\"col-md-3 logo-w3l\">");
 document.writeln("                    <h1><a class=\"navbar-brand\" href=\"#\"><span>M</span>emories</a></h1>");
+document.writeln("                    <div class=\"clearfix\"> </div>");
 document.writeln("                </div>");
 document.writeln("                <div class=\"col-md-9 navi-w3l\">");
 document.writeln("                    <nav class=\"navbar navbar-default\">");
@@ -47,7 +48,7 @@ document.writeln("                                <div class=\"clearfix\"></div>
 document.writeln("                            </div>");
 document.writeln("                            <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">");
 document.writeln("                                <nav class=\"menu menu--francisco\">");
-document.writeln("                                    <ul class=\"nav navbar-nav menu__list\">");
+document.writeln("                                    <ul class=\"nav navbar-nav menu__list clearfix\">");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"home\" class=\"menu__link\"><span class=\"menu__helper\">Home</span></a></li>");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"artifacts\" class=\"menu__link scroll\"><span class=\"menu__helper\">Artifacts</span></a></li>");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"family\" class=\"menu__link scroll\"><span class=\"menu__helper\">Family</span></a></li>");
