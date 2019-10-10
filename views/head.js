@@ -43,6 +43,7 @@ document.writeln("                                    <span class=\"icon-bar\"><
 document.writeln("                                    <span class=\"icon-bar\"></span>");
 document.writeln("                                    <span class=\"icon-bar\"></span>");
 document.writeln("                                </button>");
+document.writeln("                                <div class=\"clearfix\"></div>");
 document.writeln("                            </div>");
 document.writeln("                            <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">");
 document.writeln("                                <nav class=\"menu menu--francisco\">");
