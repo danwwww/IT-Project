@@ -53,7 +53,7 @@ document.writeln("                                        <li class=\"menu__item
 document.writeln("                                        <li class=\"menu__item\"><a href=\"artifacts\" class=\"menu__link scroll\"><span class=\"menu__helper\">Artifacts</span></a></li>");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"family\" class=\"menu__link scroll\"><span class=\"menu__helper\">Family</span></a></li>");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"account\" class=\"menu__link scroll\"><span class=\"menu__helper\">My Account</span></a></li>");
-document.writeln("                                        <li class=\"dropdown\">");
+document.writeln("                                        <li class=\"dropup\">");
 document.writeln("                                            <a href=\"#\" class=\"menu__item dropdown-toggle\" data-toggle=\"dropdown\">Upload<b class=\"caret\"></b></a>");
 document.writeln("                                            <ul class=\"dropdown-menu\">");
 document.writeln("                                                <li class=\"dropdown-item\"><a href=\"uploadArtifacts\" class=\"menu__link scroll\"><span class=\"menu__helper\">Upload Artifacts</span></a></li>");
