@@ -54,7 +54,7 @@ document.writeln("                                        <li class=\"menu__item
 document.writeln("                                        <li class=\"menu__item\"><a href=\"family\" class=\"menu__link scroll\"><span class=\"menu__helper\">Family</span></a></li>");
 document.writeln("                                        <li class=\"menu__item\"><a href=\"account\" class=\"menu__link scroll\"><span class=\"menu__helper\">My Account</span></a></li>");
 document.writeln("                                        <li class=\"dropdown menu__item\">");
-document.writeln("                                            <button class=\"menu__link scroll layoutlink dropdown-toggle\" data-toggle=\"dropdown\">Upload<b class=\"caret\"></b></button>");
+document.writeln("                                            <a href=\"#\" class=\"menu__link scroll layoutlink dropdown-toggle\" data-toggle=\"dropdown\">Upload<b class=\"caret\"></b></a>");
 document.writeln("                                            <ul class=\"dropdown-menu\">");
 document.writeln("                                                <li class=\"dropdown-item\"><a href=\"uploadArtifacts\" class=\"menu__link scroll\"><span class=\"menu__helper\">Upload Artifacts</span></a></li>");
 document.writeln("                                                <li class=\"dropdown-item\"><a href=\"uploadProfiles\" class=\"menu__link scroll\"><span class=\"menu__helper\">Upload Profile</span></a></li>");
