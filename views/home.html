@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="../css/home.css">
+    <script type="text/javascript" src="head.js"></script>
+</head>
+<body>
+<form action = "/savePhoto" method = POST>
+<div class="fileInputContainer">
+    <input class="fileInput" type="file" name="file" id="file" />
+</div>
+</form>
+<div class="content-bottom">
+    <form action = "/saveMessage" method = POST>
+    <div class="text">
+        <textarea type="text" name = "message" id = "message" placeholder="Write your family sentences"></textarea>
+    </div>
+    <div class="btn">
+        <button type="submit" class="btn" >Save</button>
+    </div>
+    </form>
+</div>
+</body>
+</html>

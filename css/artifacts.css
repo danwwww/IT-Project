@@ -1,0 +1,136 @@
+body {
+    background: url(../images/bg.jpeg) no-repeat center;
+    background-size: cover;
+    background-attachment:fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.search {
+    width: 80%;
+    position: relative;
+    margin-left: 10%;
+    top: 190px;
+    background-color: rgba(255,255,255,0.7);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    text-align: center;
+    min-height: 310vh;
+    background-attachment:fixed;
+}
+
+.search_bar {
+    margin-right: 25%;
+}
+
+.search_bar button{
+    float: right;
+    position: relative;
+    top: 45px;
+    background: rgba(153, 102, 51, 0.6);
+    border: none;
+    color: #fff;
+    margin: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    width: 10%;
+}
+
+body .search .search_bar input {
+    text-align: center;
+    position: absolute;
+    padding: 10px 0 10px 15px;
+    font-size: 17px;
+    font-weight: 300;
+    color: black;
+    letter-spacing: 1px;
+    background-color: rgba(255,255,255,0.7);
+    border: 1px solid #000000;
+    border-radius:15px;
+    box-sizing: border-box;
+    font-family: 'Mukta', sans-serif;
+    width: 30%;
+    outline: none;
+    top: 50px;
+    float: left;
+}
+
+.btn button {
+    background: rgba(153, 102, 51, 0.6);
+    border: none;
+    color: #fff;
+    margin: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    position: relative;
+    top: 110px;
+    width: 10%;
+}
+
+.search div .btn {
+    position: absolute;
+    top: 230px;
+}
+
+.btn {
+    position: relative;
+    text-align: center;
+    top: -30px;
+    width: 90%;
+    margin-left: 0;
+}
+
+.search .main {
+    width: 90%;
+    margin-left: 5%;
+    position: relative;
+    top: 130px;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}

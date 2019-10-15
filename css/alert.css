@@ -1,0 +1,50 @@
+body {
+    background-color: rgba(153, 102, 51, 0.6);
+    background-size: cover;
+    background-attachment:fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+}
+
+h2 {
+    text-align: center;
+    top: 50px;
+    width: 60%;
+    margin-left: 20%;
+}
+
+button {
+    background-color: rgba(153, 102, 51, 0.6);
+    color: white;
+    font-family: 'Mukta', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    width: 40%;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    border-radius: 35px;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    -ms-border-radius: 35px;
+    -o-border-radius: 35px;
+    height: 15%;
+}
+
+.bg {
+    width: 50%;
+    position: relative;
+    margin-left: 25%;
+    top: 80px;
+    background-color: rgba(255,255,255,0.7);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 45%;
+}

@@ -1,0 +1,119 @@
+/*Default styling for the website, simple and clean*/
+body {
+    background: url(../images/bg_home.jpeg) no-repeat center;
+    /*background-size: cover;*/
+    background-attachment:fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.fileInputContainer{
+    width: 49%;
+    float: left;
+    position: relative;
+}
+
+.fileInputContainer form {
+    position: relative;
+    width: 525px;
+    height: 525px;
+    top: 220px;
+    margin-left: 20%;
+}
+
+input[type="file"]{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 525px;
+    width: 525px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.fileInputContainer .btn {
+    position: relative;
+    margin-left: 10%;
+    top: 20px;
+    float: left;
+}
+/*
+.fileInputContainer{
+    height:350px;
+    position:relative;
+    width: 49%;
+    top: 220px;
+    float: left;
+
+}
+.fileInputContainer input{
+    background:url(../images/photo_example.jpeg);
+    background-size: 525px 350px;
+    width: 525px;
+    height: 350px;
+    left: 18%;
+    overflow: hidden;
+    position:absolute;
+    right:0;
+    top:0;
+    filter:alpha(opacity=0);
+    cursor:pointer;
+}
+*/
+
+.text {
+    position: relative;
+    float: right;
+    width: 49%;
+    top: 220px;
+}
+
+.text textarea{
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin-left: 10%;
+    background: none;
+    border: 0;
+    font-size: x-large;
+    font-family: "Snell Roundhand";
+}
+
+.content-bottom .btn {
+    position: relative;
+    top: 140px;
+    float:right;
+    margin-right: 14%;
+}
+
+.btn button {
+    background: rgba(153, 102, 51, 0.6);
+    border: none;
+    color: #fff;
+    margin: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    position: absolute;
+    width: 350px;
+}

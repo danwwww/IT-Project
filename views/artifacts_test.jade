@@ -1,0 +1,104 @@
+doctype html
+html(lang='en')
+
+block content
+    .main
+    head
+        meta(charset='UTF-8')
+        title Artifacts
+        link(rel='stylesheet', href='../css/artifacts.css')
+        link(href='../css/style.css', type='text/css', rel='stylesheet', media='all')
+        link(href='../css/font-awesome.min.css', rel='stylesheet')
+        script(type='text/javascript', src='head.js')
+    body
+        .search
+            .search_bar
+                form#date(action='/search', method='POST')
+                    //input.itemSearch(type='text', name='searchText', placeholder='Search for an artifact...')
+                    input(type='text', name='searchText')
+                    button(onclick='') SEARCH
+                    br
+                    br
+            .btn
+                button(onclick="move()") Add Artifact
+                    script.
+                        function move() {
+                            window.location.href = '/uploadArtifacts'
+                        }
+            .main
+                -for(var i=0;i<item.length;i++)
+                    .col-lg-4
+                        .img-grid
+                            .Portfolio-grid1
+                                a(href= '#'+'gal'+i.toString())
+                                    img.img-fluid(src='#{item[i].image}', alt=' ')
+                            .port-desc.text-center
+                                h6.main-title-w3pvt.text-center #{item[i].name}
+                                p #{item[i].description}
+
+
+                    // popup
+                    div(id='gal'+i.toString()).popup-effect.animate
+                        .popup
+                            form#date(action='/updateItem', method='POST')
+                                img.img-fluid(src='#{item[i].image}', alt='Popup Image')
+                                br
+                                br
+                                video(src='#{item[i].video}', controls, width="370")
+                                p
+                                    label Name:
+                                    input(type='text', name='name',placeholder = '#{item[i].name}')
+                                p
+                                    label Category:
+                                    input(type='text', name='category',placeholder = '#{item[i].category}')
+                                p
+                                    label Date:
+                                    input(type='text', name='category',placeholder = '#{item[i].date}')
+
+                                p
+                                    label Owner:
+                                    input(type='text', name='category',placeholder = '#{item[i].owner}')
+
+                                p
+                                    label Keeper:
+                                    input(type='text', name='category',placeholder = '#{item[i].keeper}')
+
+                                p
+                                    label Location:
+                                    input(type='text', name='category',placeholder = '#{item[i].location}')
+
+                                p.editContent.mt-4
+                                    label Description:
+                                    input(type='text', name='category',placeholder = '#{item[i].description}')
+
+                                //p Name: #{item[i].name}
+                                //p Category: #{item[i].category}
+                                //p Year: #{item[i].date}
+                                //p Owner: #{item[i].owner}
+                                //p Current Keeper: #{item[i].keeper}
+                                ////p Current Location: #{item[i].location}
+                                //p.editContent.mt-4
+                                //    | Description: #{item[i].description}
+                                a.close(href='#gallery')&times;
+
+                            script var itemID = {item[i].id}
+                            button(id='btn1' onclick=`editItem(${JSON.stringify(item[i].id)})`) Save Changes
+                                script.
+                                    function editItem(itemID) {
+                                        if (confirm("Are you sure to delete this item?")) {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open("DELETE", "/deleteItem/" + itemID, true);
+                                            window.location.href = "/artifacts";
+                                            xhr.send(null);
+                                        }
+                                    }
+                            button(id='btn2' onclick=`deleteItem(${JSON.stringify(item[i].id)})`) Delete
+                                script.
+                                    function deleteItem(itemID) {
+                                        if (confirm("Are you sure to delete this item?")) {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open("DELETE", "/deleteItem/" + itemID, true);
+                                            window.location.href="/artifacts";
+                                            xhr.send(null);
+                                        }
+                                    }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload a profile</title>
+
+    <link rel="stylesheet" href="../css/upload.css">
+    <script type="text/javascript" src="head.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="addProfile">
+        <form action="/upload/profiles/submit" id="upload" method = POST enctype='multipart/form-data'>
+            <p>
+                <label id="label1">Choose an image:</label>
+                <input type= "file" name="image" accept="image/*">
+            </p><br>
+            <p>
+                <label id="label1">Choose a video:</label>
+                <input type= "file" name="video" accept="video/*">
+            </p><br>
+            <p><label>Name: </label>
+                <input type = "text" name = "name"></p><br>
+            <p><label>Birthday: </label>
+                <span>
+                    <input type = "text" name = "year">Year
+                    <input type = "text" name = "month">Month
+                    <input type = "text" name = "day">Day
+                </span>
+                </p><br>
+            <p><label>Description: </label>
+                <textarea cols="50" rows="8" name = "description"></textarea></p><br>
+            <p><label>Life Story: </label>
+                <textarea cols="50" rows="8" name = "life_story"></textarea></p><br>
+            <p><label>Year passed: </label>
+                <input type = "text" name = "year_passed"></p><br>
+            <button class="btn" onclick=uploadProfile()>Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
