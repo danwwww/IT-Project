@@ -29,6 +29,8 @@ router.get('/home', home_controller.getHome);
 router.post('/saveMessage', home_controller.saveMessage);
 router.post('/savePhoto', home_controller.savePhoto);
 
+//user guide
+router.get('/guide', controller.guide);
 
 router.get('/artifacts', controller.showArtifacts);
 router.get('/uploadArtifacts', controller.uploadArtifacts);

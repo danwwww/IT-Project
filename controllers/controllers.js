@@ -141,6 +141,8 @@ const showProfiles = function (req, res) {
             Profiles.find({familyId: req.session.user.currentFamily}, function (err, profiles){
                 if (!err) {
                     console.log("currently on family page");
+                    //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
+                    //
                     res.render(path.join(__dirname, '../views/family_test.jade'), {profile : profiles});
 
                 } else {
@@ -248,6 +250,13 @@ const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
 
+
+/*User Guide*/
+const guide = function(req, res) {
+    console.log("called guide");
+    res.sendFile(path.join(__dirname, '../views/guide.html'));
+};
+
 /*--------------------Function Exports---------------------------*/
 
 module.exports.deleteItem = deleteItem;
@@ -259,3 +268,4 @@ module.exports.showProfiles = showProfiles;
 module.exports.uploadProfiles = uploadProfiles;
 module.exports.submitUploadProfiles = submitUploadProfiles;
 module.exports.search = search;
+module.exports.guide = guide;
