@@ -142,9 +142,17 @@ const showProfiles = function (req, res) {
                 if (!err) {
                     console.log("currently on family page");
                     //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
-                    //
-                    res.render(path.join(__dirname, '../views/family_test.jade'), {profile : profiles});
-
+                    //if user has no family
+                    if(req.session.user.currentFamily == 'noFamily'){
+                        console.log("no profile to be shown");
+                        res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
+                                "yet, so you may now join or create a family.", returnPage:"account"});
+                    }
+                    //if user has family
+                    else{
+                        console.log("profiles need to be shown");
+                        res.render(path.join(__dirname, '../views/family_test.jade'), {profile : profiles});
+                    }
                 } else {
                     res.sendStatus(400);
                 }
