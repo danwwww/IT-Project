@@ -7,7 +7,7 @@ body {
     -o-background-size: cover;
     -ms-background-size: cover;
     position: relative;
-    min-height: 320vh;
+    min-height: 460vh;
 }
 
 .search {
