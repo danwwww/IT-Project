@@ -158,8 +158,7 @@ h1 a.navbar-brand span {
 }
 .navbar-default .navbar-nav > li > a {
     color: white;
-    font-size: 1.2em;
-	letter-spacing: 1px;
+    font-size: 1.1em;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color: #996633;
@@ -596,6 +595,12 @@ marquee span {
 	.slider-info {
 		left: 11%;
 	}
+	.menu--francisco .menu__link {
+		padding: 1em 1em 1em;
+	}
+	.menu--francisco .menu__item {
+		margin: 0 0.6em;
+	}
 }
 @media(max-width: 1366px){
 	.header {
@@ -609,6 +614,12 @@ marquee span {
 	}
 	.slider-info h4 {
 		font-size: 3.35em;
+	}
+	.menu--francisco .menu__link {
+		padding: 1em 1em 1em;
+	}
+	.menu--francisco .menu__item {
+		margin: 0 0.6em;
 	}
 }
 @media(max-width: 1280px){
@@ -624,10 +635,16 @@ marquee span {
 	}
 	.slider-info h4 {
 		font-size: 3.2em;
-		padding: 1em 0em 2em;
+		padding: 1em 0em 0em;
 	}
 	.slider-info h3 {
 		font-size: 1.3em;
+	}
+	.menu--francisco .menu__link {
+		padding: 1em 1em 1em;
+	}
+	.menu--francisco .menu__item {
+		margin: 0 0.6em;
 	}
 }
 @media(max-width: 1080px){
@@ -718,7 +735,7 @@ marquee span {
 		padding-left: 0px;
 	}
 	.menu--francisco .menu__item {
-		margin: 0 0.2em;
+		margin: 0 0em;
 	}
 	.slider-info h3 {
 		font-size: 1em;
