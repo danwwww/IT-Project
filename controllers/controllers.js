@@ -185,7 +185,7 @@ const uploadArtifacts = function (req, res) {
                     "yet, so you may now join or create a family.", returnPage:"account"});
         }
         else{
-            res.sendFile(path.join(__dirname, '../views/upload_profile.html'));
+            res.sendFile(path.join(__dirname, '../views/upload_artifacts.html'));
         }
     });
 };
