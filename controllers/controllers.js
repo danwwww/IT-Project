@@ -91,7 +91,7 @@ const deleteProfile = function(req, res) {
 /*show artifacts page*/
 const showArtifacts = function (req, res) {
     console.log("trying to go artifacts page");
-    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
+    if (req.session && req.session.user) Users.findOne({id: req.session.user.id}, function (err, user) {
         console.log("in validateUser: user ="+user);
         if (!user) {
             // if the user isn't found in the DB, reset the session info and
@@ -223,8 +223,8 @@ const submitUploadArtifacts = function (req, res) {
             "description": fields.description,
             "category": fields.category,
             "familyId":req.session.user.currentFamily,
-            "image": "user_images/profilePhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
-            "video": "user_videos/profileVideos/"+fields.name+".mp4",
+            "image": "user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
+            "video": "user_videos/artifactsVideos/"+fields.name+".mp4",
         });
         console.log("image path="+item.image);
         item.save(function (err) {
