@@ -108,7 +108,16 @@ const showArtifacts = function (req, res) {
                 if (!err) {
                     console.log("currently  on artifacts page");
                     console.log(items);
-                    res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
+                    //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
+                    //if user has no family
+                    if(req.session.user.currentFamily == 'noFamily'){
+                        console.log("no artifact to be shown");
+                        res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
+                                "yet, so you may now join or create a family.", returnPage:"account"});
+                    }
+                    else{
+                        res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
+                    }
                 } else {
                     res.sendStatus(400);
                 }
@@ -169,12 +178,29 @@ const showProfiles = function (req, res) {
 
 /*show upload artifacts page*/
 const uploadArtifacts = function (req, res) {
-    res.sendFile(path.join(__dirname, '../views/upload_artifacts.html'));
+    //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
+    //if user has no family
+    if(req.session.user.currentFamily == 'noFamily'){
+        console.log("no profile to be shown");
+        res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
+                "yet, so you may now join or create a family.", returnPage:"account"});
+    }else{
+        res.sendFile(path.join(__dirname, '../views/upload_artifacts.html'));
+    }
 };
 
 /*show upload profiles page*/
 const uploadProfiles = function (req, res) {
-    res.sendFile(path.join(__dirname, '../views/upload_profile.html'));
+    //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
+    //if user has no family
+    if(req.session.user.currentFamily == 'noFamily'){
+        console.log("no profile to be shown");
+        res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
+                "yet, so you may now join or create a family.", returnPage:"account"});
+    }
+    else{
+        res.sendFile(path.join(__dirname, '../views/upload_profile.html'));
+    }
 };
 
 /*submit upload artifacts*/
@@ -203,7 +229,6 @@ const submitUploadArtifacts = function (req, res) {
             if (!err) {
                 //adding successful
                 //res.render(path.join(__dirname, '../views/alert_message.jade'));
-
                 res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully Added a New Artifact",returnPage :"artifacts"});
             }
             else {
@@ -262,6 +287,13 @@ const updateUser = function (req) {
 /*User Guide*/
 const guide = function(req, res) {
     console.log("called guide");
+    res.sendFile(path.join(__dirname, '../views/guide.html'));
+};
+
+
+/*/developer tool:  delete tester-delete artifactes*/
+const developer_deleteArtifacts = function(req, res) {
+    console.log("called developer_deleteArtifacts");
     res.sendFile(path.join(__dirname, '../views/guide.html'));
 };
 
