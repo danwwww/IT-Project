@@ -28,7 +28,7 @@ const search = function(req, res) {
     Items.find({ $and: [{ name: { '$regex': req.body.searchText, $options: 'is' }}, {familyId: req.session.user.currentFamily}]}, function(err, items) {
         if (err) throw err;
         res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
-    });
+});
 };
 
 const upload =  multer({
@@ -108,7 +108,7 @@ const showArtifacts = function (req, res) {
                     console.log(items);
                     //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
                     //if user has no family
-                    if(req.session.user.currentFamily == 'noFamily'){
+                    if(user.currentFamily == 'noFamily'){
                         console.log("no artifact to be shown");
                         res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
                                 "yet, so you may now join or create a family.", returnPage:"account"});
@@ -150,7 +150,7 @@ const showProfiles = function (req, res) {
                     console.log("currently on family page");
                     //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
                     //if user has no family
-                    if(req.session.user.currentFamily == 'noFamily'){
+                    if(user.currentFamily == 'noFamily'){
                         console.log("no profile to be shown");
                         res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
                                 "yet, so you may now join or create a family.", returnPage:"account"});
@@ -177,28 +177,33 @@ const showProfiles = function (req, res) {
 /*show upload artifacts page*/
 const uploadArtifacts = function (req, res) {
     //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
-    //if user has no family
-    if(req.session.user.currentFamily == 'noFamily'){
-        console.log("no profile to be shown");
-        res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
-                "yet, so you may now join or create a family.", returnPage:"account"});
-    }else{
-        res.sendFile(path.join(__dirname, '../views/upload_artifacts.html'));
-    }
+    Users.findOne({id: req.session.user.id}, function (err, user) {
+        //if user has no family
+        if(user.currentFamily == 'noFamily'){
+            console.log("no profile to be shown");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
+                    "yet, so you may now join or create a family.", returnPage:"account"});
+        }
+        else{
+            res.sendFile(path.join(__dirname, '../views/upload_profile.html'));
+        }
+    });
 };
 
 /*show upload profiles page*/
 const uploadProfiles = function (req, res) {
     //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
-    //if user has no family
-    if(req.session.user.currentFamily == 'noFamily'){
-        console.log("no profile to be shown");
-        res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
-                "yet, so you may now join or create a family.", returnPage:"account"});
-    }
-    else{
-        res.sendFile(path.join(__dirname, '../views/upload_profile.html'));
-    }
+    Users.findOne({id: req.session.user.id}, function (err, user) {
+        //if user has no family
+        if(user.currentFamily == 'noFamily'){
+            console.log("no profile to be shown");
+            res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"You have not joined a family " +
+                    "yet, so you may now join or create a family.", returnPage:"account"});
+        }
+        else{
+            res.sendFile(path.join(__dirname, '../views/upload_profile.html'));
+        }
+    });
 };
 
 /*submit upload artifacts*/
@@ -218,8 +223,8 @@ const submitUploadArtifacts = function (req, res) {
             "description": fields.description,
             "category": fields.category,
             "familyId":req.session.user.currentFamily,
-            "image": "user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
-            "video": "user_videos/artifactsVideos/"+fields.name+".mp4",
+            "image": "user_images/profilePhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
+            "video": "user_videos/profileVideos/"+fields.name+".mp4",
         });
         console.log("image path="+item.image);
         item.save(function (err) {
@@ -290,9 +295,12 @@ const guide = function(req, res) {
 
 
 /*/developer tool:  delete tester-delete artifactes*/
-const developer_deleteArtifacts = function(req, res) {
-    console.log("called developer_deleteArtifacts");
-    res.sendFile(path.join(__dirname, '../views/guide.html'));
+const developer_delete_user = function(req, res) {
+    console.log("called developer_delete_user");
+    Users.remove(
+        function(err, user) {
+            console.log(user);
+        });
 };
 
 /*--------------------Function Exports---------------------------*/
@@ -307,3 +315,4 @@ module.exports.uploadProfiles = uploadProfiles;
 module.exports.submitUploadProfiles = submitUploadProfiles;
 module.exports.search = search;
 module.exports.guide = guide;
+module.exports.developer_delete_user = developer_delete_user;

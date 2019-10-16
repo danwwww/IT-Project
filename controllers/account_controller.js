@@ -11,6 +11,7 @@ const Items = mongoose.model('item_tables');
 const Users = mongoose.model('account_tables');
 const ProfilePhotos = mongoose.model('profilePhoto_tables');
 const Family = mongoose.model('family_tables');
+const Message = mongoose.model('message_tables');
 var currentFamily;
 
 const getAccount = function (req, res) {
@@ -66,6 +67,11 @@ const createFamily = function (req, res) {
                 "pwd": req.body.familyPassword,
             });
             family.save();
+            const message = new Message({
+                "familyId": req.body.familyId,
+                "message": "Click here to edit your family message board!",
+            });
+            message.save();
             /*check if use family is full, if not, add to the new family*/
             Users.findOne({'id': req.session.user.id}, function (err, user) {
                 if (!user.familyId1 || user.familyId1 == "") {
