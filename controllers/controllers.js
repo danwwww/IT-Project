@@ -25,9 +25,7 @@ const storageEngine = multer.diskStorage({
 
 const search = function(req, res) {
     console.log("called search function");
-    const query = "/^" + req.body.searchText + "/";
-    console.log(query);
-    Items.find({ name: { '$regex': req.body.searchText, $options: 'is' }}, function(err, items) {
+    Items.find({ $and: [{ name: { '$regex': req.body.searchText, $options: 'is' }}, {familyId: req.session.user.currentFamily}]}, function(err, items) {
         if (err) throw err;
         res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
     });
