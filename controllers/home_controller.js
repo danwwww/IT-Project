@@ -66,14 +66,13 @@ const getHome = function (req, res) {
 const saveMessage = function(req, res) {
     console.log("saveMessage function called");
     var message = req.body.message;
-    Users.findOne({ id: req.body.userId }, function(err, user) {
-        Message.findOneAndUpdate(req.body.message, {message: req.body.message},function(err, user) {});
+    Users.findOne({ id: current_user_id }, function(err, user) {
+        Message.findOneAndUpdate({ familyId: user.currentFamily }, {message: req.body.message},function(err, user) {});
         console.log(req.body.message);
         console.log(message);
         getHome(req, res);
     });
 };
-
 
 const savePhoto = function(req, res) {
     //first of all, if user do not have a family, alert and ask to join or create family
@@ -112,7 +111,7 @@ const savePhoto = function(req, res) {
                 }
             });
 
-            Message.findOne(function(err, message) {
+            Message.findOne({ familyId: user.currentFamily },function(err, message) {
                 console.log(message);
                 res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:familyPhoto.path});
             });
