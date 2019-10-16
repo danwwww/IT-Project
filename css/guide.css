@@ -1,0 +1,40 @@
+body {
+    background: url(../images/bg.jpeg) no-repeat center;
+    background-size: cover;
+    background-attachment:fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.main {
+    width: 80%;
+    position: relative;
+    margin-left: 10%;
+    top: 190px;
+    background-color: rgba(255,255,255,0.7);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    text-align: center;
+    min-height: 63vh;
+}
+
+.userGuide {
+    text-align: left;
+    width: 80%;
+    margin-left: 10%;
+    position: relative;
+    top: 20px;
+    color: #8b4513;
+}
+
+.userGuide div {
+    font-size: x-large;
+}
+
+.userGuide li {
+    font-size: larger;
+}
