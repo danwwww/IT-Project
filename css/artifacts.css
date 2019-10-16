@@ -7,7 +7,7 @@ body {
     -o-background-size: cover;
     -ms-background-size: cover;
     position: relative;
-    min-height: 100vh;
+    min-height: 320vh;
 }
 
 .search {
@@ -19,7 +19,7 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     text-align: center;
-    min-height: 310vh;
+    min-height: 420vh;
     background-attachment:fixed;
 }
 
