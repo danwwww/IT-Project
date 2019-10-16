@@ -102,7 +102,7 @@ const showArtifacts = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            Items.find({familyId: req.session.user.currentFamily}, function (err, items) {
+            Items.find({familyId: user.currentFamily}, function (err, items) {
                 if (!err) {
                     console.log("currently  on artifacts page");
                     console.log(items);
@@ -145,7 +145,7 @@ const showProfiles = function (req, res) {
             console.log(user);
             res.locals.user = user;
             console.log("in validating function, validation successed");
-            Profiles.find({familyId: req.session.user.currentFamily}, function (err, profiles){
+            Profiles.find({familyId: user.currentFamily}, function (err, profiles){
                 if (!err) {
                     console.log("currently on family page");
                     //if user has no family, system shall not show all user without families on this page simply because user.currentFam = "noFam"
