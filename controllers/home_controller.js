@@ -7,6 +7,7 @@ mongoose.set('useFindAndModify', false);
 const path = require('path');
 const multer = require('multer');
 
+
 //these are from items.js
 const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
@@ -89,9 +90,36 @@ const savePhoto = function(req, res) {
     form.parse(req, function(error, fields, files) {
         Users.findOne({ id: current_user_id }, function(err, user) {
             console.log(user);
+            //write to local
             fs.writeFileSync("views/user_images/familyPhotos/"+user.currentFamily+".jpg", fs.readFileSync(files.upload.path));
+            //upload to ali-oss
+            let OSS = require('ali-oss');
+            let client = new OSS({
+                region: '<oss-ap-southeast-2>',
+                //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，部署在服务端使用RAM子账号或STS，部署在客户端使用STS。
+                accessKeyId: '<为什么一直重名啊>',
+                accessKeySecret: '<Znftaobao374,>',
+                bucket: '<itprojectmystery>'
+            });
+            async function put () {
+                try {
+                    console.log("******************")
+                    console.log("putting image to oss");
+                    console.log("******************")
+                    // object表示上传到OSS的Object名称，localfile表示本地文件或者文件路径
+                    let r1 = await client.put(user.currentFamily+".jpg","views/user_images/familyPhotos/"+user.currentFamily+".jpg");
+                    console.log("本地路径="+"views/user_images/familyPhotos/"+user.currentFamily+".jpg");
+                    console.log('put success: %j', r1);
+                    // let r2 = await client.get(user.currentFamily);
+                    // console.log('get success: %j', r2);
+                } catch(e) {
+                    console.log("fail to upload to ali oss");
+                    console.error('error: %j', err);
+                }
+            }
+            put();
             var familyPhoto = new FamilyPhotos();
-            familyPhoto.path = "user_images/familyPhotos/"+user.currentFamily+".jpg";
+            familyPhoto.path = "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/"+user.currentFamily+".jpg";
             console.log("new image path="+familyPhoto.path);
 
             FamilyPhotos.findOne({ family_id: user.currentFamily }, function(err, famPhoto) {
