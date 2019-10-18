@@ -146,6 +146,7 @@ const joinFamily = function (req, res) {
                                 });
                                 Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
                                 });
+                                req.session.user.currentFamily= req.body.familyId;
                                 res.render(path.join(__dirname, '../views/alert_message.jade'), {
                                     errorMessage: "join family successful, now going to account page",
                                     returnPage: "account"
@@ -156,6 +157,7 @@ const joinFamily = function (req, res) {
                                 });
                                 Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
                                 });
+                                req.session.user.currentFamily= req.body.familyId;
                                 res.render(path.join(__dirname, '../views/alert_message.jade'), {
                                     errorMessage: "join family successful, now going to account page",
                                     returnPage: "account"
@@ -165,6 +167,7 @@ const joinFamily = function (req, res) {
                                 });
                                 Users.findOneAndUpdate({id: user.id}, {currentFamily: req.body.familyId}, function (err, user) {
                                 });
+                                req.session.user.currentFamily= req.body.familyId;
                                 res.render(path.join(__dirname, '../views/alert_message.jade'), {
                                     errorMessage: "join family successful, now going to account page",
                                     returnPage: "account"
