@@ -7,6 +7,7 @@ mongoose.set('useFindAndModify', false);
 const path = require('path');
 const multer = require('multer');
 
+
 //these are from items.js
 const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
@@ -47,7 +48,7 @@ const getHome = function (req, res) {
                             console.log("user has no family");
                             res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/noFamily.jpg"});
                         }else{
-                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/"+user.currentFamily+".jpg"});
+                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/familyPhoto/"+user.currentFamily+".jpg"});
 
                         }
                     }
@@ -89,9 +90,28 @@ const savePhoto = function(req, res) {
     form.parse(req, function(error, fields, files) {
         Users.findOne({ id: current_user_id }, function(err, user) {
             console.log(user);
+            //write to local
             fs.writeFileSync("views/user_images/familyPhotos/"+user.currentFamily+".jpg", fs.readFileSync(files.upload.path));
+            //upload to ali-oss
+            let OSS = require('ali-oss');
+            let client = new OSS({
+                region: 'oss-ap-southeast-2',
+                accessKeyId: 'LTAI4Fgy2os9YCfosNtJUtKS',
+                accessKeySecret: 'UyxpOuIcixuZ3oJ6LHLX5VWSIqagaZ\n',
+                bucket: 'itprojectmystery'
+            });
+            async function put () {
+                try {
+                    let result = await client.put("familyPhoto/"+user.currentFamily+".jpg","views/user_images/familyPhotos/"+user.currentFamily+".jpg");
+                    console.log('put success: %j', result);
+                } catch(e) {
+                    console.log("fail to upload to ali oss");
+                    console.error('error: %j', err);
+                }
+            }
+            put();
             var familyPhoto = new FamilyPhotos();
-            familyPhoto.path = "user_images/familyPhotos/"+user.currentFamily+".jpg";
+            familyPhoto.path = "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/familyPhoto/"+user.currentFamily+".jpg";
             console.log("new image path="+familyPhoto.path);
 
             FamilyPhotos.findOne({ family_id: user.currentFamily }, function(err, famPhoto) {
@@ -107,7 +127,7 @@ const savePhoto = function(req, res) {
                 //if the familly is updating the photo, update in database
                 else{
                     console.log("updating photo");
-                    FamilyPhotos.findOneAndUpdate({family_id: user.currentFamily},{path:familyPhoto.path}, function(err, user) {});
+                    FamilyPhotos.findOneAndUpdate({family_id: user.currentFamily},{path:famPhoto.path}, function(err, user) {});
                 }
             });
 
