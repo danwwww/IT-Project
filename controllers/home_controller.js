@@ -48,7 +48,7 @@ const getHome = function (req, res) {
                             console.log("user has no family");
                             res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/noFamily.jpg"});
                         }else{
-                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/"+user.currentFamily+".jpg"});
+                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/familyPhoto/"+user.currentFamily+".jpg"});
 
                         }
                     }
@@ -96,23 +96,14 @@ const savePhoto = function(req, res) {
             let OSS = require('ali-oss');
             let client = new OSS({
                 region: 'oss-ap-southeast-2',
-                //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，部署在服务端使用RAM子账号或STS，部署在客户端使用STS。
                 accessKeyId: 'LTAI4Fgy2os9YCfosNtJUtKS',
                 accessKeySecret: 'UyxpOuIcixuZ3oJ6LHLX5VWSIqagaZ\n',
                 bucket: 'itprojectmystery'
             });
             async function put () {
                 try {
-                    console.log("******************")
-                    console.log("putting image to oss");
-                    console.log("******************")
-                    // object表示上传到OSS的Object名称，localfile表示本地文件或者文件路径
-                    let result = await client.put(user.currentFamily+".jpg","views/user_images/familyPhotos/"+user.currentFamily+".jpg");
-                    //let r1 = await client.put(user.currentFamily+".jpg","views/user_images/familyPhotos/"+user.currentFamily+".jpg");
-                    console.log("本地路径="+"views/user_images/familyPhotos/"+user.currentFamily+".jpg");
+                    let result = await client.put("familyPhoto/"+user.currentFamily+".jpg","views/user_images/familyPhotos/"+user.currentFamily+".jpg");
                     console.log('put success: %j', result);
-                    // let r2 = await client.get(user.currentFamily);
-                    // console.log('get success: %j', r2);
                 } catch(e) {
                     console.log("fail to upload to ali oss");
                     console.error('error: %j', err);
@@ -120,7 +111,7 @@ const savePhoto = function(req, res) {
             }
             put();
             var familyPhoto = new FamilyPhotos();
-            familyPhoto.path = "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/"+user.currentFamily+".jpg";
+            familyPhoto.path = "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/familyPhoto/"+user.currentFamily+".jpg";
             console.log("new image path="+familyPhoto.path);
 
             FamilyPhotos.findOne({ family_id: user.currentFamily }, function(err, famPhoto) {

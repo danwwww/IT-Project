@@ -271,8 +271,27 @@ const saveProfilePhoto = function(req, res) {
     form.parse(req, function(error, fields, files) {
         Users.findOne({ id: current_user_id }, function(err, user) {
             fs.writeFileSync("views/user_images/profilePhotos/"+user.id+".jpg", fs.readFileSync(files.upload.path));
+            //upload to ali-oss
+            let OSS = require('ali-oss');
+            let client = new OSS({
+                region: 'oss-ap-southeast-2',
+                accessKeyId: 'LTAI4Fgy2os9YCfosNtJUtKS',
+                accessKeySecret: 'UyxpOuIcixuZ3oJ6LHLX5VWSIqagaZ\n',
+                bucket: 'itprojectmystery'
+            });
+            async function put () {
+                try {
+                    let result = await client.put("userProfile/"+user.id+".jpg","views/user_images/profilePhotos/"+user.id+".jpg");
+                    console.log('put success: %j', result);
+                } catch(e) {
+                    console.log("fail to upload to ali oss");
+                    console.error('error: %j', err);
+                }
+            }
+            put();
+
             var profilePhoto = new ProfilePhotos();
-            profilePhoto.path = "user_images/profilePhotos/"+user.id+".jpg";
+            profilePhoto.path = "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/userProfile/"+user.id+".jpg";
             console.log("new image path="+profilePhoto.path);
 
             ProfilePhotos.findOne({ user_id: user.id }, function(err, profilePhoto) {

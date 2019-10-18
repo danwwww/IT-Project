@@ -120,7 +120,6 @@ const showArtifacts = function (req, res) {
                     res.sendStatus(400);
                 }
             });
-
         }
     }); else {
         console.log("in validating function, validation failed");
@@ -213,7 +212,27 @@ const submitUploadArtifacts = function (req, res) {
     form.parse(req, function(error, fields, files) {
         var name = fields.name;
         fs.writeFileSync("views/user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg", fs.readFileSync(files.image.path));
-        fs.writeFileSync("views/user_videos/artifactsVideos/"+name+".mp4", fs.readFileSync(files.video.path));
+        fs.writeFileSync("views/user_videos/artifactsVideos/"+req.session.user.currentFamily+"SEPARATOR"+name+".mp4"
+            , fs.readFileSync(files.video.path));
+        let OSS = require('ali-oss');
+        let client = new OSS({
+            region: 'oss-ap-southeast-2',
+            accessKeyId: 'LTAI4Fgy2os9YCfosNtJUtKS',
+            accessKeySecret: 'UyxpOuIcixuZ3oJ6LHLX5VWSIqagaZ\n',
+            bucket: 'itprojectmystery'
+        });
+        async function put () {
+            try {
+                let video = await client.put("artifactsVideo/"+req.session.user.currentFamily+"SEPARATOR"+name+".mp4",
+                    "views/user_videos/artifactsVideos/"+req.session.user.currentFamily+"SEPARATOR"+name+".mp4");
+                let image = await client.put("artifactsPhoto/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg",
+                    "views/user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg");
+            } catch(e) {
+                console.log("fail to upload to ali oss");
+                console.error('error: %j', err);
+            }
+        }
+        put();
         var item = new Items({
             "name": fields.name,
             "date": fields.year,
@@ -223,8 +242,8 @@ const submitUploadArtifacts = function (req, res) {
             "description": fields.description,
             "category": fields.category,
             "familyId":req.session.user.currentFamily,
-            "image": "user_images/artifactsPhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
-            "video": "user_videos/artifactsVideos/"+fields.name+".mp4",
+            "image": "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/artifactsPhoto/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg",
+            "video": "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/artifactsVideo/"+req.session.user.currentFamily+"SEPARATOR"+name+".mp4",
         });
         console.log("image path="+item.image);
         item.save(function (err) {
@@ -251,7 +270,27 @@ const submitUploadProfiles = function (req, res) {
     form.parse(req, function(error, fields, files) {
         var name = fields.name;
         fs.writeFileSync("views/user_images/profilePhotos/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg", fs.readFileSync(files.image.path));
-        fs.writeFileSync("views/user_videos/profileVideos/"+name+".mp4", fs.readFileSync(files.video.path));
+        fs.writeFileSync("views/user_videos/profileVideos/"+req.session.user.currentFamily+"SEPARATOR"+name+".mp4"
+            , fs.readFileSync(files.video.path));
+        let OSS = require('ali-oss');
+        let client = new OSS({
+            region: 'oss-ap-southeast-2',
+            accessKeyId: 'LTAI4Fgy2os9YCfosNtJUtKS',
+            accessKeySecret: 'UyxpOuIcixuZ3oJ6LHLX5VWSIqagaZ\n',
+            bucket: 'itprojectmystery'
+        });
+        async function put () {
+            try {
+                let video = await client.put("profileVideo/"+req.session.user.currentFamily+"SEPARATOR"+name+".mp4",
+                    "views/user_videos/profileVideos/"+req.session.user.currentFamily+"SEPARATOR"+name+".mp4");
+                let image = await client.put("profilePhoto/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg",
+                    "views/user_images/profilePhotos/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg");
+            } catch(e) {
+                console.log("fail to upload to ali oss");
+                console.error('error: %j', err);
+            }
+        }
+        put();
         var profile = new Profiles({
             "name": fields.name,
             "year": fields.year,
@@ -261,8 +300,8 @@ const submitUploadProfiles = function (req, res) {
             "life_story": fields.life_story,
             "year_passed": fields.year_passed,
             "familyId": req.session.user.currentFamily,
-            "image": "user_images/profilePhotos/"+req.session.user.currentFamily+"SEPARATOR"+fields.name+".jpg",
-            "video": "user_videos/profileVideos/"+fields.name+".mp4",
+            "image": "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/profilePhoto/"+req.session.user.currentFamily+"SEPARATOR"+name+".jpg",
+            "video": "https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/profileVideo/"+req.session.user.currentFamily+"SEPARATOR"+name+".mp4",
         });
         console.log("image path="+profile.image);
         profile.save(function (err) {
