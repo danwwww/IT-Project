@@ -48,7 +48,7 @@ const getHome = function (req, res) {
                             console.log("user has no family");
                             res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/noFamily.jpg"});
                         }else{
-                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/"+user.currentFamily+".jpg"});
+                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/"+user.currentFamily+".jpg"});
 
                         }
                     }
@@ -95,11 +95,11 @@ const savePhoto = function(req, res) {
             //upload to ali-oss
             let OSS = require('ali-oss');
             let client = new OSS({
-                region: '<oss-ap-southeast-2>',
+                region: 'oss-ap-southeast-2',
                 //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，部署在服务端使用RAM子账号或STS，部署在客户端使用STS。
-                accessKeyId: '<为什么一直重名啊>',
-                accessKeySecret: '<Znftaobao374,>',
-                bucket: '<itprojectmystery>'
+                accessKeyId: 'LTAI4Fgy2os9YCfosNtJUtKS',
+                accessKeySecret: 'UyxpOuIcixuZ3oJ6LHLX5VWSIqagaZ\n',
+                bucket: 'itprojectmystery'
             });
             async function put () {
                 try {
@@ -107,9 +107,10 @@ const savePhoto = function(req, res) {
                     console.log("putting image to oss");
                     console.log("******************")
                     // object表示上传到OSS的Object名称，localfile表示本地文件或者文件路径
-                    let r1 = await client.put(user.currentFamily+".jpg","views/user_images/familyPhotos/"+user.currentFamily+".jpg");
+                    let result = await client.put(user.currentFamily+".jpg","views/user_images/familyPhotos/"+user.currentFamily+".jpg");
+                    //let r1 = await client.put(user.currentFamily+".jpg","views/user_images/familyPhotos/"+user.currentFamily+".jpg");
                     console.log("本地路径="+"views/user_images/familyPhotos/"+user.currentFamily+".jpg");
-                    console.log('put success: %j', r1);
+                    console.log('put success: %j', result);
                     // let r2 = await client.get(user.currentFamily);
                     // console.log('get success: %j', r2);
                 } catch(e) {
@@ -135,7 +136,7 @@ const savePhoto = function(req, res) {
                 //if the familly is updating the photo, update in database
                 else{
                     console.log("updating photo");
-                    FamilyPhotos.findOneAndUpdate({family_id: user.currentFamily},{path:familyPhoto.path}, function(err, user) {});
+                    FamilyPhotos.findOneAndUpdate({family_id: user.currentFamily},{path:famPhoto.path}, function(err, user) {});
                 }
             });
 
