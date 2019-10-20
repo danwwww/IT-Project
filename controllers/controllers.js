@@ -50,6 +50,28 @@ const validateFile = function(file, cb ){
     }
 }
 
+//edit an item
+const updateItem = function(req, res) {
+    console.log("editItem function called");
+    console.log("name: " + req.body.name);
+    console.log("id: " + req.body.id);
+    Items.update({_id: req.body.id}, {name: req.body.name}, function(err, items){
+        if(err){
+            console.log("update fail");
+        }else{
+            console.log("update successful");
+        }
+        }
+    );
+    Items.update({_id: req.body.id}, {date: req.body.date});
+    Items.update({_id: req.body.id}, {keeper: req.body.keeper});
+    Items.update({_id: req.body.id}, {location: req.body.location});
+    Items.update({_id: req.body.id}, {description: req.body.description});
+    Items.update({_id: req.body.id}, {owner: req.body.owner});
+    Items.update({_id: req.body.id}, {category: req.body.category});
+    console.log('edit finished');
+};
+
 //delete an item
 const deleteItem = function(req, res) {
     console.log("deleteItem function called");
@@ -355,3 +377,4 @@ module.exports.submitUploadProfiles = submitUploadProfiles;
 module.exports.search = search;
 module.exports.guide = guide;
 module.exports.developer_delete_user = developer_delete_user;
+module.exports.updateItem = updateItem;

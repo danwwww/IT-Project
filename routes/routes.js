@@ -43,6 +43,8 @@ router.get('/uploadProfiles', controller.uploadProfiles);
 
 router.delete('/deleteItem/:id',controller.deleteItem);
 router.delete('/deleteProfile/:id',controller.deleteProfile);
+//router.delete('/editItem/:id/:name', controller.updateItem);
+router.post('/updateItem', controller.updateItem);
 
 //handle account page operations
 router.get('/account', account_controller.getAccount);

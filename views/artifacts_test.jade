@@ -46,6 +46,9 @@ block content
                                 br
                                 video(src='#{item[i].video}', controls, width="370")
                                 p
+                                    label ItemID:
+                                    input(value= item[i].id, type='text', name='id',placeholder = '#{item[i].id}')
+                                p
                                     label Name:
                                     input(type='text', name='name',placeholder = '#{item[i].name}')
                                 p
@@ -53,23 +56,23 @@ block content
                                     input(type='text', name='category',placeholder = '#{item[i].category}')
                                 p
                                     label Date:
-                                    input(type='text', name='category',placeholder = '#{item[i].date}')
+                                    input(type='text', name='date',placeholder = '#{item[i].date}')
 
                                 p
                                     label Owner:
-                                    input(type='text', name='category',placeholder = '#{item[i].owner}')
+                                    input(type='text', name='owner',placeholder = '#{item[i].owner}')
 
                                 p
                                     label Keeper:
-                                    input(type='text', name='category',placeholder = '#{item[i].keeper}')
+                                    input(type='text', name='keeper',placeholder = '#{item[i].keeper}')
 
                                 p
                                     label Location:
-                                    input(type='text', name='category',placeholder = '#{item[i].location}')
+                                    input(type='text', name='location',placeholder = '#{item[i].location}')
 
                                 p.editContent.mt-4
                                     label Description:
-                                    input(type='text', name='category',placeholder = '#{item[i].description}')
+                                    input(type='text', name='description',placeholder = '#{item[i].description}')
 
                                 //p Name: #{item[i].name}
                                 //p Category: #{item[i].category}
@@ -81,24 +84,24 @@ block content
                                 //    | Description: #{item[i].description}
                                 a.close(href='#gallery')&times;
 
-                            script var itemID = {item[i].id}
-                            button(id='btn1' onclick=`editItem(${JSON.stringify(item[i].id)})`) Save Changes
-                                script.
-                                    function editItem(itemID) {
-                                        if (confirm("Are you sure to delete this item?")) {
-                                            var xhr = new XMLHttpRequest();
-                                            xhr.open("DELETE", "/deleteItem/" + itemID, true);
-                                            window.location.href = "/artifacts";
-                                            xhr.send(null);
+                                script var itemID = {item[i].id}
+                                button(id='btn1' onclick=`editItem(${JSON.stringify(item[i].id)})`) Save Changes
+                                    script.
+                                        function editItem(itemID) {
+                                            if (confirm("Are you sure to edit this item?")) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open("DELETE", "/editItem/" + itemID, true);
+                                                window.location.href = "/artifacts";
+                                                xhr.send(null);
+                                            }
                                         }
-                                    }
-                            button(id='btn2' onclick=`deleteItem(${JSON.stringify(item[i].id)})`) Delete
-                                script.
-                                    function deleteItem(itemID) {
-                                        if (confirm("Are you sure to delete this item?")) {
-                                            var xhr = new XMLHttpRequest();
-                                            xhr.open("DELETE", "/deleteItem/" + itemID, true);
-                                            window.location.href="/artifacts";
-                                            xhr.send(null);
+                                button(id='btn2' onclick=`deleteItem(${JSON.stringify(item[i].id)})`) Delete
+                                    script.
+                                        function deleteItem(itemID) {
+                                            if (confirm("Are you sure to delete this item?")) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open("DELETE", "/deleteItem/" + itemID, true);
+                                                window.location.href="/artifacts";
+                                                xhr.send(null);
+                                            }
                                         }
-                                    }

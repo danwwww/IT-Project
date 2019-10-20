@@ -13,8 +13,6 @@ const itemSchema = mongoose.Schema(
         "location": String,
         "description": String,
         "owner": String,
-        "location": String,
-        "description": String,
         "category":String,
         "familyId": String,
         "image": String,
