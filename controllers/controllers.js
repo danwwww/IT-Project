@@ -55,21 +55,72 @@ const updateItem = function(req, res) {
     console.log("editItem function called");
     console.log("name: " + req.body.name);
     console.log("id: " + req.body.id);
-    Items.update({_id: req.body.id}, {name: req.body.name}, function(err, items){
-        if(err){
-            console.log("update fail");
-        }else{
-            console.log("update successful");
-        }
-        }
-    );
-    Items.update({_id: req.body.id}, {date: req.body.date});
-    Items.update({_id: req.body.id}, {keeper: req.body.keeper});
-    Items.update({_id: req.body.id}, {location: req.body.location});
-    Items.update({_id: req.body.id}, {description: req.body.description});
-    Items.update({_id: req.body.id}, {owner: req.body.owner});
-    Items.update({_id: req.body.id}, {category: req.body.category});
+    if(req.body.name) {
+        console.log("update item's name");
+        Items.updateOne({_id: req.body.id}, {name: req.body.name}, function(err, suc){
+            if(err){
+                console.log("edit name fail");
+            }else{
+                console.log("edit name successful");
+            }
+        });
+    }
+    if(req.body.date){
+        Items.updateOne({_id: req.body.id}, {date: req.body.date}, function(err, suc){
+            if(err){
+                console.log("edit date fail");
+            }else{
+                console.log("edit date successful");
+            }
+        });
+    }
+    if(req.body.keeper){
+        Items.updateOne({_id: req.body.id}, {keeper: req.body.keeper}, function(err, suc){
+            if(err){
+                console.log("edit keeper fail");
+            }else{
+                console.log("edit keeper successful");
+            }
+        });
+    }
+    if(req.body.location){
+        Items.updateOne({_id: req.body.id}, {location: req.body.location}, function(err, suc){
+            if(err){
+                console.log("edit location fail");
+            }else{
+                console.log("edit location successful");
+            }
+        });
+    }
+    if(req.body.description){
+        Items.updateOne({_id: req.body.id}, {location: req.body.description}, function(err, suc){
+            if(err){
+                console.log("edit description fail");
+            }else{
+                console.log("edit description successful");
+            }
+        });
+    }
+    if(req.body.owner){
+        Items.updateOne({_id: req.body.id}, {owner: req.body.owner}, function(err, suc){
+            if(err){
+                console.log("edit owner fail");
+            }else{
+                console.log("edit owner successful");
+            }
+        });
+    }
+    if(req.body.category){
+        Items.updateOne({_id: req.body.id}, {category: req.body.category}, function(err, suc){
+            if(err){
+                console.log("edit category fail");
+            }else{
+                console.log("edit category successful");
+            }
+        });
+    }
     console.log('edit finished');
+    showArtifacts(req, res);
 };
 
 //delete an item
@@ -273,11 +324,12 @@ const submitUploadArtifacts = function (req, res) {
             if (!err) {
                 //adding successful
                 //res.render(path.join(__dirname, '../views/alert_message.jade'));
-                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully Added a New Artifact",returnPage :"artifacts"});
+                showArtifacts(req, res);
             }
             else {
                 //adding failed
-                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Artifacts",returnPage :"artifacts"});
+                //res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Artifacts",returnPage :"artifacts"});
+                showArtifacts(req, res);
                 /**should also jump to error message page
                  * */
             }
@@ -331,10 +383,12 @@ const submitUploadProfiles = function (req, res) {
             if (!err) {
                 /** the file is to be made and changed
                  * */
-                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully To Add a New Profile",returnPage :"family"});
+                //res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully To Add a New Profile",returnPage :"family"});
+                showProfiles(req, res);
             }
             else {
-                res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Profile",returnPage :"family"});
+                //res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Profile",returnPage :"family"});
+                showProfiles(req, res);
                 /**should also jump to error message page
                  * */
             }
