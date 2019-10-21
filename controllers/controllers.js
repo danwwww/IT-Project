@@ -324,12 +324,18 @@ const submitUploadArtifacts = function (req, res) {
             if (!err) {
                 //adding successful
                 //res.render(path.join(__dirname, '../views/alert_message.jade'));
-                showArtifacts(req, res);
+                Items.find({familyId: req.session.user.currentFamily}, function (err, items) {
+                    //res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
+                    res.redirect('/artifacts');
+                });
             }
             else {
                 //adding failed
                 //res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Artifacts",returnPage :"artifacts"});
-                showArtifacts(req, res);
+                Items.find({familyId: req.session.user.currentFamily}, function (err, items) {
+                    //res.render(path.join(__dirname, '../views/artifacts_test.jade'), {item : items});
+                    res.redirect('/artifacts');
+                });
                 /**should also jump to error message page
                  * */
             }
@@ -384,11 +390,11 @@ const submitUploadProfiles = function (req, res) {
                 /** the file is to be made and changed
                  * */
                 //res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"successfully To Add a New Profile",returnPage :"family"});
-                showProfiles(req, res);
+                res.redirect('/family');
             }
             else {
                 //res.render(path.join(__dirname, '../views/alert_message.jade'), {errorMessage:"Failed To Add New Profile",returnPage :"family"});
-                showProfiles(req, res);
+                res.redirect('family');
                 /**should also jump to error message page
                  * */
             }
