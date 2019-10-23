@@ -93,7 +93,7 @@ const updateItem = function(req, res) {
         });
     }
     if(req.body.description){
-        Items.updateOne({_id: req.body.id}, {location: req.body.description}, function(err, suc){
+        Items.updateOne({_id: req.body.id}, {description: req.body.description}, function(err, suc){
             if(err){
                 console.log("edit description fail");
             }else{
@@ -140,6 +140,41 @@ const deleteItem = function(req, res) {
                 console.log("called deleteItem, deletion succeed and trying to direct to artifacts page");
             }
         });
+};
+
+//edit an profile
+const updateProfile = function(req, res) {
+    console.log("editProfile function called");
+    if(req.body.name) {
+        console.log("update profile's name");
+        Profiles.updateOne({_id: req.body.id}, {name: req.body.name}, function(err, suc){
+            if(err){
+                console.log("edit name fail");
+            }else{
+                console.log("edit name successful");
+            }
+        });
+    }
+    if(req.body.life_story){
+        Profiles.updateOne({_id: req.body.id}, {life_story: req.body.life_story}, function(err, suc){
+            if(err){
+                console.log("edit life_story fail");
+            }else{
+                console.log("edit life_story successful");
+            }
+        });
+    }
+    if(req.body.description){
+        Profiles.updateOne({_id: req.body.id}, {description: req.body.description}, function(err, suc){
+            if(err){
+                console.log("edit description fail");
+            }else{
+                console.log("edit description successful");
+            }
+        });
+    }
+    console.log('edit finished');
+    showProfiles(req, res);
 };
 
 //delete a profile
@@ -438,3 +473,4 @@ module.exports.search = search;
 module.exports.guide = guide;
 module.exports.developer_delete_user = developer_delete_user;
 module.exports.updateItem = updateItem;
+module.exports.updateProfile = updateProfile;

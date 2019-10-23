@@ -143,15 +143,22 @@ html(lang='en')
                                             span #{profile[i+1].year}~#{profile[i+1].year_passed}
                                 div(id='gal' + i.toString()).popup-effect.animate
                                     .popup
-                                        img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
-                                        p Name: #{profile[i].name}
-                                        p Birthday: #{profile[i].year}/#{profile[i].month}/#{profile[i].date}
-                                        p.editContent.mt-4
-                                            | Description: #{profile[i].description}
-                                        p.editContent.mt-4
-                                            | Life story: #{profile[i].life_story}
-                                        a.close(href='#gallery') ×
-                                        button(id="btn1") Edit
+                                        form#date(action='/updateProfile', method='POST')
+                                            img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
+                                            p
+                                                label Name:
+                                                input(type='text', name='name',placeholder = '#{profile[i].name}}')
+                                            p
+                                                label Birthday:
+                                                input(type='text', name='date',placeholder = '#{profile[i].year}/#{profile[i].month}/#{profile[i].date}')
+                                            p
+                                                label Description:
+                                                input(type='text', name='description',placeholder = '#{profile[i].description}')
+                                            p
+                                                label Life story:
+                                                input(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
+                                            a.close(href='#gallery') ×
+                                            button(id="btn1") Edit
                                         script var profileID = {profile[i].id}
                                         button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
                                             script.

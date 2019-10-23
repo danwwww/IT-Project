@@ -45,6 +45,7 @@ router.delete('/deleteItem/:id',controller.deleteItem);
 router.delete('/deleteProfile/:id',controller.deleteProfile);
 //router.delete('/editItem/:id/:name', controller.updateItem);
 router.post('/updateItem', controller.updateItem);
+router.post('/updateProfile', controller.updateProfile);
 
 //handle account page operations
 router.get('/account', account_controller.getAccount);
