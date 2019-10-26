@@ -18,7 +18,7 @@ contributor: Chen
 * */
 const showProfiles = function (req, res) {
     console.log("trying to go family page");
-    if (req.session && req.session.user) Users.findOne({id: req.session.user.id}, function (err, user) {
+    if (req.session && req.session.user) Users.findOne({email: req.session.user.email}, function (err, user) {
         console.log("in validateUser: user ="+user);
         if (!user) {
             // if the user isn't found in the DB, reset the session info and
@@ -42,7 +42,6 @@ const showProfiles = function (req, res) {
                     //if user has family
                     else{
                         console.log("profiles need to be shown");
-                        console.log(profiles[1]);
                         res.render(path.join(__dirname, '../views/family.jade'), {profile : profiles});
                     }
                 } else {
