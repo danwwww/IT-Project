@@ -63,7 +63,7 @@ html(lang='en')
                                                     label Life story:
                                                     textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                                 a.close(href='#gallery') ×
-                                                button(id="btn1") Edit
+                                                button(id="btn1") Save Changes
                                             script var profileID = {profile[i].id}
                                             button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
                                                 script.
@@ -95,7 +95,7 @@ html(lang='en')
                                                     label Life story:
                                                     textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                             a.close(href='#gallery') ×
-                                            button(id="btn1") Edit
+                                            button(id="btn1") Save Changes
                                             script var profileID = {profile[i+1].id}
                                             button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i+1].id)})`) Delete
                                                 script.
@@ -136,7 +136,7 @@ html(lang='en')
                                                 label Life story:
                                                 textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                         a.close(href='#gallery') ×
-                                        button(id="btn1") Edit
+                                        button(id="btn1") Save Changes
                                         script var profileID = {profile[count-1].id}
                                         button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[count-1].id)})`) Delete
                                             script.
@@ -188,7 +188,7 @@ html(lang='en')
                                                     label Life story:
                                                     textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                             a.close(href='#gallery') ×
-                                            button(id="btn1") Edit
+                                            button(id="btn1") Save Changes
                                             script var profileID = {profile[i].id}
                                             button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
                                                 script.
@@ -209,7 +209,7 @@ html(lang='en')
                                                 video(src='#{profile[i+1].video}', controls width="340")
                                                 p
                                                     label Name:
-                                                    input(type='text', name='name',placeholder = '#{profile[i].name}}')
+                                                    input(type='text', name='name',placeholder = '#{profile[i].name}')
                                                 p
                                                     label Birthday:
                                                     input(type='text', name='date',placeholder = '#{profile[i].year}/#{profile[i].month}/#{profile[i].date}')
@@ -220,7 +220,7 @@ html(lang='en')
                                                     label Life story:
                                                     textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                             a.close(href='#gallery') ×
-                                            button(id="btn1") Edit
+                                            button(id="btn1") Save Changes
                                             script var profileID = {profile[i+1].id}
                                             button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i+1].id)})`) Delete
                                                 script.

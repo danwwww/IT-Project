@@ -48,6 +48,7 @@ router.post('/search', artifacts_controller.search);
 router.get('/family', family_controller.showProfiles);
 router.post('/upload/profiles/submit', family_controller.submitUploadProfiles);
 router.get('/uploadProfiles', family_controller.uploadProfiles);
+router.post('/updateProfile', family_controller.updateProfiles);
 router.delete('/deleteProfile/:id',family_controller.deleteProfile);
 
 

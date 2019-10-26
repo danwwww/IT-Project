@@ -205,4 +205,5 @@ const updateProfiles = function(req, res) {
 module.exports.deleteProfile = deleteProfile;
 module.exports.showProfiles = showProfiles;
 module.exports.uploadProfiles = uploadProfiles;
+module.exports.updateProfiles = updateProfiles;
 module.exports.submitUploadProfiles = submitUploadProfiles;
