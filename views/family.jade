@@ -6,7 +6,7 @@ html(lang='en')
         link(rel='stylesheet', href='../css/family.css')
         link(href='../css/style.css', type='text/css', rel='stylesheet', media='all')
         link(href='../css/font-awesome.min.css', rel='stylesheet')
-        link(rel='stylesheet', type='text/css', href='../css/profile/bootstrap.min.css')
+        //link(rel='stylesheet', type='text/css', href='../css/profile/bootstrap.min.css')
         link(rel='stylesheet', type='text/css', href='../css/profile/font-awesome.min.css')
         link(rel='stylesheet', type='text/css', href='../css/profile/profile-style.css')
         script(type='text/javascript', src='head.js')
@@ -30,7 +30,7 @@ html(lang='en')
                                         img(src='../images/arrow-down.png', alt='Picture')
                                     .cd-timeline-content.projects
                                         a(href='#' + 'gal' + i.toString())
-                                            img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                            img.img-fluid(src='#{profile[i].image}', alt=' ')
                                         .project-content
                                             h2 #{profile[i].name}
                                             span #{profile[i].year}~#{profile[i].year_passed}
@@ -39,24 +39,31 @@ html(lang='en')
                                         img(src='../images/arrow-down.png', alt='Picture')
                                     .cd-timeline-content.projects
                                         a(href='#' + 'gal' + (i+1).toString())
-                                            img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                            img.img-fluid(src='#{profile[i+1].image}', alt=' ')
                                         .project-content
                                             h2 #{profile[i+1].name}
                                             span #{profile[i+1].year}~#{profile[i+1].year_passed}
                                 div(id='gal' + i.toString()).popup-effect.animate
                                     .popup
-                                        img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
-                                        p
-                                            label Name:
-                                            input(type='text', name='name',placeholder = '#{profile[i].name}')
-                                        //p Name: #{profile[i].name}
-                                        p Birthday: #{profile[i].year}/#{profile[i].month}/#{profile[i].date}
-                                        p.editContent.mt-4
-                                            | Description: #{profile[i].description}
-                                        p.editContent.mt-4
-                                            | Life story: #{profile[i].life_story}
-                                        a.close(href='#gallery') ×
-                                        button(id="btn1") Edit
+                                        form#date(action='/updateProfile', method='POST')
+                                            img.img-fluid(src='#{profile[i].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[i].video}', controls width="340")
+                                            p
+                                                label ProfileID:
+                                                input(value= profile[i].id, type='text', name='id',placeholder = '#{profile[i].id}')
+                                            p
+                                                label Name:
+                                                input(type='text', name='name',placeholder = '#{profile[i].name}')
+                                            p
+                                                label Description:
+                                                textarea(type='text', name='description',placeholder = '#{profile[i].description}')
+                                            p
+                                                label Life story:
+                                                textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
+                                            a.close(href='#gallery') ×
+                                            button(id="btn1") Edit
                                         script var profileID = {profile[i].id}
                                         button(id = "btn2" onclick=`deleteProfile(${JSON.stringify(profile[i].id)})`) Delete
                                             script.
@@ -70,13 +77,23 @@ html(lang='en')
                                                 }
                                 div(id='gal' + (i+1).toString()).popup-effect.animate
                                     .popup
-                                        img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
-                                        p Name: #{profile[i+1].name}
-                                        p Birthday: #{profile[i+1].year}/#{profile[i+1].month}/#{profile[i+1].date}
-                                        p.editContent.mt-4
-                                            | Description: #{profile[i+1].description}
-                                        p.editContent.mt-4
-                                            | Life story: #{profile[i+1].life_story}
+                                        form#date(action='/updateProfile', method='POST')
+                                            img.img-fluid(src='#{profile[i+1].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[i+1].video}', controls width="340")
+                                            p
+                                                label Name:
+                                                input(type='text', name='name',placeholder = '#{profile[i].name}}')
+                                            p
+                                                label Birthday:
+                                                input(type='text', name='date',placeholder = '#{profile[i].year}/#{profile[i].month}/#{profile[i].date}')
+                                            p
+                                                label Description:
+                                                textarea(type='text', name='description',placeholder = '#{profile[i].description}')
+                                            p
+                                                label Life story:
+                                                textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                         a.close(href='#gallery') ×
                                         button(id="btn1") Edit
                                         script var profileID = {profile[i+1].id}
@@ -95,19 +112,29 @@ html(lang='en')
                                         img(src='../images/arrow-down.png', alt='Picture')
                                     .cd-timeline-content.projects
                                         a(href='#' + 'gal' + (count-1).toString())
-                                            img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                            img.img-fluid(src='#{profile[count-1].image}', alt=' ')
                                         .project-content
                                             h2 #{profile[count-1].name}
-                                            span #{profile[i].year}~#{profile[i].year_passed}
+                                            span #{profile[count-1].year}~#{profile[count-1].year_passed}
                                 div(id='gal' + (count-1).toString()).popup-effect.animate
                                     .popup
-                                        img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
-                                        p Name: #{profile[count-1].name}
-                                        p Birthday: #{profile[i].year}/#{profile[i].month}/#{profile[i].date}
-                                        p.editContent.mt-4
-                                            | Description: #{profile[count-1].description}
-                                        p.editContent.mt-4
-                                            | Life story: #{profile[count-1].life_story}
+                                        form#date(action='/updateProfile', method='POST')
+                                            img.img-fluid(src='#{profile[count-1].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[count-1].video}', controls width="340")
+                                            p
+                                                label Name:
+                                                input(type='text', name='name',placeholder = '#{profile[i].name}}')
+                                            p
+                                                label Birthday:
+                                                input(type='text', name='date',placeholder = '#{profile[i].year}/#{profile[i].month}/#{profile[i].date}')
+                                            p
+                                                label Description:
+                                                textarea(type='text', name='description',placeholder = '#{profile[i].description}')
+                                            p
+                                                label Life story:
+                                                textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                         a.close(href='#gallery') ×
                                         button(id="btn1") Edit
                                         script var profileID = {profile[count-1].id}
@@ -128,7 +155,7 @@ html(lang='en')
                                         img(src='../images/arrow-down.png', alt='Picture')
                                     .cd-timeline-content.projects
                                         a(href='#' + 'gal' + i.toString())
-                                            img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                            img.img-fluid(src='#{profile[i].image}', alt=' ')
                                         .project-content
                                             h2 #{profile[i].name}
                                             span #{profile[i].year}~#{profile[i].year_passed}
@@ -137,19 +164,29 @@ html(lang='en')
                                         img(src='../images/arrow-down.png', alt='Picture')
                                     .cd-timeline-content.projects
                                         a(href='#' + 'gal' + (i + 1).toString())
-                                            img.img-fluid(src='../images/oldman.jpeg', alt=' ')
+                                            img.img-fluid(src='#{profile[i+1].image}', alt=' ')
                                         .project-content
                                             h2 #{profile[i + 1].name}
                                             span #{profile[i+1].year}~#{profile[i+1].year_passed}
                                 div(id='gal' + i.toString()).popup-effect.animate
                                     .popup
-                                        img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
-                                        p Name: #{profile[i].name}
-                                        p Birthday: #{profile[i].year}/#{profile[i].month}/#{profile[i].date}
-                                        p.editContent.mt-4
-                                            | Description: #{profile[i].description}
-                                        p.editContent.mt-4
-                                            | Life story: #{profile[i].life_story}
+                                        form#date(action='/updateProfile', method='POST')
+                                            img.img-fluid(src='#{profile[i].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[i].video}', controls width="340")
+                                            p
+                                                label Name:
+                                                input(type='text', name='name',placeholder = '#{profile[i].name}}')
+                                            p
+                                                label Birthday:
+                                                input(type='text', name='date',placeholder = '#{profile[i].year}/#{profile[i].month}/#{profile[i].date}')
+                                            p
+                                                label Description:
+                                                textarea(type='text', name='description',placeholder = '#{profile[i].description}')
+                                            p
+                                                label Life story:
+                                                textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                         a.close(href='#gallery') ×
                                         button(id="btn1") Edit
                                         script var profileID = {profile[i].id}
@@ -165,13 +202,23 @@ html(lang='en')
                                                 }
                                 div(id='gal' + (i+1).toString()).popup-effect.animate
                                     .popup
-                                        img.img-fluid(src='../images/oldman.jpeg', alt='Popup Image')
-                                        p Name: #{profile[i+1].name}
-                                        p Birthday: #{profile[i+1].year}/#{profile[i+1].month}/#{profile[i+1].date}
-                                        p.editContent.mt-4
-                                            | Description: #{profile[i+1].description}
-                                        p.editContent.mt-4
-                                            | Life story: #{profile[i+1].life_story}
+                                        form#date(action='/updateProfile', method='POST')
+                                            img.img-fluid(src='#{profile[i+1].image}', alt='Popup Image')
+                                            br
+                                            br
+                                            video(src='#{profile[i+1].video}', controls width="340")
+                                            p
+                                                label Name:
+                                                input(type='text', name='name',placeholder = '#{profile[i].name}}')
+                                            p
+                                                label Birthday:
+                                                input(type='text', name='date',placeholder = '#{profile[i].year}/#{profile[i].month}/#{profile[i].date}')
+                                            p
+                                                label Description:
+                                                textarea(type='text', name='description',placeholder = '#{profile[i].description}')
+                                            p
+                                                label Life story:
+                                                textarea(type='text', name='life_story',placeholder = '#{profile[i].life_story}')
                                         a.close(href='#gallery') ×
                                         button(id="btn1") Edit
                                         script var profileID = {profile[i+1].id}

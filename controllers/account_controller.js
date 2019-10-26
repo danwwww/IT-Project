@@ -4,8 +4,9 @@ var formidable = require("formidable");
 var fs = require('fs');
 const mongoose = require('mongoose');
 const path = require('path');
-const multer = require('multer');
 mongoose.set('useFindAndModify', false);
+
+
 //these are from items.js
 const Items = mongoose.model('item_tables');
 const Users = mongoose.model('account_tables');
@@ -14,6 +15,12 @@ const Family = mongoose.model('family_tables');
 const Message = mongoose.model('message_tables');
 var currentFamily;
 
+
+/*
+page: account
+usage: 1. refresh after change user profile/ switch fanily/ change user name, 2. on navigation bar
+contributor: Chen
+* */
 const getAccount = function (req, res) {
     console.log("in get Account");
     console.log("get account timer finished");
@@ -48,10 +55,14 @@ const getAccount = function (req, res) {
         req.session.reset();
         res.redirect('/');
     }
-
 };
 
-/*create new family*/
+
+/*
+page: account(pop up)
+usage: create a new family on account page
+contributor: Zhehao
+* */
 const createFamily = function (req, res) {
     /*check if family id exist*/
     Family.findOne({ id: req.body.familyId }, function(err, family1) {
@@ -113,7 +124,12 @@ const createFamily = function (req, res) {
     });
 };
 
-/*user join family*/
+
+/*
+page: account(pop up)
+usage: join a new family on account page
+contributor: Zhehao
+* */
 const joinFamily = function (req, res) {
     console.log("1");
     /*check if family id exist*/
@@ -182,13 +198,17 @@ const joinFamily = function (req, res) {
                     }
                 }
             });
-
-
         }
     });
 };
 
-/* User update  user account in account page*/
+
+
+/*
+page: account(form)
+usage: change user name or switch family on account page
+contributor: Chen
+* */
 const updateAccount = function(req, res){
     console.log("called updateAccount");
     //if change username
@@ -246,26 +266,32 @@ const updateAccount = function(req, res){
 };
 
 
-function intervalFunc(time) {
-    i = 0;
-    while(i<time){
-        time -= Math.random();
-        console.log(time);
-    }
-    console.log("**********timer finished***************");
-}
-
-
-/* User logged out, direct them to log in screen and remove session data*/
+/*
+page: account(button)
+usage: logout, reset user session
+contributor: Shuangyuan
+* */
 const logOut = function(req, res) {
     req.session.reset();
     res.redirect('/');
 };
 
+
+/*
+page: non, callable function
+usage: update user session information
+contributor: Dan
+* */
 const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
 
+
+/*
+page: account(button)
+usage: save user's newly uploaded profile photo on account page
+contributor: Chen
+* */
 const saveProfilePhoto = function(req, res) {
     var form = new formidable.IncomingForm();
     current_user_id = req.session.user.id

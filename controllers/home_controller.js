@@ -1,11 +1,9 @@
 //import modules
-var express = require('express');
 var formidable = require("formidable");
 var fs = require('fs');
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 const path = require('path');
-const multer = require('multer');
 
 
 //these are from items.js
@@ -14,7 +12,12 @@ const FamilyPhotos = mongoose.model('familyPhoto_tables');
 const Users = mongoose.model('account_tables');
 var current_user_id;
 
-/* User navigated to home Page*/
+
+/*
+page: home
+usage: 1. open after login, 2. on navigation bar, 3. refresh after save message or family photo
+contributor: Chen
+* */
 const getHome = function (req, res) {
     console.log("in validateUser: validating");
     if (req.session && req.session.user) Users.findOne({id: req.session.user.id}, function (err, user) {
@@ -48,7 +51,8 @@ const getHome = function (req, res) {
                             console.log("user has no family");
                             res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"/user_images/familyPhotos/noFamily.jpg"});
                         }else{
-                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"https://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/familyPhoto/"+user.currentFamily+".jpg"});
+                            console.log("fam image path="+"http://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/familyPhoto/"+user.currentFamily+".jpg");
+                            res.render(path.join(__dirname, '../views/home.jade'), {messages : message.message,image_path:"http://itprojectmystery.oss-ap-southeast-2.aliyuncs.com/familyPhoto/"+user.currentFamily+".jpg"});
 
                         }
                     }
@@ -63,7 +67,11 @@ const getHome = function (req, res) {
 };
 
 
-/* save message at home page*/
+/*
+page: home
+usage: save newly entered message on home page
+contributor: Chen
+* */
 const saveMessage = function(req, res) {
     console.log("saveMessage function called");
     var message = req.body.message;
@@ -75,6 +83,12 @@ const saveMessage = function(req, res) {
     });
 };
 
+
+/*
+page: home
+usage: save newly uploaded family photo on home page
+contributor: Chen
+* */
 const savePhoto = function(req, res) {
     //first of all, if user do not have a family, alert and ask to join or create family
     Users.findOne({ id: current_user_id }, function(err, user) {

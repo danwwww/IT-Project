@@ -1,25 +1,32 @@
 //import modules
-var express = require('express');
-var formidable = require("formidable");
-var fs = require('fs');
 const mongoose = require('mongoose');
 const path = require('path');
 const multer = require('multer');
 mongoose.set('useFindAndModify', false);
+
+
 //these are from items.js
 const Users = mongoose.model('account_tables');
 const Message = mongoose.model('message_tables');
 const FamilyPhotos = mongoose.model('familyPhoto_tables');
-var current_user_id;
 
-/*open welcome page*/
+
+/*
+page: welcome page
+usage: user that have not logged in shall be guided this page to log in
+contributor: Chen
+* */
 const welcome = function(req, res){
     console.log("called welcome");
     res.sendFile(path.join(__dirname, '../views/login.html'));
 }
 
 
-/*Create a new user with entered username, password, email */
+/*
+page: register page
+usage: give user a for to fill when they click 'Create Account' on login page
+contributor: Chen
+* */
 const createUser = function (req, res) {
     /** check if account has already existed
      * */
@@ -65,8 +72,11 @@ const createUser = function (req, res) {
 };
 
 
-/* User attempted a log in, check email and password against database. If successful store their user information in
- * session data to help templating and updating user info whilst on the site */
+/*
+page: welcome page
+usage: check user's log in information
+contributor: Chen
+* */
 const handleLogin = function(req, res) {
     Users.findOne({ id: req.body.userId }, function(err, user) {
         console.log(req.body.userId);
@@ -95,7 +105,11 @@ const handleLogin = function(req, res) {
 };
 
 
-/*Update user information*/
+/*
+page: non, callable function
+usage: update user session information
+contributor: Dan
+* */
 const updateUser = function (req) {
     Users.findOneAndUpdate({username: req.session.user.username}, req.session.user, {new: true}, function(err, user) {});
 };
